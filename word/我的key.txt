@@ -1,0 +1,9 @@
+友盟：夜辉宝典key:56449b0ae0f55af0240017c0
+
+3.3  方法B：添加工程引用（升级方便，推荐）
+解压SDK压缩包，将文件夹中的social_sdk_library_project文件夹导入Eclipse，并在您的工程中添加对此项目的引用即可。
+
+
+qq:
+APP ID:1104967462
+APP KEY:8SKqUN5ap6zc5GtK

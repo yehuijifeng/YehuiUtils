@@ -55,7 +55,7 @@ public class GoodAdapter extends BaseAdapter{
         final ViewHolder viewHolder;
         if(convertView ==null){
             viewHolder = new ViewHolder();
-            convertView = layoutInflater.inflate(R.layout.item_cart, null);
+            convertView = layoutInflater.inflate(R.layout.item_demo_cart, null);
             viewHolder.imgview = (ImageView)convertView.findViewById(R.id.item_img);
             viewHolder.button = (Button)convertView.findViewById(R.id.item_button);
             convertView.setTag(viewHolder);

@@ -82,7 +82,7 @@ public class IndexAdapter extends BaseAdapter<Object> {
                 baseViewHolder = new TestViewTowHolder(view);
                 break;
             case 1:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cart, parent, false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo_cart, parent, false);
                 baseViewHolder = new TestViewHolder(view);
                 break;
         }

@@ -4,20 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--数据加载的提示遮罩层-->
-    <include layout="@layout/layout_my_loading" />
-
-    <!--下拉刷新，上拉加载控件-->
     <in.srain.cube.views.ptr.PtrFrameLayout
         android:id="@id/default_refresh_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@id/default_recycler_view"
+        <ExpandableListView
+            android:id="@id/default_expandable_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
 
+        </ExpandableListView>
     </in.srain.cube.views.ptr.PtrFrameLayout>
-
 </LinearLayout>

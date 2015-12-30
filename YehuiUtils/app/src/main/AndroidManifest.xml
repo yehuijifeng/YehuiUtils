@@ -17,11 +17,6 @@
 
         </activity>
 
-        <!--toolbar-->
-        <activity
-            android:name=".activity.ToolbarActivity"
-            android:launchMode="singleTop" />
-
         <!--viewpager-->
         <activity
             android:name=".activity.ViewpagerActivity"
@@ -29,7 +24,7 @@
 
         </activity>
 
-        <!--toolbar-->
+        <!--recyclerview-->
         <activity
             android:name=".activity.RecyclerListActivity"
             android:launchMode="singleTop">
@@ -39,8 +34,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.XListViewActivity"
+        <!--多级列表-->
+        <activity
+            android:name=".activity.ExpandableListActivity"
             android:launchMode="singleTop">
+
 
         </activity>
     </application>

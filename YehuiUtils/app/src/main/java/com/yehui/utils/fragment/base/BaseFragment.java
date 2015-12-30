@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yehui.utils.R;
 import com.yehui.utils.activity.base.BaseHelper;
-import com.yehui.utils.view.DefaultTitleView;
+import com.yehui.utils.view.MyTitleView;
 
 import java.util.ArrayList;
 
@@ -91,7 +91,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * fragment的title
      */
-    protected DefaultTitleView defaultTitleView;
+    protected MyTitleView defaultTitleView;
 
     /**
      * 父布局填充
@@ -101,7 +101,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * title的类型，枚举类型
      */
-    protected DefaultTitleView.TitleMode titleMode;
+    protected MyTitleView.TitleMode titleMode;
 
     /**
      * 创建视图
@@ -153,7 +153,7 @@ public abstract class BaseFragment extends Fragment {
         if (!isRegistered(this)) {
             registerEventBus(this);
         }
-        defaultTitleView = (DefaultTitleView) parentView.findViewById(R.id.title_view);
+        defaultTitleView = (MyTitleView) parentView.findViewById(R.id.my_title_view);
         if (defaultTitleView != null) {
             defaultTitleView.getTitleMode();
             defaultTitleView.setTitleText(setTitleText()+"");
@@ -196,11 +196,11 @@ public abstract class BaseFragment extends Fragment {
      *
      * @param titleMode
      */
-    protected void setTitleMode(DefaultTitleView.TitleMode titleMode) {
+    protected void setTitleMode(MyTitleView.TitleMode titleMode) {
         defaultTitleView.setTitleMode(titleMode);
     }
 
-    protected DefaultTitleView.TitleMode getTitleMode() {
+    protected MyTitleView.TitleMode getTitleMode() {
         return defaultTitleView.getTitleMode();
     }
 

@@ -48,7 +48,7 @@ public class FootView extends LinearLayout {
     }
 
     private void initView(Context context) {
-        root = LayoutInflater.from(context).inflate(R.layout.layout_custom_footer, this);
+        root = LayoutInflater.from(context).inflate(R.layout.layout_default_footer, this);
         custom_footer_hint_text = (TextView) root.findViewById(R.id.custom_footer_hint_text);
         custom_footer_hint_text.setText("上拉加载更多");
         custom_footer_bar = (ProgressBar) root.findViewById(R.id.custom_footer_bar);

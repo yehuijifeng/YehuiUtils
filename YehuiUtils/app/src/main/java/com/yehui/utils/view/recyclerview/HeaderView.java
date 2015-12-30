@@ -65,7 +65,7 @@ public class HeaderView extends LinearLayout implements PtrUIHandler {
         /**
          * 头部
          */
-        headView = inflater.inflate(R.layout.layout_custom_header, this);
+        headView = inflater.inflate(R.layout.layout_default_header, this);
         custom_header_hint_text = (TextView) headView.findViewById(R.id.custom_header_hint_text);
         custom_header_time = (TextView) headView.findViewById(R.id.custom_header_time);
         custom_header_image = (ImageView) headView.findViewById(R.id.custom_header_image);

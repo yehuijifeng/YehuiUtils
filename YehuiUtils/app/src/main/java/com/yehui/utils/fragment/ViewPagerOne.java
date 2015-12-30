@@ -26,7 +26,7 @@ public class ViewPagerOne extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.layout_test, container, false);
+        return inflater.inflate(R.layout.layout_test_viewpager_item, container, false);
     }
 
     //protected abstract void initView(View parentView);//basefragment中的view接口

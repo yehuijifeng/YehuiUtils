@@ -18,7 +18,7 @@ public class ViewPagerFive extends BaseFragment {
 
     @Override
     protected int setFragmentLayoutId() {
-        return R.layout.layout_test;
+        return R.layout.layout_test_viewpager_item;
     }
 
     @Override

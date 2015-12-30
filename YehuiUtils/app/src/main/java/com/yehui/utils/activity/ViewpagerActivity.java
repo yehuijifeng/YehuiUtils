@@ -20,7 +20,7 @@ public class ViewpagerActivity extends BaseViewPagerActivity {
 
     @Override
     protected void setContentView() {
-        setContentView(R.layout.activity_viewpager);
+        setContentView(R.layout.activity_test_viewpager);
     }
 
     @Override

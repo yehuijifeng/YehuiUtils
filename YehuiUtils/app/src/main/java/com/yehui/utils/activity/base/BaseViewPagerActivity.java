@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 
 import com.yehui.utils.R;
 import com.yehui.utils.adapter.MyFragmentPagerAdapter;
-import com.yehui.utils.view.viewpager.DefaultViewPager;
+import com.yehui.utils.view.viewpager.MyViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public abstract class BaseViewPagerActivity extends BaseActivity implements View
     /**
      * 默认viewpager
      */
-    private DefaultViewPager mViewPager;
+    private MyViewPager mViewPager;
     private LinearLayout mViewpagerTab;
 
     /**
@@ -60,8 +60,8 @@ public abstract class BaseViewPagerActivity extends BaseActivity implements View
 
     @Override
     protected void initView() {
-        mViewPager = (DefaultViewPager) findViewById(R.id.viewpager_view);
-        mViewpagerTab = (LinearLayout) findViewById(R.id.viewpager_view_tab);
+        mViewPager = (MyViewPager) findViewById(R.id.my_viewpager_view);
+        mViewpagerTab = (LinearLayout) findViewById(R.id.my_viewpager_view_tab);
         defaultItemTabView = (LinearLayout) mViewpagerTab.findViewById(R.id.viewpager_btn_layout);
         defaultItemImageView = (ImageView) mViewpagerTab.findViewById(R.id.viewpager_image_bar);
         if (isShowBar())

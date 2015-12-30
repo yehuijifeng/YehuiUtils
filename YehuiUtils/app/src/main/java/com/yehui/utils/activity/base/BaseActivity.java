@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yehui.utils.R;
 import com.yehui.utils.application.ActivityCollector;
-import com.yehui.utils.view.DefaultTitleView;
+import com.yehui.utils.view.MyTitleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +83,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * activity的title
      */
-    protected DefaultTitleView defaultTitleView;
+    protected MyTitleView mTitleView;
 
     /**
      * 父布局填充
@@ -93,7 +93,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * title的类型，枚举类型
      */
-    protected DefaultTitleView.TitleMode titleMode;
+    protected MyTitleView.TitleMode titleMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,14 +112,14 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     private void initProperties() {
         helper = new BaseHelper(this);
-        defaultTitleView = (DefaultTitleView) findViewById(R.id.title_view);
-        if (defaultTitleView != null) {
+        mTitleView = (MyTitleView) findViewById(R.id.my_title_view);
+        if (mTitleView != null) {
             if (setCustomToolbar() != null) {
                 onCreateCustomToolBar(setCustomToolbar());
             } else {
                 addTitleMode();
-                defaultTitleView.getTitleMode();
-                defaultTitleView.setTitleText(setTitleText() + "");
+                mTitleView.getTitleMode();
+                mTitleView.setTitleText(setTitleText() + "");
             }
         }
         outMetrics = helper.outMetrics;
@@ -136,21 +136,21 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 设置标题类型
      */
     private void addTitleMode() {
-        defaultTitleView.setTitleMode(setTitleTypeByTitleMode());
+        mTitleView.setTitleMode(setTitleTypeByTitleMode());
     }
 
     /**
      * 供子类调用的title类型
      */
-    protected DefaultTitleView.TitleMode setTitleTypeByTitleMode() {
-        return DefaultTitleView.TitleMode.NORMAL;
+    protected MyTitleView.TitleMode setTitleTypeByTitleMode() {
+        return MyTitleView.TitleMode.NORMAL;
     }
 
     /**
      * @param view 创建自定义的toolbar
      */
     protected void onCreateCustomToolBar(View view) {
-        defaultTitleView.setNewView(view);
+        mTitleView.setNewView(view);
     }
 
     /**

@@ -19,7 +19,7 @@ import android.widget.ListView;
 import com.yehui.utils.R;
 import com.yehui.utils.activity.base.BaseActivity;
 import com.yehui.utils.adapter.GoodAdapter;
-import com.yehui.utils.view.DefaultTitleView;
+import com.yehui.utils.view.MyTitleView;
 
 /**
  * Created by yehuijifeng
@@ -60,18 +60,18 @@ public class CartAnimationActivity extends BaseActivity {
 
     @Override
     protected void setContentView() {
-        setContentView(R.layout.activity_list_cart);
+        setContentView(R.layout.activity_demo_list_cart);
     }
 
     @Override
-    protected DefaultTitleView.TitleMode setTitleTypeByTitleMode() {
+    protected MyTitleView.TitleMode setTitleTypeByTitleMode() {
         return titleMode.NO_BACK_TEXT;
     }
 
     @Override
     protected void initView() {
 
-        defaultTitleView.setTextButtonOnClick(new View.OnClickListener() {
+        mTitleView.setTextButtonOnClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(ToolbarActivity.class);

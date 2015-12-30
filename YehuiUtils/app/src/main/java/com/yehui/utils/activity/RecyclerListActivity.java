@@ -12,7 +12,7 @@ import com.yehui.utils.R;
 import com.yehui.utils.activity.base.BaseStaggeredActivity;
 import com.yehui.utils.adapter.base.BaseViewHolder;
 import com.yehui.utils.utils.LogUtil;
-import com.yehui.utils.view.DefaultTitleView;
+import com.yehui.utils.view.MyTitleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +31,9 @@ public class RecyclerListActivity extends BaseStaggeredActivity {
 //    protected View setCustomToolbar() {
 //        return inflate(R.layout.item_test_recycler, null);
 //    }
-
     @Override
-    protected DefaultTitleView.TitleMode setTitleTypeByTitleMode() {
-        return DefaultTitleView.TitleMode.NO_BACK_IMAGE;
+    protected MyTitleView.TitleMode setTitleTypeByTitleMode() {
+        return MyTitleView.TitleMode.NO_BACK_IMAGE;
     }
 
     @Override
@@ -66,13 +65,14 @@ public class RecyclerListActivity extends BaseStaggeredActivity {
     @Override
     protected void initView() {
         super.initView();
-        defaultTitleView.setImageButtonOnClick(new View.OnClickListener() {
+        mTitleView.setImageButtonOnClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showShortToast("编辑图片");
             }
         });
-
+        //loadingView();
+        //handler.sendEmptyMessageDelayed(1, 2000);
     }
 
 
@@ -103,8 +103,8 @@ public class RecyclerListActivity extends BaseStaggeredActivity {
                 case 0:
                     clearAll();
                     List<String> list2 = new ArrayList<>();
-                    for (int i = 0; i <20 ; i++) {
-                        list2.add("加载完成"+i);
+                    for (int i = 0; i < 20; i++) {
+                        list2.add("加载完成" + i);
                     }
                     addAll(list2);
                     LogUtil.i("加载完成");
@@ -116,12 +116,12 @@ public class RecyclerListActivity extends BaseStaggeredActivity {
                     LogUtil.i("刷新成功");
                     clearAll();
                     List<String> list1 = new ArrayList<>();
-                    for (int i = 0; i <25 ; i++) {
-                        list1.add("刷新成功"+i);
+                    for (int i = 0; i < 25; i++) {
+                        list1.add("刷新成功" + i);
                     }
                     addAll(list1);
                     notifyDataChange();
-                    refreshSuccess();
+                    refreshFail("app被外星人带走了", "我要夺回来，我要夺回来，我要夺回来，我要夺回来！");
                 default:
                     break;
             }
@@ -210,7 +210,7 @@ public class RecyclerListActivity extends BaseStaggeredActivity {
 
     @Override
     protected void setContentView() {
-        setContentView(R.layout.activity_default_recycler_view);
+        setContentView(R.layout.activity_test_recycler_view);
     }
 
 

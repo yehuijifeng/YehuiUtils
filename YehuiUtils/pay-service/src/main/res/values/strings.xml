@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">pay-service</string>
+    <string name="pay_result_callback_msg">支付结果回调信息</string>
+    <string name="app_tip">微信支付demo</string>
+</resources>

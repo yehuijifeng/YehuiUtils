@@ -1,0 +1,33 @@
+<resources>
+
+    <!-- toolsbar-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--标题栏高度-->
+        <item name="actionBarSize">@dimen/default_title_height</item>
+        <!-- toolbar（actionbar）颜色 -->
+        <item name="colorPrimary">@color/white</item>
+        <!--主图文字颜色-->
+        <!--<item name="testColorPrimary">@color/white</item>-->
+        <!-- 标题栏文字颜色-->
+        <!--<item name="titleTextColor">@color/colorPrimary</item>-->
+        <item name="android:windowBackground">@color/default_gray</item>
+        <!-- 状态栏颜色 -->
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- 底部导航栏颜色 -->
+        <!--<item name="navigationBarColor">#4876FF</item>-->
+    </style>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!--默认横线-->
+    <style name="default_hour_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/default_hour_height</item>
+        <item name="android:background">@color/default_gray</item>
+    </style>
+
+</resources>

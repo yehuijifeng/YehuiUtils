@@ -1,0 +1,1 @@
+include ':app', ':umeng-sdk', ':pay-service'

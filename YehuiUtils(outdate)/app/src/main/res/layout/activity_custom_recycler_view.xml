@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<com.yehui.utils.view.recyclerview.HeaderView
+         android:id="@id/custom_header_view"
+         android:layout_width="match_parent"
+         android:layout_height="0dp" />-->
+    <include
+        android:id="@id/loading_layout"
+        layout="@layout/layout_loading" />
+
+   <!-- <include
+        android:id="@id/recycler_view_widget"
+        layout="@layout/activity_test_default_list" />-->
+    <com.handmark.pulltorefresh.library.PullToRefreshRecyclerView
+        android:id="@+id/pull_to_refresh_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<android.support.v7.widget.RecyclerView
+        android:id="@id/recycler_view_widget"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+-->
+    </com.handmark.pulltorefresh.library.PullToRefreshRecyclerView>
+
+
+    <!--<com.yehui.utils.view.recyclerview.SuperSwipeRefreshLayout-->
+    <!--android:id="@id/custom_header_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--&lt;!&ndash;<ScrollView&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="match_parent">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<include&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@id/loading_layout"&ndash;&gt;-->
+    <!--&lt;!&ndash;layout="@layout/layout_loading" &ndash;&gt;-->
+    <!--&lt;!&ndash;/>&ndash;&gt;-->
+    <!--&lt;!&ndash;</ScrollView>&ndash;&gt;-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@id/recycler_view_widget"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
+
+
+    <!--</com.yehui.utils.view.recyclerview.SuperSwipeRefreshLayout>-->
+
+</LinearLayout>

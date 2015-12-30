@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- <com.yehui.utils.view.DefaultTitleView
+         android:id="@id/title_view"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content" />-->
+    <include
+        android:id="@id/title_view"
+        layout="@layout/layout_title" />
+    <!--android:id="@id/viewpager_view_tab"-->
+
+
+    <!--<include layout="@layout/layout_viewpager" />-->
+    <com.yehui.utils.view.viewpager.DefaultViewPager
+        android:id="@id/viewpager_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/viewpager_view_tab"
+        android:layout_below="@id/title_view" />
+
+    <!--<include layout="@layout/layout_viewpager_tab" />-->
+    <LinearLayout
+        android:id="@id/viewpager_view_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/viewpager_btn_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/viewpager_image_bar"
+            android:layout_width="100dp"
+            android:layout_height="5dp"
+            android:background="@drawable/viewpager_bar" />
+    </LinearLayout>
+</RelativeLayout>

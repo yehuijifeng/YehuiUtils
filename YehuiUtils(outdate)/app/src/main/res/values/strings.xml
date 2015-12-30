@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">YehuiUtils</string>
+
+    <string name="header_hint_normal">下拉刷新</string>
+    <string name="header_hint_ready">松开刷新数据</string>
+    <string name="header_hint_loading">正在加载... ...</string>
+    <string name="header_last_time">上次更新时间：</string>
+    <string name="footer_hint_normal">点击或者下拉查看更多</string>
+    <string name="footer_hint_ready">松开载入更多</string>
+    <string name="hint_refresh">刷新</string>
+    <string name="lading_fail">连接服务器失败，请重试... ...</string>
+    <string name="lading_empty">暂无数据</string>
+    <string name="hint_click_refresh">点击刷新</string>
+</resources>

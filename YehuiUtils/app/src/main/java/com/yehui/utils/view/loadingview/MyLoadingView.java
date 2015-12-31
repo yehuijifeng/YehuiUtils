@@ -108,7 +108,7 @@ public class MyLoadingView extends LinearLayout {
         if (!EmptyUtil.isStringEmpty(fialBtnStr))
             loading_btn.setText(fialBtnStr + "");
         else
-            loading_btn.setText(getResources().getString(R.string.hint_refresh));
+            loading_btn.setText(getResources().getString(R.string.loading_refresh));
     }
 
 
@@ -139,7 +139,7 @@ public class MyLoadingView extends LinearLayout {
         if (!EmptyUtil.isStringEmpty(fialBtnStr))
             loading_btn.setText(fialBtnStr + "");
         else
-            loading_btn.setText(getResources().getString(R.string.hint_refresh));
+            loading_btn.setText(getResources().getString(R.string.loading_refresh));
 
     }
 

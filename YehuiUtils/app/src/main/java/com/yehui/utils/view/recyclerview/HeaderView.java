@@ -101,7 +101,7 @@ public class HeaderView extends LinearLayout implements PtrUIHandler {
         custom_header_bar.setVisibility(GONE);
         custom_header_image.setVisibility(VISIBLE);
         custom_header_image.setRotation(0);//图片旋转
-        getRefreshListener().onRefreshPrepare(true,frame);
+         getRefreshListener().onRefreshPrepare(true,frame);
     }
 
     /**

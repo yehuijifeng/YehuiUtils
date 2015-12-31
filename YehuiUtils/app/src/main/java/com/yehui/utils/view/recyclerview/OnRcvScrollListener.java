@@ -80,8 +80,6 @@ public class OnRcvScrollListener extends RecyclerView.OnScrollListener {
                         footView.onFootPrepare();
                     }
                 }
-            }else{
-                footView.onFootViewEmpty();
             }
         } else if (newState == 1) {
             //LogUtil.i("滑动中");
@@ -91,8 +89,6 @@ public class OnRcvScrollListener extends RecyclerView.OnScrollListener {
                         footView.onFootPrepare();
                     }
                 }
-            }else{
-                footView.onFootViewEmpty();
             }
         } else if (newState == 2) {
             //LogUtil.i("上弹中");

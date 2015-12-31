@@ -53,15 +53,15 @@ public class UltimateRecyclerView extends LinearLayout {
     }
 
     public void setIsRefresh(boolean isRefresh) {
-        if (isRefresh) {
-            if (ptrFrameLayout == null)
-                ptrFrameLayout = (PtrFrameLayout) root.findViewById(R.id.default_refresh_view);
-            ptrFrameLayout.setHeaderView(headerView);
+        this.isRefresh = isRefresh;
+        if (isRefresh()) {
+            headerView.setVisibility(VISIBLE);
             ptrFrameLayout.addPtrUIHandler(headerView);
         } else {
-            ptrFrameLayout = null;
+            headerView.setVisibility(GONE);
+            ptrFrameLayout.removePtrUIHandler(headerView);
         }
-        this.isRefresh = isRefresh;
+
     }
 
     private boolean isLoadMore;//是否可以上拉加载
@@ -71,10 +71,8 @@ public class UltimateRecyclerView extends LinearLayout {
     }
 
     public void setIsLoadMore(boolean isLoadMore) {
-        if (onRcvScrollListener != null) {
-            onRcvScrollListener.setIsShowFoot(isLoadMore);
-        }
         this.isLoadMore = isLoadMore;
+        onRcvScrollListener.setIsShowFoot(isLoadMore());
     }
 
     public HeaderView.RefreshListener getRefreshListener() {
@@ -120,11 +118,13 @@ public class UltimateRecyclerView extends LinearLayout {
         loadingLayout = (MyLoadingView) root.findViewById(R.id.my_loading_layout);
         ptrFrameLayout = (PtrFrameLayout) root.findViewById(R.id.default_refresh_view);
         recyclerView = (RecyclerView) root.findViewById(R.id.default_recycler_view);
-        headerView = new HeaderView(context);
         footView = new FootView(context);
-
         onRcvScrollListener = new OnRcvScrollListener(context, recyclerView, footView);
         recyclerView.addOnScrollListener(onRcvScrollListener);
+        onRcvScrollListener.setIsShowFoot(isLoadMore());
+        headerView = new HeaderView(context);
+        ptrFrameLayout.setHeaderView(headerView);
+        ptrFrameLayout.addPtrUIHandler(headerView);
         /**
          * 注意！
          * 该回调方法必须写！
@@ -138,6 +138,7 @@ public class UltimateRecyclerView extends LinearLayout {
                 //ptrFrameLayout.autoRefresh();//自动刷新
             }
         });
+        ptrFrameLayout.setPullToRefresh(false);
     }
 
 
@@ -153,12 +154,13 @@ public class UltimateRecyclerView extends LinearLayout {
     }
 
     /**
-     * 加载更多的回调
+     * 加载完全部数据，不再下拉加载
      */
     public void closeLoadMoreView() {
         if (isLoadMore()) {
             if (footView != null)
                 footView.onFootViewAll();
+            onRcvScrollListener.setIsShowFoot(false);
         }
     }
 
@@ -169,6 +171,7 @@ public class UltimateRecyclerView extends LinearLayout {
         if (isLoadMore()) {
             if (footView != null)
                 footView.onFootViewEmpty();
+                onRcvScrollListener.setIsShowFoot(true);
         }
     }
 

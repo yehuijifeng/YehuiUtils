@@ -96,12 +96,10 @@ public abstract class BaseStaggeredActivity extends BaseListActivity {
         public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
 
             //改成使用上面的间隔来设置
-            if (parent.getChildAdapterPosition(view) != 0) {
                 outRect.top = top;
                 outRect.left = left;
                 outRect.right = right;
                 outRect.bottom = bottom;
-            }
         }
     }
 }

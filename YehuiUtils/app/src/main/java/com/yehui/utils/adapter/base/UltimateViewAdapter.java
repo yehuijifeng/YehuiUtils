@@ -57,6 +57,10 @@ public abstract class UltimateViewAdapter<VH extends RecyclerView.ViewHolder> ex
         customLoadMoreView = loadView;
     }
 
+    public void removeLoadMoreView() {
+        customLoadMoreView = null;
+    }
+
     /**
      * 添加头的方法
      *

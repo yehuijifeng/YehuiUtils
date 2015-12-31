@@ -9,7 +9,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.yehui.utils.R;
-import com.yehui.utils.activity.base.BaseStaggeredActivity;
+import com.yehui.utils.activity.base.BaseListActivity;
 import com.yehui.utils.adapter.base.BaseViewHolder;
 import com.yehui.utils.utils.LogUtil;
 import com.yehui.utils.view.MyTitleView;
@@ -22,7 +22,7 @@ import java.util.List;
  * on 2015/12/9.
  * recycler代替listview
  */
-public class RecyclerListActivity extends BaseStaggeredActivity {
+public class RecyclerListActivity extends BaseListActivity {
 
     /**
      * 自定义toolbar的优先级高于toolbarmodel
@@ -41,21 +41,21 @@ public class RecyclerListActivity extends BaseStaggeredActivity {
         return 0;
     }
 
-    @Override
-    protected float[] decorationSize() {
-        return new float[]{3f, 0f, 0f, 3f};
-    }
+//    @Override
+//    protected float[] decorationSize() {
+//        return new float[]{3f, 0f, 0f, 3f};
+//    }
 
 
-    @Override
+   /* @Override
     protected int stagViewByNumber() {
         return 2;
-    }
+    }*/
 
-    @Override
+    /*@Override
     protected int stagViewOrientation() {
         return 0;
-    }
+    }*/
 
 //    @Override
 //    protected int gridViewByNumber() {
@@ -71,8 +71,10 @@ public class RecyclerListActivity extends BaseStaggeredActivity {
                 showShortToast("编辑图片");
             }
         });
+        mAdapter.setheaderView(inflate(R.layout.item_demo_cart,null));
         //loadingView();
         //handler.sendEmptyMessageDelayed(1, 2000);
+
     }
 
 
@@ -82,6 +84,16 @@ public class RecyclerListActivity extends BaseStaggeredActivity {
         for (int i = 0; i < 15; i++) {
             addOne("确定" + i, i);
         }
+        /**
+         * 是否下拉刷新
+         */
+        setIsRefresh(true);
+
+        /**
+         * 是否上拉加载
+         */
+        setIsLoadMore(true);
+
     }
 
     @Override
@@ -110,7 +122,6 @@ public class RecyclerListActivity extends BaseStaggeredActivity {
                     LogUtil.i("加载完成");
                     notifyDataChange();
                     loadMoreSuccess();
-
                     break;
                 case 1:
                     LogUtil.i("刷新成功");
@@ -128,22 +139,6 @@ public class RecyclerListActivity extends BaseStaggeredActivity {
 
         }
     };
-
-    /**
-     * 是否下拉加载更多
-     */
-    @Override
-    protected boolean isLoadMore() {
-        return true;
-    }
-
-    /**
-     * 是否下拉刷新
-     */
-    @Override
-    protected boolean isRefresh() {
-        return true;
-    }
 
     /**
      * 重新加载

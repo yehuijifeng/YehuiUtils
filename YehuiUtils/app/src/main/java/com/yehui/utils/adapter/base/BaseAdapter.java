@@ -26,6 +26,9 @@ public abstract class BaseAdapter<T> extends UltimateViewAdapter<BaseViewHolder>
      */
     public abstract void onBindDataForItem(BaseViewHolder holder, int position);
 
+    public void setheaderView(View headerView) {
+        customHeaderView = headerView;
+    }
 
     /**
      * 绑定viewholder
@@ -40,8 +43,8 @@ public abstract class BaseAdapter<T> extends UltimateViewAdapter<BaseViewHolder>
         if (!holder.itemView.equals(customLoadMoreView)) {
             if (customHeaderView != null) position--;
             onBindDataForItem(holder, position);
-        } else if (holder.itemView.equals(customLoadMoreView)&&data.size()==0) {
-            if (customHeaderView != null)position--;
+        } else if (holder.itemView.equals(customLoadMoreView) && data.size() == 0) {
+            if (customHeaderView != null) position--;
             holder.itemView.setVisibility(View.GONE);
         }
     }

@@ -72,6 +72,8 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
     protected SwipeRefreshLayout swipeRefreshLayout;
     protected LinearLayoutManager layoutManager;
     protected MyLoadingView mLoadingView;
+    protected boolean isLoadMore = true, isRefresh = true;
+
 
     /**
      * 创建横向的还是纵向的recyclerview
@@ -108,13 +110,10 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
         recyclerView.setAdapter(mAdapter);
         //添加item的间距
         recyclerView.addItemDecoration(new SpaceItemDecoration(DisplayUtil.dip2px(this, itemDecoration())));
-        mRecyclerView.setIsRefresh(isRefresh());
-        mRecyclerView.setIsLoadMore(isLoadMore());
+        setIsRefresh(false);
+        setIsLoadMore(true);
         if (mRecyclerView.footView != null) mRecyclerView.footView.onFootViewEmpty();
-        //是否下拉刷新
-        defaultRefresh();
-        //是否上拉加载更多
-        defaultLoadMore();
+
     }
 
     /**
@@ -201,23 +200,23 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
      * 下拉刷新监听事件
      */
     private void defaultRefresh() {
-        mRecyclerView.setRefreshListener(new HeaderView.RefreshListener() {
-            @Override
-            public void onRefreshPrepare(boolean bl, PtrFrameLayout frame) {
-                //准备刷新
-            }
+            mRecyclerView.setRefreshListener(new HeaderView.RefreshListener() {
+                @Override
+                public void onRefreshPrepare(boolean bl, PtrFrameLayout frame) {
+                    //准备刷新
+                }
 
-            @Override
-            public void onRefreshBegin(boolean bl, PtrFrameLayout frame) {
-                //刷新中
-                refresh();
-            }
+                @Override
+                public void onRefreshBegin(boolean bl, PtrFrameLayout frame) {
+                    //刷新中
+                    refresh();
+                }
 
-            @Override
-            public void onRefreshComplete(boolean bl, PtrFrameLayout frame) {
-                //刷新完成
-            }
-        });
+                @Override
+                public void onRefreshComplete(boolean bl, PtrFrameLayout frame) {
+                    //刷新完成
+                }
+            });
     }
 
     /**
@@ -234,25 +233,23 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
      * 默认加载更多的方法
      */
     private void defaultLoadMore() {
+            mRecyclerView.setLoadMoreListener(new FootView.LoadMoreListener() {
+                @Override
+                public void onLoadMorePrepare(boolean bl) {
+                    //准备加载
+                }
 
-        mRecyclerView.setLoadMoreListener(new FootView.LoadMoreListener() {
-            @Override
-            public void onLoadMorePrepare(boolean bl) {
-                //准备加载
-            }
+                @Override
+                public void onLoadMoreBegin(boolean bl) {
+                    //正在加载
+                    loadMore();
+                }
 
-            @Override
-            public void onLoadMoreBegin(boolean bl) {
-                //正在加载
-                loadMore();
-            }
-
-            @Override
-            public void onLoadMoreComplete(boolean bl) {
-                //加载完成
-            }
-        });
-
+                @Override
+                public void onLoadMoreComplete(boolean bl) {
+                    //加载完成
+                }
+            });
     }
 
     /**
@@ -270,16 +267,44 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
     /**
      * 是否下拉刷新
      */
-    protected boolean isRefresh() {
-        return true;
+    private boolean isRefresh() {
+        return isRefresh;
     }
 
     /**
      * 是否上拉加载更多
      */
-    protected boolean isLoadMore() {
-        return true;
+    private boolean isLoadMore() {
+        return isLoadMore;
     }
+
+    /**
+     * 子类可以调用该方法，动态的改变上拉加载的存在方式
+     */
+    protected void setIsLoadMore(boolean isLoadMore) {
+        this.isLoadMore=isLoadMore;
+        mRecyclerView.setIsLoadMore(isLoadMore);
+        defaultLoadMore();
+        if (isLoadMore()) {
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            mRecyclerView.footView.setLayoutParams(layoutParams);
+            //添加尾部视图
+            mAdapter.setLoadMoreView(mRecyclerView.footView);
+        } else {
+            mAdapter.removeLoadMoreView();
+        }
+     }
+
+    /**
+     * 子类可以调用该方法，动态的改变下拉刷新的存在方式
+     */
+    protected void setIsRefresh(boolean isRefresh) {
+        this.isRefresh=isRefresh;
+        mRecyclerView.setIsRefresh(isRefresh);
+        defaultRefresh();
+    }
+
+
 
     /**
      * 上拉加载更多,根据情况子类重写
@@ -294,8 +319,8 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
     protected void loadMoreSuccess() {
         if (isLoadMore()) {
             mRecyclerView.closeLoadMoreView();
-            loadingSuccess();
         }
+        loadingSuccess();
     }
 
     /**
@@ -307,8 +332,8 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
     protected void loadMoreFail(String failTextStr, String fialBtnStr) {
         if (isLoadMore()) {
             mRecyclerView.closeLoadMoreView();
-            loadingFail(failTextStr, fialBtnStr);
         }
+        loadingFail(failTextStr, fialBtnStr);
     }
 
     /**
@@ -317,8 +342,18 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
     protected void loadMoreFail() {
         if (isLoadMore()) {
             mRecyclerView.closeLoadMoreView();
-            loadingFail();
         }
+        loadingFail();
+    }
+
+    /**
+     * 加载了更多数据，不再有加载更多的状态
+     */
+    protected void loadMoreAll() {
+        if (isLoadMore()) {
+            mRecyclerView.closeLoadMoreView();
+        }
+        loadingFail();
     }
 
     /**
@@ -327,8 +362,8 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
     protected void refreshSuccess() {
         if (isRefresh()) {
             mRecyclerView.closeRefreshView();
-            loadingSuccess();
         }
+        loadingSuccess();
     }
 
     /**
@@ -337,19 +372,21 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
     protected void refreshFail() {
         if (isRefresh()) {
             mRecyclerView.closeRefreshView();
-            loadingFail();
         }
+        loadingFail();
     }
 
-    /**刷新失败
+    /**
+     * 刷新失败
+     *
      * @param failTextStr 提示语
-     * @param fialBtnStr 按钮上的文字
+     * @param fialBtnStr  按钮上的文字
      */
     protected void refreshFail(String failTextStr, String fialBtnStr) {
         if (isRefresh()) {
             mRecyclerView.closeRefreshView();
-            loadingFail(failTextStr, fialBtnStr);
         }
+        loadingFail(failTextStr, fialBtnStr);
     }
 
     /**
@@ -372,8 +409,8 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
             //outRect.bottom = space;
 
             //改成使用上面的间隔来设置
-            if (parent.getChildAdapterPosition(view) != 0)
-                outRect.top = space;
+            //if (parent.getChildAdapterPosition(view) != 0)
+            outRect.bottom = space;
         }
     }
 
@@ -434,10 +471,14 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
 
         public MyAdapter(List<Object> data) {
             super(data);
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            mRecyclerView.footView.setLayoutParams(layoutParams);
-            //添加尾部视图
-            setLoadMoreView(mRecyclerView.footView);
+//            if (isLoadMore()) {
+//                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//                mRecyclerView.footView.setLayoutParams(layoutParams);
+//                //添加尾部视图
+//                setLoadMoreView(mRecyclerView.footView);
+//            } else {
+//                removeLoadMoreView();
+//            }
         }
 
         /**

@@ -57,6 +57,9 @@ public abstract class UltimateViewAdapter<VH extends RecyclerView.ViewHolder> ex
         customLoadMoreView = loadView;
     }
 
+    /**
+     * 删除尾部视图
+     */
     public void removeLoadMoreView() {
         customLoadMoreView = null;
     }
@@ -70,6 +73,12 @@ public abstract class UltimateViewAdapter<VH extends RecyclerView.ViewHolder> ex
         customHeaderView = headerView;
     }
 
+    /**
+     * 删除头视图
+     */
+    public void removeHeaderView() {
+        customHeaderView = null;
+    }
     public View getLoadMoreView(){
         return customLoadMoreView;
     }

@@ -71,7 +71,7 @@ public class RecyclerListActivity extends BaseListActivity {
                 showShortToast("编辑图片");
             }
         });
-        mAdapter.setheaderView(inflate(R.layout.item_demo_cart,null));
+        mAdapter.setHeaderView(inflate(R.layout.item_demo_cart, null));
         //loadingView();
         //handler.sendEmptyMessageDelayed(1, 2000);
 
@@ -122,6 +122,7 @@ public class RecyclerListActivity extends BaseListActivity {
                     LogUtil.i("加载完成");
                     notifyDataChange();
                     loadMoreSuccess();
+                    mAdapter.removeHeaderView();
                     break;
                 case 1:
                     LogUtil.i("刷新成功");

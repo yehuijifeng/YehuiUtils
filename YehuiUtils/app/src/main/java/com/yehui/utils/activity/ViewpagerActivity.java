@@ -59,22 +59,22 @@ public class ViewpagerActivity extends BaseViewPagerActivity {
     @Override
     protected View setTabView(ViewGroup container, int position) {
         View view = inflate(R.layout.item_default_viewpager_tab, container, false);
-        TextView tabText = (TextView) view.findViewById(R.id.viewpager_text);
+        TextView tabText = (TextView) view.findViewById(R.id.viewpager_tab_text);
         switch (position) {
             case 0:
-                tabText.setText("tab1");
+                tabText.setText("基础");
                 break;
             case 1:
-                tabText.setText("tab2");
+                tabText.setText("列表");
                 break;
             case 2:
-                tabText.setText("tab3");
+                tabText.setText("表格");
                 break;
             case 3:
-                tabText.setText("tab4");
+                tabText.setText("瀑布流");
                 break;
             case 4:
-                tabText.setText("tab5");
+                tabText.setText("多级列表");
                 break;
 
         }

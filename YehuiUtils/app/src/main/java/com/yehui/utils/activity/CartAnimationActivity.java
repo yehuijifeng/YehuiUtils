@@ -19,7 +19,7 @@ import android.widget.ListView;
 import com.yehui.utils.R;
 import com.yehui.utils.activity.base.BaseActivity;
 import com.yehui.utils.adapter.GoodAdapter;
-import com.yehui.utils.view.MyTitleView;
+import com.yehui.utils.view.titleview.MyTitleView;
 
 /**
  * Created by yehuijifeng

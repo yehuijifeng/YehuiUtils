@@ -16,9 +16,8 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.yehui.utils.R;
 import com.yehui.utils.activity.base.BaseHelper;
-import com.yehui.utils.view.MyTitleView;
+import com.yehui.utils.view.titleview.MyTitleView;
 
 import java.util.ArrayList;
 
@@ -39,11 +38,6 @@ public abstract class BaseFragment extends Fragment {
      * 布局id,传入了ToolBarActivity中重写的setContentView中，以便于添加toolbar
      */
     protected abstract int setFragmentLayoutId();
-
-    /**
-     * 初始化title
-     */
-    protected abstract String setTitleText();
 
     /**
      * 初始化view，传入父类view
@@ -99,9 +93,9 @@ public abstract class BaseFragment extends Fragment {
     protected ViewGroup root;
 
     /**
-     * title的类型，枚举类型
+     * 该fragment是否处于显示状态
      */
-    protected MyTitleView.TitleMode titleMode;
+    protected boolean isVisible;
 
     /**
      * 创建视图
@@ -119,6 +113,7 @@ public abstract class BaseFragment extends Fragment {
 
     /**
      * 视图创建
+     *
      * @param view
      * @param savedInstanceState
      */
@@ -131,15 +126,13 @@ public abstract class BaseFragment extends Fragment {
 
     /**
      * 选中状态
+     *
      * @param isVisibleToUser
      */
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         //到显示状态为true，不可见为false
-        if (isVisibleToUser) {
-        }else{
-
-        }
+        isVisible = isVisibleToUser;
         super.setUserVisibleHint(isVisibleToUser);
     }
 
@@ -152,11 +145,6 @@ public abstract class BaseFragment extends Fragment {
         outMetrics = helper.outMetrics;
         if (!isRegistered(this)) {
             registerEventBus(this);
-        }
-        defaultTitleView = (MyTitleView) parentView.findViewById(R.id.my_title_view);
-        if (defaultTitleView != null) {
-            defaultTitleView.getTitleMode();
-            defaultTitleView.setTitleText(setTitleText()+"");
         }
     }
 
@@ -188,20 +176,6 @@ public abstract class BaseFragment extends Fragment {
 
     protected void showSoftInputFromWindow(View view) {
         helper.showSoftInputFromWindow(view);
-    }
-
-
-    /**
-     * 设置标题类型
-     *
-     * @param titleMode
-     */
-    protected void setTitleMode(MyTitleView.TitleMode titleMode) {
-        defaultTitleView.setTitleMode(titleMode);
-    }
-
-    protected MyTitleView.TitleMode getTitleMode() {
-        return defaultTitleView.getTitleMode();
     }
 
     public String[] getResourceStringArray(int resId) {

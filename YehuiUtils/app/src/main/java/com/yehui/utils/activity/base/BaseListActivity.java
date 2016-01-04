@@ -471,14 +471,6 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
 
         public MyAdapter(List<Object> data) {
             super(data);
-//            if (isLoadMore()) {
-//                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//                mRecyclerView.footView.setLayoutParams(layoutParams);
-//                //添加尾部视图
-//                setLoadMoreView(mRecyclerView.footView);
-//            } else {
-//                removeLoadMoreView();
-//            }
         }
 
         /**

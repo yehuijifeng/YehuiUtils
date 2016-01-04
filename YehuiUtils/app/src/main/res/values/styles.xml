@@ -1,22 +1,22 @@
 <resources>
 
+    <!--colorPrimary 对应ActionBar的颜色。
+colorPrimaryDark对应状态栏的颜色
+colorAccent 对应EditText编辑时、RadioButton选中、CheckBox等选中时的颜色。-->
     <!-- toolsbar-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!--标题栏高度-->
         <item name="actionBarSize">@dimen/default_title_height</item>
         <!-- toolbar（actionbar）颜色 -->
-        <item name="colorPrimary">@color/white</item>
-        <!--主图文字颜色-->
-        <!--<item name="testColorPrimary">@color/white</item>-->
-        <!-- 标题栏文字颜色-->
-        <!--<item name="titleTextColor">@color/colorPrimary</item>-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--主要风格颜色-->
         <item name="android:windowBackground">@color/default_gray</item>
         <!-- 状态栏颜色 -->
         <item name="colorPrimaryDark">@color/colorPrimary</item>
-        <item name="colorAccent">@color/colorAccent</item>
         <!-- 底部导航栏颜色 -->
         <!--<item name="navigationBarColor">#4876FF</item>-->
     </style>
+
 
     <style name="AppTheme.Base" parent="Theme.AppCompat">
         <item name="windowActionBar">false</item>

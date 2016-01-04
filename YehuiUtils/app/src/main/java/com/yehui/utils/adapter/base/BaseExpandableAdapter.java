@@ -13,7 +13,7 @@ import java.util.List;
  * on 2015/12/30.
  * 多级列表的适配器
  */
-public abstract class BaseExpandableAdapter<VH extends BaseViewHolder> extends BaseExpandableListAdapter {
+public abstract class BaseExpandableAdapter<VH extends BaseExpandableViewHolder> extends BaseExpandableListAdapter {
 
     /**
      * 每一行父viewholder的view
@@ -21,7 +21,7 @@ public abstract class BaseExpandableAdapter<VH extends BaseViewHolder> extends B
      * @param parent
      * @return
      */
-    public abstract VH groupViewHolder(ViewGroup parent, int groupPosition, boolean isExpanded);
+    public abstract VH groupViewHolder(View parent, int groupPosition, boolean isExpanded);
 
     /**
      * 父类中旋转的图片
@@ -36,14 +36,14 @@ public abstract class BaseExpandableAdapter<VH extends BaseViewHolder> extends B
     /**
      * 父view每一行的数据
      */
-    public abstract void groupItemData(BaseViewHolder baseViewHolder, int groupPosition, boolean isExpanded);
+    public abstract void groupItemData(BaseExpandableViewHolder baseViewHolder, int groupPosition, boolean isExpanded);
 
     /**
      * 每一行子viewholder的view
      *
      * @return
      */
-    public abstract VH childViewHolder(ViewGroup parent, int groupPosition, int childPosition);
+    public abstract VH childViewHolder(View parent, int groupPosition, int childPosition);
 
     /**
      * 子itemview的视图
@@ -53,7 +53,7 @@ public abstract class BaseExpandableAdapter<VH extends BaseViewHolder> extends B
     /**
      * 子view每一行的数据
      */
-    public abstract void childItemData(BaseViewHolder baseViewHolder, int groupPosition, int childPosition);
+    public abstract void childItemData(BaseExpandableViewHolder baseViewHolder, int groupPosition, int childPosition);
 
     private Activity activity;
     private List<?> groupArray;
@@ -152,19 +152,18 @@ public abstract class BaseExpandableAdapter<VH extends BaseViewHolder> extends B
     public View getChildView(int groupPosition, int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
         View v;
-        BaseViewHolder baseViewHolder;
-
+        BaseExpandableViewHolder baseViewHolder;
         if (convertView == null) {
             // 加载行布局文件，产生具体的一行
             v = activity.getLayoutInflater().inflate(childViewByLayout(), null);
             // 创建存储一行控件的对象
-            baseViewHolder = (BaseViewHolder) childViewHolder(parent, groupPosition, childPosition);
+            baseViewHolder =  childViewHolder(v, groupPosition, childPosition);
             // 将该行的控件全部存储到vh中
             v.setTag(baseViewHolder);// 将vh存储到行的Tag中
         } else {
             v = convertView;
             // 取出隐藏在行中的Tag--取出隐藏在这一行中的vh控件缓存对象
-            baseViewHolder = (BaseViewHolder) convertView.getTag();
+            baseViewHolder = (BaseExpandableViewHolder) convertView.getTag();
         }
         // 从ViewHolder缓存的控件中改变控件的值
         childItemData(baseViewHolder, groupPosition, childPosition);
@@ -212,18 +211,18 @@ public abstract class BaseExpandableAdapter<VH extends BaseViewHolder> extends B
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
         View v;
-        BaseViewHolder baseViewHolder;
+        BaseExpandableViewHolder baseViewHolder;
 
         if (convertView == null) {
             // 加载行布局文件，产生具体的一行
             v = activity.getLayoutInflater().inflate(groupViewByLayout(), null);
             // 创建存储一行控件的对象
-            baseViewHolder = groupViewHolder(parent, groupPosition, isExpanded);
+            baseViewHolder = groupViewHolder(v, groupPosition, isExpanded);
             v.setTag(baseViewHolder);// 将vh存储到行的Tag中
         } else {
             v = convertView;
             // 取出隐藏在行中的Tag--取出隐藏在这一行中的vh控件缓存对象
-            baseViewHolder = (BaseViewHolder) convertView.getTag();
+            baseViewHolder = (BaseExpandableViewHolder) convertView.getTag();
         }
         // 判断组视图是否展开
         if (groupImageView() != null) {

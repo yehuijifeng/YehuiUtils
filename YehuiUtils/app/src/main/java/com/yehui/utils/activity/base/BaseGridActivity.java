@@ -31,11 +31,6 @@ public abstract class BaseGridActivity extends BaseListActivity {
         recyclerView.addItemDecoration(spaceItemDecoration);
     }
 
-    @Override
-    protected void initData() {
-
-    }
-
     /**
      * 重写baselistview中的加横线方法，为了去掉父类中的横线
      */

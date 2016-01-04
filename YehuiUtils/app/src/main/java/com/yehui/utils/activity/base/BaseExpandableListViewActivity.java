@@ -2,13 +2,12 @@ package com.yehui.utils.activity.base;
 
 import android.app.Activity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 
 import com.yehui.utils.R;
 import com.yehui.utils.adapter.base.BaseExpandableAdapter;
-import com.yehui.utils.adapter.base.BaseViewHolder;
+import com.yehui.utils.adapter.base.BaseExpandableViewHolder;
 import com.yehui.utils.view.recyclerview.HeaderView;
 import com.yehui.utils.view.recyclerview.MyExpandableView;
 
@@ -29,7 +28,7 @@ public abstract class BaseExpandableListViewActivity extends BaseActivity {
      *
      * @return
      */
-    protected abstract BaseViewHolder getGroupViewHolder(ViewGroup parent, int groupPosition, boolean isExpanded);
+    protected abstract BaseExpandableViewHolder getGroupViewHolder(View parent, int groupPosition, boolean isExpanded);
 
     /**
      * 父类中旋转的方向箭头图片，若为空则使用默认的
@@ -44,17 +43,17 @@ public abstract class BaseExpandableListViewActivity extends BaseActivity {
     /**
      * 父view每一行的数据
      */
-    public abstract void groupItemData(BaseViewHolder baseViewHolder, int groupPosition, boolean isExpanded);
+    public abstract void groupItemData(BaseExpandableViewHolder baseViewHolder, int groupPosition, boolean isExpanded);
 
     /**
      * 父view的点击事件
      */
-    public abstract void onGroupItemClick(ExpandableListView expandableListView, View itemView, int groupPosition, boolean isExpanded);
+    public abstract void onGroupItemClick(ExpandableListView expandableListView, View itemView, int groupPosition, long id);
 
     /**
      * 需要放入子viewholder
      */
-    protected abstract BaseViewHolder getChildViewHolder(ViewGroup parent, int groupPosition, int childPosition);
+    protected abstract BaseExpandableViewHolder getChildViewHolder(View parent, int groupPosition, int childPosition);
 
     /**
      * 子itemview
@@ -64,12 +63,12 @@ public abstract class BaseExpandableListViewActivity extends BaseActivity {
     /**
      * 子view每一行的数据
      */
-    public abstract void childItemData(BaseViewHolder baseViewHolder, int groupPosition, int childPosition);
+    public abstract void childItemData(BaseExpandableViewHolder baseViewHolder, int groupPosition, int childPosition);
 
     /**
      * 子view的点击事件
      */
-    public abstract void onChildItemClick(ExpandableListView expandableListView, View itemView, int groupPosition, int childPosition);
+    public abstract void onChildItemClick(ExpandableListView expandableListView, View itemView, int groupPosition, int childPosition,long id);
 
     private MyExpandableView mExpandableView;
     private ExpandableListView expandableListView;
@@ -86,11 +85,8 @@ public abstract class BaseExpandableListViewActivity extends BaseActivity {
         expandableListView.setGroupIndicator(null); //隐藏ExpandableListView自带的图标
         mExpandableView.setIsRefresh(isRefresh());
         defaultRefresh();
-    }
-
-    @Override
-    protected void initData() {
-
+        expandableListView.setOnGroupClickListener(new onGroupClickListener());
+        expandableListView.setOnChildClickListener(new onChildClickListener());
     }
 
     /**
@@ -220,7 +216,7 @@ public abstract class BaseExpandableListViewActivity extends BaseActivity {
         }
 
         @Override
-        public BaseViewHolder groupViewHolder(ViewGroup parent, int groupPosition, boolean isExpanded) {
+        public BaseExpandableViewHolder groupViewHolder(View parent, int groupPosition, boolean isExpanded) {
                        return BaseExpandableListViewActivity.this.getGroupViewHolder(parent, groupPosition, isExpanded);
         }
 
@@ -235,13 +231,12 @@ public abstract class BaseExpandableListViewActivity extends BaseActivity {
         }
 
         @Override
-        public void groupItemData(BaseViewHolder baseViewHolder, int groupPosition, boolean isExpanded) {
-            //baseViewHolder.itemView.setOnClickListener(new onGroupClickListener(groupPosition, isExpanded));
+        public void groupItemData(BaseExpandableViewHolder baseViewHolder, int groupPosition, boolean isExpanded) {
             BaseExpandableListViewActivity.this.groupItemData(baseViewHolder, groupPosition, isExpanded);
         }
 
         @Override
-        public BaseViewHolder childViewHolder(ViewGroup parent, int groupPosition, int childPosition) {
+        public BaseExpandableViewHolder childViewHolder(View parent, int groupPosition, int childPosition) {
             return BaseExpandableListViewActivity.this.getChildViewHolder(parent, groupPosition, childPosition);
         }
 
@@ -252,50 +247,35 @@ public abstract class BaseExpandableListViewActivity extends BaseActivity {
         }
 
         @Override
-        public void childItemData(BaseViewHolder baseViewHolder, int groupPosition, int childPosition) {
-            //baseViewHolder.itemView.setOnClickListener(new onChildClickListener(groupPosition, childPosition));
+        public void childItemData(BaseExpandableViewHolder baseViewHolder, int groupPosition, int childPosition) {
             BaseExpandableListViewActivity.this.childItemData(baseViewHolder, groupPosition, childPosition);
         }
 
     }
 
+
     /**
      * 父item的点击事件
      */
-    class onGroupClickListener implements View.OnClickListener {
-
-        private int groupPosition;
-        private boolean isExpanded;
-
-        public onGroupClickListener(int groupPosition, boolean isExpanded) {
-            this.groupPosition = groupPosition;
-            this.isExpanded = isExpanded;
-        }
+    class onGroupClickListener implements ExpandableListView.OnGroupClickListener {
 
         @Override
-        public void onClick(View v) {
-            onGroupItemClick(expandableListView, v, groupPosition, isExpanded);
+        public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+            onGroupItemClick(parent, v, groupPosition, id);
+            return false;
         }
     }
 
     /**
      * 子item的点击事件
      */
-    class onChildClickListener implements View.OnClickListener {
-
-        private int groupPosition;
-        private int childPosition;
-
-        public onChildClickListener(int groupPosition, int childPosition) {
-            this.groupPosition = groupPosition;
-            this.childPosition = childPosition;
-        }
+    class onChildClickListener implements ExpandableListView.OnChildClickListener {
 
         @Override
-        public void onClick(View v) {
-            onChildItemClick(expandableListView, v, groupPosition, childPosition);
+        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+            onChildItemClick(parent, v, groupPosition, childPosition,id);
+            return false;
         }
     }
-
 
 }

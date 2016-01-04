@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yehui.utils.R;
 import com.yehui.utils.application.ActivityCollector;
-import com.yehui.utils.view.MyTitleView;
+import com.yehui.utils.view.titleview.MyTitleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +58,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 获取屏幕宽高
      */
-    protected DisplayMetrics outMetrics = new DisplayMetrics();
+    protected DisplayMetrics outMetrics;
 
     /**
      * gson,解析json数据或者类转json时能用到

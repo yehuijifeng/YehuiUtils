@@ -5,14 +5,14 @@ import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.yehui.utils.R;
 import com.yehui.utils.activity.base.BaseListActivity;
 import com.yehui.utils.adapter.base.BaseViewHolder;
 import com.yehui.utils.utils.LogUtil;
-import com.yehui.utils.view.MyTitleView;
+import com.yehui.utils.view.titleview.MyTitleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -221,7 +221,7 @@ public class RecyclerListActivity extends BaseListActivity {
      */
     class DefaultViewHolder extends BaseViewHolder {
 
-        private RadioButton radioButtonTest;
+        private CheckBox radioButtonTest;
         private TextView textViewTest;
         private Button buttonTest;
 
@@ -231,7 +231,7 @@ public class RecyclerListActivity extends BaseListActivity {
 
         @Override
         public void initItemView(View itemView) {
-            radioButtonTest = (RadioButton) itemView.findViewById(R.id.radioButtonTest);
+            radioButtonTest = (CheckBox) itemView.findViewById(R.id.radioButtonTest);
             textViewTest = (TextView) itemView.findViewById(R.id.textViewTest);
             buttonTest = (Button) itemView.findViewById(R.id.buttonTest);
         }
@@ -239,7 +239,7 @@ public class RecyclerListActivity extends BaseListActivity {
 
     class DefaultTowViewHolder extends BaseViewHolder {
 
-        private RadioButton radioButtonTest;
+        private CheckBox radioButtonTest;
         private TextView textViewTest;
         private Button buttonTest;
 
@@ -249,7 +249,7 @@ public class RecyclerListActivity extends BaseListActivity {
 
         @Override
         public void initItemView(View itemView) {
-            radioButtonTest = (RadioButton) itemView.findViewById(R.id.radioButtonTest);
+            radioButtonTest = (CheckBox) itemView.findViewById(R.id.radioButtonTest);
             textViewTest = (TextView) itemView.findViewById(R.id.textViewTest);
             buttonTest = (Button) itemView.findViewById(R.id.buttonTest);
         }

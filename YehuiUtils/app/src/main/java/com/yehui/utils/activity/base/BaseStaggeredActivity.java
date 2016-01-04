@@ -33,11 +33,6 @@ public abstract class BaseStaggeredActivity extends BaseListActivity {
         mRecyclerView.onRcvScrollListener.stagNumber=stagViewByNumber();
     }
 
-    @Override
-    protected void initData() {
-
-    }
-
     /**
      * 瀑布流的方向
      * 0,默认，垂直

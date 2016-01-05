@@ -1,0 +1,91 @@
+使用方法
+
+数据库建表 : 首先定义想要建表的对象
+/**
+ * @Annotation Table's bean
+ * 这就是我们想要保存的数据结构, 我们期待使用数据库进行增加/删除/查询操作
+ * !! 注意要使这个类继承ConvertibleBean并且保留一个空的构造函数
+ */
+public class TabBean extends ConvertibleBean {
+
+    @PrimaryKey @NotNull @AutoInc public int _id;
+
+    @DataMark
+    @NotNull public int IntProp;
+
+    @DataMark
+    @NotNull public float FloatProp;
+
+    @NotNull public double DoubleProp;
+
+    @DefaultNull public String StringProp;
+
+    public short ShortProp;
+
+    public long LongProp;
+
+    public boolean BooleanProp;
+
+    @DBIgnore public String IgnoreProp;
+
+    /***
+     * 建议:对自增主键的表,不要创建带主键的构造函数
+     */
+    public TabBean(int intProp, float floatProp, double doubleProp, String stringProp,
+                   short shortProp, long longProp, boolean booleanProp, String ignoreProp) {
+        IntProp = intProp;
+        FloatProp = floatProp;
+        DoubleProp = doubleProp;
+        StringProp = stringProp;
+        ShortProp = shortProp;
+        LongProp = longProp;
+        BooleanProp = booleanProp;
+        IgnoreProp = ignoreProp;
+    }
+
+    /***
+     * 重要:对要插入数据库的JavaBean一定要保留空的构造函数!
+     */
+    public TabBean(){}
+}
+然后就是以这个类作为参数建表了
+List<Class> tables = new ArrayList<>();
+tables.add(TabBean.class);
+dbHelper = new CommonDBHelper(App.getInstance(), tables, VERSION);
+其中App.getInstance是获得Application实例, 一般的使用全局Context的Application作为建表的context(防止activity混乱的生命周期可能会导致的NPE问题)。建表的时候我们看到传入了一个类的列表tables, 允许我们在数据库中用这种方式建立多个表。
+
+然后就是插入行了, 也是十分之简单的加入现在有一个TabBean对象bean, 我们希望把他存进数据库中, 那么
+dbHelper.insert(db, bean);
+很好, 然后我们希望查询TabBean中的对象
+List<Convertible> results = dbHelper.queryAll(db, TabBean.class);
+TabBean head = (TabBean)results.get(0);
+我们希望清空TabBean中的对象
+dbHelper.deleteAll(db, TabBean.class);
+可以看出所有的数据库操作都变成了简单的对象操作, 从此告别繁琐的执行sql操作。
+
+
+----------------------------------------------------------------------------------------------
+
+
+功能注解与建议
+
+数据库使用注解如下, 对所有的属性一定要申明为public或者private, final属性会被忽略
+
+自增键 AutoInc
+
+数据标记 DataMark(参见wiki DataMark)
+
+忽略 DBIgnore(使用了这个注解的属性在建表以及插入以及增删查操作中将被忽略)
+
+默认空值 DefaultNull
+
+非空值 NotNull
+
+主键 PrimaryKey
+
+另外建表的sql语句会在第一次建表, 可以在Logcat(level = i,filter = 'CommonDBHelper')中打印出来。如果要关闭log可以调用
+
+dbHelper.showLog(false);
+日志是默认开启的。
+
+更多相关功能可以参考com.android.dbutil.api中接口类中的声明

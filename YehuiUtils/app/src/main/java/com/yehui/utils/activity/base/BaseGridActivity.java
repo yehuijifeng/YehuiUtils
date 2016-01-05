@@ -19,7 +19,14 @@ public abstract class BaseGridActivity extends BaseListActivity {
      */
     protected abstract int gridViewByNumber();
 
+    /**
+     * 表格布局的管理器
+     */
     protected GridLayoutManager layoutManager;
+
+    /**
+     * 表格布局的边框线
+     */
     protected SpaceItemDecoration spaceItemDecoration;
 
     @Override

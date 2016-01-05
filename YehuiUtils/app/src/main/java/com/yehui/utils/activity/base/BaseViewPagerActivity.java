@@ -52,11 +52,7 @@ public abstract class BaseViewPagerActivity extends BaseActivity implements View
      * 进度条移动值
      **/
     private Integer moveI;
-    private int bmpw = 0; // 游标宽度
-    private int offset = 0;// // 动画图片偏移量
-    private int currIndex = 0;// 当前页卡编号
     private LinearLayout.LayoutParams currLayoutParams;
-    private boolean isFirst = true;//防重发
 
     @Override
     protected void initView() {
@@ -103,6 +99,9 @@ public abstract class BaseViewPagerActivity extends BaseActivity implements View
 
     }
 
+    /**
+     * 每一个tab的点击事件，点击后直接跳转到该tab下的pager页面
+     */
     private class ItemTabOnClick implements View.OnClickListener {
 
         private int item;
@@ -149,20 +148,6 @@ public abstract class BaseViewPagerActivity extends BaseActivity implements View
         if (itemView != null)
             return itemView;
         return null;
-    }
-
-    /**
-     * 窗口焦点改变
-     * 视图加载完成之后执行：值得注意的是PopupWindow每次显示和销毁都会执行一次
-     */
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        // 只执行一次
-        if (isFirst) {
-            // 取标签宽度付给进度条，获得单个界面的宽度
-            isFirst = false;
-        }
     }
 
     /**
@@ -233,6 +218,4 @@ public abstract class BaseViewPagerActivity extends BaseActivity implements View
 //            showShortToast("滑动完毕");
 //        }
     }
-
-
 }

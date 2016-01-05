@@ -91,9 +91,24 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected LayoutInflater inflater;
 
     /**
-     * title的类型，枚举类型
+     * title的类型，枚举类型,初始化给默认标题类型
      */
-    protected MyTitleView.TitleMode titleMode;
+    protected MyTitleView.TitleMode titleMode=MyTitleView.TitleMode.NORMAL;
+
+
+    /**
+     * 获得当前title类型
+     */
+    public MyTitleView.TitleMode getTitleMode() {
+        return titleMode;
+    }
+
+    /**
+     * 更改当前title类型
+     */
+    public void setTitleMode(MyTitleView.TitleMode titleMode) {
+        this.titleMode = titleMode;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +120,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         initProperties();
         initView();
         initData();
+        addTitleMode();
     }
 
     /**
@@ -112,38 +128,30 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     private void initProperties() {
         helper = new BaseHelper(this);
+        eventBus=helper.eventBus;
         mTitleView = (MyTitleView) findViewById(R.id.my_title_view);
         if (mTitleView != null) {
             if (setCustomToolbar() != null) {
                 onCreateCustomToolBar(setCustomToolbar());
             } else {
-                addTitleMode();
-                mTitleView.getTitleMode();
+                mTitleView.setTitleMode(titleMode);
                 mTitleView.setTitleText(setTitleText() + "");
             }
         }
         outMetrics = helper.outMetrics;
-        eventBus = EventBus.getDefault();
+        //eventBus = EventBus.getDefault();
         imageLoader = ImageLoader.getInstance();
         inflater = this.getLayoutInflater();
         if (!helper.isRegistered(this)) {
             helper.registerEventBus(this);
         }
-
     }
 
     /**
-     * 设置标题类型
+     * 设置标题类型，本类调用，外部不可改变
      */
     private void addTitleMode() {
-        mTitleView.setTitleMode(setTitleTypeByTitleMode());
-    }
-
-    /**
-     * 供子类调用的title类型
-     */
-    protected MyTitleView.TitleMode setTitleTypeByTitleMode() {
-        return MyTitleView.TitleMode.NORMAL;
+        mTitleView.setTitleMode(getTitleMode());
     }
 
     /**
@@ -155,8 +163,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 供子类调用的title,自定义toolbar
-     *
-     * @return
      */
     protected View setCustomToolbar() {
         return null;
@@ -165,9 +171,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * EventBus工具类接收消息的特定类，需要注册后才能使用
      */
-    public void onEventMainThread() {
-
-    }
+    public void onEventMainThread() {}
     /**EventBus工具类的四种方法
      1、onEvent
      2、onEventMainThread
@@ -214,10 +218,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 需要实现eventbus中的一个方法，不然报错
      */
-    public void onEventMainThread(Object obj) {
-
-    }
-
+    public void onEventMainThread(Object obj) {}
 
     /**
      * 隐藏/显示软键盘的方法
@@ -232,8 +233,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 获取屏幕高度
-     *
-     * @return
      */
     protected int getWindowHeight() {
         return helper.getWindowHeight();
@@ -241,15 +240,13 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 获取屏幕宽度
-     *
-     * @return
      */
     protected int getWindowWidth() {
         return helper.getWindowWidth();
     }
 
     /**
-     * @return 获取上一个Activity传过来的Bundle
+     * 获取上一个Activity传过来的Bundle
      */
     protected Bundle getBundle() {
         return helper.getBundle();
@@ -315,29 +312,27 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * <h1 color='#FFAAAA'>获取资源文件下的字符串数组</h1>
+     * 获取资源文件下的字符串数组
      *
-     * @param resId <font color='#FFFFFF'>资源ID 示例:R.array.lab_payment_methods</font>
-     * @return
+     * @param resId 资源ID 示例:R.array.lab_payment_methods
      */
     public String[] getResourceStringArray(int resId) {
         return helper.getResourceStringArray(resId);
     }
 
     /**
-     * <h1 color='#FFAAAA'>获取资源文件下的字符串<h1/>
+     * 获取资源文件下的字符串
      *
-     * @param resId 资源ID。<font color='#FFFFFF'>示例:R.string.xxx<font/>
-     * @return
+     * @param resId 资源ID。示例:R.string.xxx
      */
     public String getResourceString(int resId) {
         return helper.getResourceString(resId);
     }
 
     /**
-     * <h1 color='#FFAAAA'>获取资源文件下的Drawable对象<h1/>
+     *  获取资源文件下的Drawable对象
      *
-     * @param resId 资源ID.<font color='#FFFFFF'>示例:R.drawable.xxx<font/>
+     * @param resId 资源ID. 示例:R.drawable.xxx
      * @return Drawable对象
      */
     public Drawable getResourceDrawable(int resId) {
@@ -345,9 +340,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * <h1 color='#FFAAAA'>获取资源文件下的颜色值<h1/>
+     *  获取资源文件下的颜色值
      *
-     * @param resId 资源ID。<font color='#FFFFFF'>示例:R.color.xxx<font/>
+     * @param resId 资源ID。 示例:R.color.xxx
      * @return
      */
     public int getResourceColor(int resId) {
@@ -357,7 +352,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 获取资源文件下的int值
      *
-     * @param resId 资源ID。<font color='#FFFFFF'>示例:R.integer.xxx<font/>
+     * @param resId 资源ID。 示例:R.integer.xxx
      * @return
      */
     public int getResourceInteger(int resId) {
@@ -367,7 +362,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 获取资源文件下的尺寸值
      *
-     * @param resId 资源ID。<font color='#FFFFFF'>示例:R.dimen.xxx<font/>
+     * @param resId 资源ID。 示例:R.dimen.xxx
      * @return
      */
     public float getResourceDimension(int resId) {
@@ -443,6 +438,13 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void showDebugToast(String text) {
         helper.showDebugToast(text);
+    }
+
+    /**
+     * 退出程序
+     */
+    public void finishAll(){
+        helper.finishAll();
     }
 
     @Override

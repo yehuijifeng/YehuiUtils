@@ -28,25 +28,39 @@ import de.greenrobot.event.EventBus;
  */
 public class BaseHelper {
 
-    //默认每个activity和fragment都注册eventbus
+    /**
+     * 默认每个activity和fragment都注册eventbus
+     */
     protected EventBus eventBus;
 
-    //获取当前屏幕的长宽的方法
+    /**
+     * 获取当前屏幕的长宽的方法
+     */
     public DisplayMetrics outMetrics = new DisplayMetrics();
 
-    //代理的目标activity
+    /**
+     * 代理的目标activity
+     */
     protected BaseActivity activity;
 
-    //获取项目资源
+    /**
+     * 获取项目资源
+     */
     protected Resources resources;
 
-    //系统输入法服务
+    /**
+     * 系统输入法服务
+     */
     protected InputMethodManager inputMethodManager;
 
-    //父布局
+    /**
+     * 父布局
+     */
     protected LayoutInflater inflater;
 
-    //toast弹出信息
+    /**
+     * toast弹出信息
+     */
     protected Toast toast;
 
     public BaseHelper(Context context) {
@@ -120,10 +134,16 @@ public class BaseHelper {
             return defaultValue;
     }
 
+    /**
+     * 获取上一个Activity传过来的布尔值
+     */
     public boolean getBoolean(String key, boolean defaultValue) {
         return getBundle() != null && getBundle().getBoolean(key, defaultValue);
     }
 
+    /**
+     * 获取上一个Activity传过来的double值
+     */
     public double getDouble(String key, double defaultValue) {
         if (getBundle() != null)
             return getBundle().getDouble(key, defaultValue);
@@ -131,6 +151,9 @@ public class BaseHelper {
             return defaultValue;
     }
 
+    /**
+     * 获取上一个Activity传过来的float值
+     */
     public float getFloat(String key, float defaultValue) {
         if (getBundle() != null)
             return getBundle().getFloat(key, defaultValue);
@@ -138,6 +161,9 @@ public class BaseHelper {
             return defaultValue;
     }
 
+    /**
+     * 获取上一个Activity传过来的实现了Parcelable接口的对象
+     */
     public Parcelable getParcelable(String key) {
         if (getBundle() != null)
             return getBundle().getParcelable(key);
@@ -145,6 +171,9 @@ public class BaseHelper {
             return null;
     }
 
+    /**
+     * 获取上一个Activity传过来的字符串集合
+     */
     public List<String> getStringArrayList(String key) {
         if (getBundle() != null)
             return getBundle().getStringArrayList(key);
@@ -152,6 +181,9 @@ public class BaseHelper {
             return null;
     }
 
+    /**
+     * 获取上一个Activity传过来的实现了Parcelable接口的对象的集合
+     */
     public ArrayList<? extends Parcelable> getParcelableList(String key) {
         if (getBundle() != null)
             return getBundle().getParcelableArrayList(key);
@@ -269,8 +301,9 @@ public class BaseHelper {
 
     /**
      * 在父布局中添加view
+     *
      * @param resource 需要添加的布局id
-     * @param root 给这个布局一个容器，规定大小和style
+     * @param root     给这个布局一个容器，规定大小和style
      */
     public View inflate(int resource, ViewGroup root) {
         return inflater.inflate(resource, root);
@@ -292,18 +325,18 @@ public class BaseHelper {
 
     /**
      * 解释：
-     *
-     onEvent:如果使用onEvent作为订阅函数，那么该事件在哪个线程发布出来的，onEvent就会在这个线程中运行，也就是说发布事件和接收事件线程在同一个线程。使用这个方法时，在onEvent方法中不能执行耗时操作，如果执行耗时操作容易导致事件分发延迟。
-     onEventMainThread:如果使用onEventMainThread作为订阅函数，那么不论事件是在哪个线程中发布出来的，onEventMainThread都会在UI线程中执行，接收事件就会在UI线程中运行，这个在Android中是非常有用的，因为在Android中只能在UI线程中跟新UI，所以在onEvnetMainThread方法中是不能执行耗时操作的。
-     onEventBackground:如果使用onEventBackgrond作为订阅函数，那么如果事件是在UI线程中发布出来的，那么onEventBackground就会在子线程中运行，如果事件本来就是子线程中发布出来的，那么onEventBackground函数直接在该子线程中执行。
-     onEventAsync：如果使用onEventAsync函数作为订阅函数，那么无论事件在哪个线程发布，都会创建新的子线程在执行onEventAsync.
+     * <p/>
+     * onEvent:如果使用onEvent作为订阅函数，那么该事件在哪个线程发布出来的，onEvent就会在这个线程中运行，也就是说发布事件和接收事件线程在同一个线程。使用这个方法时，在onEvent方法中不能执行耗时操作，如果执行耗时操作容易导致事件分发延迟。
+     * onEventMainThread:如果使用onEventMainThread作为订阅函数，那么不论事件是在哪个线程中发布出来的，onEventMainThread都会在UI线程中执行，接收事件就会在UI线程中运行，这个在Android中是非常有用的，因为在Android中只能在UI线程中跟新UI，所以在onEvnetMainThread方法中是不能执行耗时操作的。
+     * onEventBackground:如果使用onEventBackgrond作为订阅函数，那么如果事件是在UI线程中发布出来的，那么onEventBackground就会在子线程中运行，如果事件本来就是子线程中发布出来的，那么onEventBackground函数直接在该子线程中执行。
+     * onEventAsync：如果使用onEventAsync函数作为订阅函数，那么无论事件在哪个线程发布，都会创建新的子线程在执行onEventAsync.
      */
-    public void onEventMainThread(Object obj){
+    public void onEventMainThread(Object obj) {
 
     }
 
     /**
-     *注册eventbus
+     * 注册eventbus
      */
     public void registerEventBus(Object o) {
         eventBus.register(o);

@@ -23,8 +23,8 @@ public class MyTitleView extends LinearLayout {
     private TextView title_default_text, title_default_right_text;
     private LinearLayout toolbar_ly;
     //默认标题类型
-    private static final TitleMode DEFAULT_MODE = TitleMode.NORMAL;
-    private TitleMode mTitleMode = DEFAULT_MODE;
+    //private static final TitleMode DEFAULT_MODE = TitleMode.NORMAL;
+    private TitleMode mTitleMode;
 
     public MyTitleView(Context context) {
         super(context);
@@ -49,6 +49,7 @@ public class MyTitleView extends LinearLayout {
         title_default_text = (TextView) view.findViewById(R.id.title_default_text);
         title_default_right_text = (TextView) view.findViewById(R.id.title_default_right_text);
         title_default_back.setOnClickListener(toBack);
+        setTitleMode(TitleMode.NORMAL);
     }
 
     /**
@@ -119,7 +120,7 @@ public class MyTitleView extends LinearLayout {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-        switch (mTitleMode) {
+        switch (getTitleMode()) {
             case NORMAL://正常的title
                 initNormalTitle();
                 break;

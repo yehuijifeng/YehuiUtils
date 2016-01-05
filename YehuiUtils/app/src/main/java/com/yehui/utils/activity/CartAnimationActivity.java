@@ -64,12 +64,8 @@ public class CartAnimationActivity extends BaseActivity {
     }
 
     @Override
-    protected MyTitleView.TitleMode setTitleTypeByTitleMode() {
-        return titleMode.NO_BACK_TEXT;
-    }
-
-    @Override
     protected void initView() {
+        setTitleMode(MyTitleView.TitleMode.NO_BACK_IMAGE);
 
         mTitleView.setTextButtonOnClick(new View.OnClickListener() {
             @Override

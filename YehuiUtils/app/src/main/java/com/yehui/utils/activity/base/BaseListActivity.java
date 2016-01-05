@@ -32,9 +32,9 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
     /**
      * 每一行的布局文件id
      *
-     * @param type
+     * @param resId
      */
-    protected abstract int getItemLayoutResId(int type);
+    protected abstract int getItemLayoutById(int resId);
 
     /**
      * 初始化每一行的数据
@@ -85,7 +85,7 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
 
     /**
      * 设置每个item的间距,
-     * 紧紧针对listview可用！
+     * 紧紧针对listview可用！(其他代理类有自己的方法)
      */
     protected float itemDecoration() {
         return 1;
@@ -113,7 +113,6 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
         setIsRefresh(false);
         setIsLoadMore(true);
         if (mRecyclerView.footView != null) mRecyclerView.footView.onFootViewEmpty();
-
     }
 
     /**
@@ -191,11 +190,6 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
         mLoadingView.loadingView(loadingStr);
     }
 
-    @Override
-    protected void initData() {
-
-    }
-
     /**
      * 下拉刷新监听事件
      */
@@ -253,15 +247,22 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
     }
 
     /**
-     * 加载更多,子类需要重写
+     * 重新加载,子类需要重写
      */
     protected void reLoad() {
     }
 
     /**
-     * 下拉刷新方法,子类需要重写
+     * 下拉刷新,子类需要重写
      */
     protected void refresh() {
+    }
+
+    /**
+     * 上拉加载,子类需要重写
+     */
+    protected void loadMore() {
+
     }
 
     /**
@@ -280,6 +281,7 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
 
     /**
      * 子类可以调用该方法，动态的改变上拉加载的存在方式
+     * isLoadMore 是否可以上拉加载
      */
     protected void setIsLoadMore(boolean isLoadMore) {
         this.isLoadMore=isLoadMore;
@@ -297,20 +299,12 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
 
     /**
      * 子类可以调用该方法，动态的改变下拉刷新的存在方式
+     * isRefresh 是否可以下拉刷新
      */
     protected void setIsRefresh(boolean isRefresh) {
         this.isRefresh=isRefresh;
         mRecyclerView.setIsRefresh(isRefresh);
         defaultRefresh();
-    }
-
-
-
-    /**
-     * 上拉加载更多,根据情况子类重写
-     */
-    protected void loadMore() {
-
     }
 
     /**
@@ -501,7 +495,7 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
          */
         @Override
         public BaseViewHolder onCreateViewHolderItem(ViewGroup parent, int viewType) {
-            View itemView = inflate(getItemLayoutResId(viewType), parent, false);
+            View itemView = inflate(getItemLayoutById(viewType), parent, false);
             return BaseListActivity.this.getViewHolder(itemView, viewType);
         }
 

@@ -11,6 +11,7 @@ import com.yehui.utils.fragment.ViewPagerFour;
 import com.yehui.utils.fragment.ViewPagerOne;
 import com.yehui.utils.fragment.ViewPagerThree;
 import com.yehui.utils.fragment.ViewPagerTow;
+import com.yehui.utils.view.titleview.MyTitleView;
 
 /**
  * Created by yehuijifeng
@@ -36,11 +37,12 @@ public class ViewpagerActivity extends BaseViewPagerActivity {
         mViewList.add(new ViewPagerThree());
         mViewList.add(new ViewPagerFour());
         mViewList.add(new ViewPagerFive());
+        setTitleMode(MyTitleView.TitleMode.NO_BACK_NORMAL);
     }
 
     @Override
     protected boolean isShowBar() {
-        return false;
+        return true;
     }
 
     /**
@@ -76,7 +78,6 @@ public class ViewpagerActivity extends BaseViewPagerActivity {
             case 4:
                 tabText.setText("多级列表");
                 break;
-
         }
         return view;
     }

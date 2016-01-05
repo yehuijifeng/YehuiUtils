@@ -19,8 +19,14 @@ public abstract class BaseStaggeredActivity extends BaseListActivity {
      */
     protected abstract int stagViewByNumber();
 
-
+    /**
+     * 瀑布流的管理器
+     */
     protected StaggeredGridLayoutManager layoutManager;
+
+    /**
+     * 瀑布流的边框线
+     */
     protected SpaceItemDecoration spaceItemDecoration;
 
     @Override

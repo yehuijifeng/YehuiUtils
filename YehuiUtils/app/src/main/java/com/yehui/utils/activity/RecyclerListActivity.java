@@ -31,10 +31,6 @@ public class RecyclerListActivity extends BaseListActivity {
 //    protected View setCustomToolbar() {
 //        return inflate(R.layout.item_test_recycler, null);
 //    }
-    @Override
-    protected MyTitleView.TitleMode setTitleTypeByTitleMode() {
-        return MyTitleView.TitleMode.NO_BACK_IMAGE;
-    }
 
     @Override
     protected int isHorizaontalOrVertical() {
@@ -65,6 +61,7 @@ public class RecyclerListActivity extends BaseListActivity {
     @Override
     protected void initView() {
         super.initView();
+        setTitleMode(MyTitleView.TitleMode.NO_BACK_IMAGE);
         mTitleView.setImageButtonOnClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +77,6 @@ public class RecyclerListActivity extends BaseListActivity {
 
     @Override
     protected void initData() {
-        super.initData();
         for (int i = 0; i < 15; i++) {
             addOne("确定" + i, i);
         }
@@ -97,7 +93,7 @@ public class RecyclerListActivity extends BaseListActivity {
     }
 
     @Override
-    protected int getItemLayoutResId(int type) {
+    protected int getItemLayoutById(int type) {
         if (type == 2015) {
             return R.layout.item_test_recycler;
         }

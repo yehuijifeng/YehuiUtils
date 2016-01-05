@@ -14,8 +14,10 @@ import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yehui.utils.R;
 import com.yehui.utils.application.ActivityCollector;
+import com.yehui.utils.utils.SharedPreferencesUtil;
 import com.yehui.utils.view.titleview.MyTitleView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,6 +112,26 @@ public abstract class BaseActivity extends AppCompatActivity {
         this.titleMode = titleMode;
     }
 
+    /**
+     * 小数点的确定位数
+     */
+    protected DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
+    /**
+     * sharedPreferences键值对的存储工具
+     */
+    protected SharedPreferencesUtil sharedPreferences;
+
+
+    protected SharedPreferencesUtil getSharedPreferences() {
+        if(sharedPreferences==null)return null;
+        return sharedPreferences;
+    }
+
+    protected void setSharedPreferences(String name) {
+        this.sharedPreferences =new SharedPreferencesUtil(this,name);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //title,功能操作模式叠加
@@ -167,6 +189,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected View setCustomToolbar() {
         return null;
     }
+
+
 
     /**
      * EventBus工具类接收消息的特定类，需要注册后才能使用

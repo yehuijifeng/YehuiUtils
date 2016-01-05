@@ -4,6 +4,10 @@ import android.util.Log;
 
 import com.yehui.utils.application.YehuiApplication;
 
+/**
+ * 2016年1月5日10:46:19
+ * 打印日志工具类
+ */
 public class LogUtil {
 
 	public static String TAG = YehuiApplication.TAG;

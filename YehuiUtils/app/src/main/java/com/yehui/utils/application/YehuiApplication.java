@@ -11,8 +11,9 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.yehui.utils.utils.FileUtil.FileContact;
 import com.yehui.utils.utils.LogUtil;
-import com.yehui.utils.utils.imageLoaderUtil.DefaultOptions;
+import com.yehui.utils.utils.imageLoaderUtil.ImageOptions;
 
 import java.io.File;
 
@@ -37,9 +38,13 @@ public class YehuiApplication extends Application {
     //日志统一管理
     public static final String TAG = "yehuiUtils";
     //取得默认image的配置类
-    public static DisplayImageOptions defaultOptions = DefaultOptions.defaultOptions();
+    public static DisplayImageOptions defaultOptions = ImageOptions.defaultOptions();
+    //取得默认image的配置类
+    public static DisplayImageOptions roundOptions = ImageOptions.roundOptions();
+
     //imageloader的实例化
     public static ImageLoader imageLoader = ImageLoader.getInstance();
+
     public boolean normal_app=false;
     @Override
     public void onCreate() {
@@ -91,14 +96,13 @@ public class YehuiApplication extends Application {
                 .memoryCacheSize(2 * 1024 * 1024)//内存缓存大小，2M
                 .memoryCacheSizePercentage(13)//内存缓存百分比
                 .diskCacheFileCount(100) //缓存的文件数量
-                .diskCache(new UnlimitedDiskCache(new File("data/yehui")))//自定义缓存图片地址
+                .diskCache(new UnlimitedDiskCache(new File(FileContact.YEHUI_CACHE_IMG_PATH)))//自定义缓存图片地址
                 .imageDownloader(new BaseImageDownloader(this, 5 * 1000, 30 * 1000)) // connectTimeout (5 s), readTimeout (30 s)超时时间
                 .imageDownloader(new BaseImageDownloader(context)) //图片下载，当前页面
                 .imageDecoder(new BaseImageDecoder(true)) //图片解码
                 .defaultDisplayImageOptions(DisplayImageOptions.createSimple()) //默认图像显示选项：创建简单的
                 .writeDebugLogs()//写入debug的log
                 .build();
-
 
         /**
          *2.单例ImageLoader类的初始化

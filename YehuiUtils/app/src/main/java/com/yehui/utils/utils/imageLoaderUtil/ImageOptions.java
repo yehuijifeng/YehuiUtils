@@ -13,7 +13,11 @@ import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
  * imageloader的默认配置，单个图片的属性配置
  */
 
-public class DefaultOptions {
+public class ImageOptions {
+
+    /**
+     * 默认的图片显示方式
+     */
     public static DisplayImageOptions defaultOptions() {
         /**
          *3.DisplayImageOptions实例对象的配置
@@ -31,7 +35,7 @@ public class DefaultOptions {
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(android.R.drawable.ic_menu_rotate)//加载的时候显示的图片
                 .showImageForEmptyUri(android.R.drawable.stat_sys_warning)  // empty空或者错误的情况下URI时显示的图片
-                .showImageOnFail( android.R.drawable.ic_delete)// 不是图片文件或者解码错误情况下的图片
+                .showImageOnFail(android.R.drawable.ic_delete)// 不是图片文件或者解码错误情况下的图片
                 .resetViewBeforeLoading(true)  //设置图片在下载前是否重置，复位
                 .delayBeforeLoading(0)//加载前延迟：1s
                 .cacheInMemory(true)// 设置下载的图片是否缓存在内存中,default 不缓存至内存
@@ -76,5 +80,18 @@ public class DefaultOptions {
         //NONE:图片不会调整
         return options;
 
+    }
+
+
+    /**
+     * 圆形图片
+     */
+    public static DisplayImageOptions roundOptions() {
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .displayer(new CircleBitmapDisplayer())
+                .build();
+        return options;
     }
 }

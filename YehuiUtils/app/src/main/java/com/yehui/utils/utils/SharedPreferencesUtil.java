@@ -12,6 +12,15 @@ import java.util.Map;
  */
 public class SharedPreferencesUtil {
 
+    /**
+     * 防止被实例化
+     */
+    private SharedPreferencesUtil() {
+        /* cannot be instantiated */
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
+
+
     private SharedPreferences mSharedPreferences;
 
     private SharedPreferences.Editor mEditor;

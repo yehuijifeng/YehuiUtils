@@ -10,6 +10,14 @@ import android.content.Context;
 public class DisplayUtil {
 
     /**
+     * 防止被实例化
+     */
+    private DisplayUtil() {
+        /* cannot be instantiated */
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
+
+    /**
      * 将px值转换为dip或dp值，保证尺寸大小不变
      */
     public static int px2dip(Context context, float pxValue) {

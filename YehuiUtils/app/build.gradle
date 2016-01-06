@@ -30,4 +30,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.3'
     compile project(':umeng-sdk')
     compile project(':pay-service')
+    compile files('blis/ormlite-android-4.48.jar')
+    compile files('blis/ormlite-core-4.48.jar')
 }

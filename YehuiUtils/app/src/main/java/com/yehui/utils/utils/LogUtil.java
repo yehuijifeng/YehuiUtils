@@ -10,6 +10,14 @@ import com.yehui.utils.application.YehuiApplication;
  */
 public class LogUtil {
 
+	/**
+	 * 防止被实例化
+	 */
+	private LogUtil() {
+        /* cannot be instantiated */
+		throw new UnsupportedOperationException("cannot be instantiated");
+	}
+
 	public static String TAG = YehuiApplication.TAG;
 
 	public static boolean model = true;

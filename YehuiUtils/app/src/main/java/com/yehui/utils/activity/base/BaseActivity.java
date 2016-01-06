@@ -95,7 +95,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * title的类型，枚举类型,初始化给默认标题类型
      */
-    protected MyTitleView.TitleMode titleMode=MyTitleView.TitleMode.NORMAL;
+    protected MyTitleView.TitleMode titleMode;
 
 
     /**
@@ -110,6 +110,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void setTitleMode(MyTitleView.TitleMode titleMode) {
         this.titleMode = titleMode;
+        addTitleMode();
     }
 
     /**
@@ -142,7 +143,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         initProperties();
         initView();
         initData();
-        addTitleMode();
+
     }
 
     /**
@@ -156,12 +157,12 @@ public abstract class BaseActivity extends AppCompatActivity {
             if (setCustomToolbar() != null) {
                 onCreateCustomToolBar(setCustomToolbar());
             } else {
-                mTitleView.setTitleMode(titleMode);
+                setTitleMode(MyTitleView.TitleMode.NORMAL);
+                mTitleView.setTitleMode(getTitleMode());
                 mTitleView.setTitleText(setTitleText() + "");
             }
         }
         outMetrics = helper.outMetrics;
-        //eventBus = EventBus.getDefault();
         imageLoader = ImageLoader.getInstance();
         inflater = this.getLayoutInflater();
         if (!helper.isRegistered(this)) {
@@ -173,7 +174,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 设置标题类型，本类调用，外部不可改变
      */
     private void addTitleMode() {
-        mTitleView.setTitleMode(getTitleMode());
+        if(mTitleView!=null)
+            mTitleView.setTitleMode(getTitleMode());
     }
 
     /**

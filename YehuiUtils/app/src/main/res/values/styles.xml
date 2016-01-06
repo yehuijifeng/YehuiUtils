@@ -30,4 +30,29 @@ colorAccent 对应EditText编辑时、RadioButton选中、CheckBox等选中时�
         <item name="android:background">@color/default_gray</item>
     </style>
 
+    <!--默认button设置-->
+    <style name="default_button_style">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_margin">@dimen/default_padding_and_margin</item>
+        <item name="android:padding">@dimen/default_padding_and_margin</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">@dimen/default_button_width</item>
+        <item name="android:layout_height">@dimen/default_button_height</item>
+        <item name="android:background">@drawable/bg_default_btn</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!--默认textview设置-->
+    <style name="default_textview_style">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_margin">@dimen/default_padding_and_margin</item>
+        <item name="android:padding">@dimen/default_padding_and_margin</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">@dimen/default_button_width</item>
+        <item name="android:layout_height">@dimen/default_button_height</item>
+        <item name="android:background">@drawable/bg_default_text</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

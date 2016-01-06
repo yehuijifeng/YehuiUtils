@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_my_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_sql_create_db"
+                style="@style/default_button_style"
+                android:layout_width="wrap_content"
+                android:text="创建数据库" />
+
+            <Button
+                android:id="@+id/btn_sql_delete_db"
+                style="@style/default_button_style"
+                android:layout_width="wrap_content"
+                android:text="删除数据库中所有表" />
+
+            <Button
+                android:id="@+id/btn_sql_create_table"
+                style="@style/default_button_style"
+                android:layout_width="wrap_content"
+                android:text="创建表" />
+
+            <Button
+                android:id="@+id/btn_sql_create_insert"
+                style="@style/default_button_style"
+                android:layout_width="wrap_content"
+                android:text="添加" />
+
+            <Button
+                android:id="@+id/btn_sql_create_update"
+                style="@style/default_button_style"
+                android:layout_width="wrap_content"
+                android:text="修改" />
+
+            <Button
+                android:id="@+id/btn_sql_create_delete"
+                style="@style/default_button_style"
+                android:layout_width="wrap_content"
+                android:text="删除" />
+
+            <Button
+                android:id="@+id/btn_sql_create_query"
+                style="@style/default_button_style"
+                android:layout_width="wrap_content"
+                android:text="查询" />
+
+            <TextView
+                android:id="@+id/show_table"
+                style="@style/default_textview_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="数据库信息" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

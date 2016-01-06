@@ -8,6 +8,13 @@ import android.view.View;
  * 判断空指针的工具类
  */
 public class EmptyUtil {
+    /**
+     * 防止被实例化
+     */
+    private EmptyUtil() {
+        /* cannot be instantiated */
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
 
     /**
      * 字符串

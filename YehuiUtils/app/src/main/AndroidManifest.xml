@@ -21,10 +21,7 @@
         <activity
             android:name=".activity.ViewpagerActivity"
             android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <!--recyclerview-->
@@ -46,6 +43,16 @@
             android:name=".activity.YehuiHomeActivity"
             android:launchMode="singleTop">
 
+
+        </activity>
+        <!--数据库操作类-->
+        <activity
+            android:name=".activity.SqliteUtilsDemoActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
     </application>

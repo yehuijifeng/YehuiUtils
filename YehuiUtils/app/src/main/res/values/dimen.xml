@@ -15,4 +15,6 @@
     <dimen name="default_xxx_padding_and_margin">20dp</dimen>
     <dimen name="default_title_height">48dp</dimen>
     <dimen name="default_refresh_height">60dp</dimen>
+    <dimen name="default_button_height">40dp</dimen>
+    <dimen name="default_button_width">70dp</dimen>
 </resources>

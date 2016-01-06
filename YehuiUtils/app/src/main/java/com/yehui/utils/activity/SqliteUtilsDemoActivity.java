@@ -95,8 +95,9 @@ public class SqliteUtilsDemoActivity extends BaseActivity implements View.OnClic
                 ormListeDemoTowDao.queryAll();
                 break;
             case R.id.btn_sql_create_delete:
-                ormListeDemoTowDao.deleteById(2);
-                show_table.setText("\n删除成功：删除id为2的数据");
+                int i=2;
+                ormListeDemoTowDao.deleteById(i);
+                show_table.setText("\n删除成功：删除id为"+i+"的数据");
                 ormListeDemoTowDao.queryAll();
                 break;
             case R.id.btn_sql_create_query:

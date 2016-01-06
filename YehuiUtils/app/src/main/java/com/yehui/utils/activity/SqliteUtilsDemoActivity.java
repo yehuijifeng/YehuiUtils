@@ -13,8 +13,6 @@ import com.yehui.utils.bean.OrmLiteDemoTowBean;
 import com.yehui.utils.db.OrmLiteDemoThreeDao;
 import com.yehui.utils.db.OrmLiteDemoTowDao;
 
-import java.util.List;
-
 /**
  * Created by yehuijifeng on 2016/1/5.
  */
@@ -73,7 +71,6 @@ public class SqliteUtilsDemoActivity extends BaseActivity implements View.OnClic
      */
     private void initDb() {
         ormLiteDemoTowBean = new OrmLiteDemoTowBean("test");
-        ormLiteDemoThreeBean = new OrmLiteDemoThreeBean(0.7f);
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -84,103 +81,45 @@ public class SqliteUtilsDemoActivity extends BaseActivity implements View.OnClic
                 openDB();
                 break;
             case R.id.btn_sql_create_table:
-                insertTable();
+                ormListeDemoTowDao.insertTable();
+                show_table.setText("\n添加表成功");
                 break;
             case R.id.btn_sql_create_insert:
-                insertData();
-                queryAll();
+                ormListeDemoTowDao.insertData(ormLiteDemoTowBean);
+                show_table.setText("\n添加数据成功");
+                ormListeDemoTowDao.queryAll();
                 break;
             case R.id.btn_sql_create_update:
-                updateData();
-                queryAll();
+                ormListeDemoTowDao.updateData();
+                show_table.setText("\n更新数据成功");
+                ormListeDemoTowDao.queryAll();
                 break;
             case R.id.btn_sql_create_delete:
-                deleteById();
-                queryAll();
+                ormListeDemoTowDao.deleteById(2);
+                show_table.setText("\n删除成功：删除id为2的数据");
+                ormListeDemoTowDao.queryAll();
                 break;
             case R.id.btn_sql_create_query:
-                queryAll();
+
+                String information = "\n查询成功：";
+                for (OrmLiteDemoTowBean ormLiteDemoBeanTow : ormListeDemoTowDao.queryAll()) {
+                    information += "\nid:  "
+                            + ormLiteDemoBeanTow.getTest_id() + "\nname:  "
+                            + ormLiteDemoBeanTow.getTest_name();
+                }
+                show_table.append(information);
                 break;
             case R.id.btn_sql_delete_db:
-                deleteDB();
+                ormListeDemoTowDao.deleteDB();
+                show_table.setText("\n清空数据库成功");
                 break;
         }
-    }
-
-    private void deleteDB() {
-        if (ormListeDemoTowDao == null)
-            ormListeDemoTowDao = new OrmLiteDemoTowDao(this);
-        ormListeDemoTowDao.dBHelper.deleteDB();
-        show_table.setText("\n清空数据库成功");
     }
 
     private void openDB() {
         ormListeDemoTowDao = new OrmLiteDemoTowDao(this);
         show_table.setText("\n打开数据库成功");
     }
-
-    private void insertTable() {
-        if (ormListeDemoTowDao == null)
-            ormListeDemoTowDao = new OrmLiteDemoTowDao(this);
-        ormListeDemoTowDao.dBHelper.updateDB(OrmLiteDemoTowBean.class);
-        show_table.setText("\n添加表成功");
-    }
-
-    private void insertData() {
-        try {
-            if (ormListeDemoTowDao == null)
-                ormListeDemoTowDao = new OrmLiteDemoTowDao(this);
-            ormListeDemoTowDao.getDaos().create(ormLiteDemoTowBean);
-        } catch (Exception e) {
-            showShortToast(getResourceString(R.string.operation_db_fial));
-        }
-        show_table.setText("\n添加数据成功");
-    }
-
-    private void updateData() {
-        try {
-            if (ormListeDemoTowDao == null)
-                ormListeDemoTowDao = new OrmLiteDemoTowDao(this);
-            OrmLiteDemoTowBean ormLiteDemoTowBean = new OrmLiteDemoTowBean("testsd");
-            ormLiteDemoTowBean.setTest_id(1);
-            ormListeDemoTowDao.getDaos().update(ormLiteDemoTowBean);
-        } catch (Exception e) {
-            showShortToast(getResourceString(R.string.operation_db_fial));
-        }
-        show_table.setText("\n更新数据成功");
-    }
-
-    private void deleteById() {
-        try {
-            if (ormListeDemoTowDao == null)
-                ormListeDemoTowDao = new OrmLiteDemoTowDao(this);
-            ormListeDemoTowDao.getDaos().deleteById(1);
-            //ormListeDemoTowDao.getDaos().delete(ormLiteDemoTowBean);
-        } catch (Exception e) {
-            showShortToast(getResourceString(R.string.operation_db_fial));
-        }
-        show_table.setText("\n删除成功：删除id为1的数据");
-    }
-
-    private void queryAll() {
-        List<OrmLiteDemoTowBean> ormLiteDemoTowBeanList = null;
-        try {
-            if (ormListeDemoTowDao == null)
-                ormListeDemoTowDao = new OrmLiteDemoTowDao(this);
-            ormLiteDemoTowBeanList = ormListeDemoTowDao.getDaos().queryForAll();
-
-            String information = "\n查询成功：";
-            for (OrmLiteDemoTowBean ormLiteDemoBeanTow : ormLiteDemoTowBeanList) {
-                information += "\nid:  "
-                        + ormLiteDemoBeanTow.getTest_id() + "\nname:  "
-                        + ormLiteDemoBeanTow.getTest_name();
-            }
-            show_table.append(information);
-        } catch (Exception e) {
-            showShortToast(getResourceString(R.string.operation_db_fial));
-        }
-    }
-
 
     @Override
     protected void onDestroy() {

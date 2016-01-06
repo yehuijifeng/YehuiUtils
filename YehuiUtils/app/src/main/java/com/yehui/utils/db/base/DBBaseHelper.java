@@ -1,4 +1,4 @@
-package com.yehui.utils.db;
+package com.yehui.utils.db.base;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.j256.ormlite.dao.Dao;
 import com.yehui.utils.bean.OrmLiteDemoThreeBean;
+import com.yehui.utils.bean.OrmLiteDemoTowBean;
+import com.yehui.utils.db.base.DBBaseDao;
 
 import java.sql.SQLException;
 
@@ -34,10 +36,23 @@ public class OrmLiteDemoThreeDao extends DBBaseDao {
      * @throws SQLException
      */
     public synchronized Dao<OrmLiteDemoThreeBean, Integer> getDaos() {
-        if (dbDao == null) {
+        if (dbDao == null)
             dbDao=setDao(OrmLiteDemoThreeBean.class, dbDao);
-        }
         return dbDao;
     }
 
+    public void testAdd(){
+        if (dbDao == null)
+            dbDao=setDao(OrmLiteDemoThreeBean.class, dbDao);
+        OrmLiteDemoTowBean ormLiteDemoTowBean=new OrmLiteDemoTowBean();
+        ormLiteDemoTowBean.setTest_name("夜辉疾风的外键");
+        OrmLiteDemoThreeBean ormLiteDemoThreeBean=new OrmLiteDemoThreeBean();
+        ormLiteDemoThreeBean.setTest_float(0.5f);
+        ormLiteDemoThreeBean.setOrmLiteDemoTowBean(ormLiteDemoTowBean);
+        try {
+            dbDao.create(ormLiteDemoThreeBean);
+        } catch (SQLException e) {
+            return;
+        }
+    }
 }

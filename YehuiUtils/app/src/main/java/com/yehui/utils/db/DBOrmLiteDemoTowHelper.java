@@ -3,6 +3,7 @@ package com.yehui.utils.db;
 import android.content.Context;
 
 import com.yehui.utils.bean.OrmLiteDemoTowBean;
+import com.yehui.utils.db.base.DBBaseHelper;
 
 /**
  * Created by yehuijifeng

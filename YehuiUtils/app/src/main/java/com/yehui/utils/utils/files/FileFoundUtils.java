@@ -13,6 +13,13 @@ import java.io.FileOutputStream;
  */
 public class FileFoundUtils {
     /**
+     * 防止被实例化
+     */
+    private FileFoundUtils() {
+        /* cannot be instantiated */
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
+    /**
      * 删除文件
      * 递归删除
      */
@@ -93,7 +100,7 @@ public class FileFoundUtils {
     /**
      * 复制
      */
-    public boolean copyFile(File toFile, String filePath) {
+    public static boolean copyFile(File toFile, String filePath) {
         try {
             if (toFile != null && toFile.exists()) {
                 // 另外还需要一个输出流来将复制的内容写入到文件中去

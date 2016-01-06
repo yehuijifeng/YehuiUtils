@@ -1,4 +1,4 @@
-package com.yehui.utils.db;
+package com.yehui.utils.db.base;
 
 /**
  * Created by yehuijifeng

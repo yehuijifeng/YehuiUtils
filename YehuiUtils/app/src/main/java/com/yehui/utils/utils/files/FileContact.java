@@ -10,6 +10,13 @@ import java.io.File;
  */
 public class FileContact {
     /**
+     * 防止被实例化
+     */
+    private FileContact() {
+        /* cannot be instantiated */
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
+    /**
      * sd卡根目录
      */
     public static File SD_FILE = Environment.getExternalStorageDirectory();

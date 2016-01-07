@@ -257,7 +257,6 @@ public class BaseHelper {
         else
             toast.setDuration(Toast.LENGTH_LONG);
         toast.setText(text);
-
         toast.show();
     }
 
@@ -295,6 +294,7 @@ public class BaseHelper {
     public float getResourceDimension(int resId) {
         return resources.getDimension(resId);
     }
+
     /**
      * ------------------------------------------------------------------------------------
      */
@@ -392,7 +392,6 @@ public class BaseHelper {
 //        }
 //        return false;
 //    }
-
 
     /**
      * 退出程序

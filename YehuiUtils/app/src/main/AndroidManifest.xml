@@ -49,6 +49,14 @@
         <activity
             android:name=".activity.SqliteUtilsDemoActivity"
             android:launchMode="singleTop">
+
+
+        </activity>
+
+        <!--提示框-->
+        <activity
+            android:name=".activity.DialogActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

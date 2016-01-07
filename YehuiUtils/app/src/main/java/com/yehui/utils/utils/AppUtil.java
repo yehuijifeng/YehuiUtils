@@ -1,8 +1,12 @@
 package com.yehui.utils.utils;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+
+import java.util.List;
 
 /**
  * Created by yehuijifeng
@@ -49,5 +53,20 @@ public class AppUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 判断该activity是否处于栈顶
+     * @param activty
+     * @return
+     */
+    public boolean isTopActivity(Activity activty) {
+        ActivityManager activityManager = (ActivityManager) activty.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> runningTaskInfoList = activityManager.getRunningTasks(1);
+        if (runningTaskInfoList != null) {
+            String topActivity = runningTaskInfoList.get(0).topActivity.toString();
+            return topActivity.equals(activty.getComponentName().toString());
+        } else
+            return false;
     }
 }

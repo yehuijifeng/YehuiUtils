@@ -44,7 +44,7 @@ public class YehuiApplication extends Application {
 //    }
 
     //日志统一管理
-    public static final String TAG = "yehuiUtils";
+    public static final String TAG = "YehuiUtils";
     //取得默认image的配置类
     public static DisplayImageOptions defaultOptions = ImageOptions.defaultOptions();
     //取得圆形image的配置类

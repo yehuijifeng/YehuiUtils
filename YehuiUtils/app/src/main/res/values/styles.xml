@@ -55,4 +55,11 @@ colorAccent 对应EditText编辑时、RadioButton选中、CheckBox等选中时�
         <item name="android:background">@drawable/bg_default_text</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <!--流布局-->
+    <declare-styleable name="FlowLayout">
+        <attr name="horizontal_spacing" format="dimension"/>
+        <attr name="vertical_spacing" format="dimension"/>
+    </declare-styleable>
+
 </resources>

@@ -1,12 +1,16 @@
 package com.yehui.utils.activity.base;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.WindowCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -93,6 +97,26 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected LayoutInflater inflater;
 
     /**
+     * 本地广播接收者
+     * 例子：
+     * （接收）：
+     * YehuiBroadcast yehuiBroadcast = new YehuiBroadcast();
+     * IntentFilter filter = new IntentFilter("yehui.utils.broadcast");
+     * localBroadcastManager.registerReceiver(yehuiBroadcast, filter);
+     * 广播接收器：
+     * class YehuiBroadcast extends BroadcastReceiver{}
+     * 实现的方法：
+     *
+     * @Override public void onReceive(Context context, Intent intent) {}
+     * <p>
+     * （发送）：
+     * Intent intent = new Intent("yehui.utils.broadcast");
+     * intent.putExtra("yehuiBroadcase","这是广播接收者传递过来的消息");
+     * localBroadcastManager.sendBroadcast(intent);
+     */
+    protected LocalBroadcastManager localBroadcastManager;
+
+    /**
      * title的类型，枚举类型,初始化给默认标题类型
      */
     protected MyTitleView.TitleMode titleMode;
@@ -125,12 +149,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     protected SharedPreferencesUtil getSharedPreferences() {
-        if(sharedPreferences==null)return null;
+        if (sharedPreferences == null) return null;
         return sharedPreferences;
     }
 
     protected void setSharedPreferences(String name) {
-        this.sharedPreferences =new SharedPreferencesUtil(this,name);
+        this.sharedPreferences = new SharedPreferencesUtil(this, name);
     }
 
     @Override
@@ -143,7 +167,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         initProperties();
         initView();
         initData();
-
     }
 
     /**
@@ -151,7 +174,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     private void initProperties() {
         helper = new BaseHelper(this);
-        eventBus=helper.eventBus;
+        eventBus = helper.eventBus;
         mTitleView = (MyTitleView) findViewById(R.id.my_title_view);
         if (mTitleView != null) {
             if (setCustomToolbar() != null) {
@@ -171,10 +194,28 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * 获得本地广播接收者实例
+     */
+    protected LocalBroadcastManager getLBM() {
+        return localBroadcastManager = LocalBroadcastManager.getInstance(this);
+    }
+
+    /**
+     * 从资源中获取Bitmap
+     */
+    protected Bitmap getBitmapByImageID(int drawableId) {
+        try {
+            return BitmapFactory.decodeResource(getResources(), drawableId);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
      * 设置标题类型，本类调用，外部不可改变
      */
     private void addTitleMode() {
-        if(mTitleView!=null)
+        if (mTitleView != null)
             mTitleView.setTitleMode(getTitleMode());
     }
 
@@ -193,11 +234,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * EventBus工具类接收消息的特定类，需要注册后才能使用
      */
-    public void onEventMainThread() {}
+    public void onEventMainThread() {
+    }
     /**EventBus工具类的四种方法
      1、onEvent
      2、onEventMainThread
@@ -244,7 +285,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 需要实现eventbus中的一个方法，不然报错
      */
-    public void onEventMainThread(Object obj) {}
+    public void onEventMainThread(Object obj) {
+    }
 
     /**
      * 隐藏/显示软键盘的方法
@@ -356,7 +398,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     *  获取资源文件下的Drawable对象
+     * 获取资源文件下的Drawable对象
      *
      * @param resId 资源ID. 示例:R.drawable.xxx
      * @return Drawable对象
@@ -366,7 +408,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     *  获取资源文件下的颜色值
+     * 获取资源文件下的颜色值
      *
      * @param resId 资源ID。 示例:R.color.xxx
      * @return
@@ -469,8 +511,45 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 退出程序
      */
-    public void finishAll(){
+    public void finishAll() {
         helper.finishAll();
+    }
+
+
+    private boolean isFastClick=true;
+
+    protected boolean isFastClick() {
+        return isFastClick;
+    }
+
+    /**供子类调用的方法，是否需要快速点击回避事件
+     * @param isFastClick
+     */
+    protected void setIsFastClick(boolean isFastClick) {
+        this.isFastClick = isFastClick;
+    }
+
+    /**
+     * 快速点击回避
+     * 防止快速点击重复页面
+     * @param ev
+     * @return
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN&&isFastClick()) {
+            if (isFastClick(500)) return true;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    private long lastTime;
+
+    private boolean isFastClick(int limit) {
+        long currentTime = System.currentTimeMillis();
+        long timeDiff = currentTime - lastTime;
+        lastTime = currentTime;
+        return timeDiff < limit;
     }
 
     @Override
@@ -479,7 +558,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (helper.isRegistered(this)) {
             helper.unregisterEventBus(this);
         }
-        helper=null;
+        helper = null;
         ActivityCollector.removeActivity(this);
     }
 

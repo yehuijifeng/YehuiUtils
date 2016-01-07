@@ -19,9 +19,12 @@
     <color name="default_viewpager_tab_color">#FFFFFF</color>
 
     <!--默认的下拉刷新循环颜色-->
-        <color name="default_load_more_color_one">#ff0f9d58</color>
-        <color name="default_load_more_color_tow">#ffdb4437</color>
-        <color name="default_load_more_color_three">#ff4285f4</color>
-        <color name="default_load_more_color_four">#fff4b400</color>
+    <color name="default_load_more_color_one">#ff0f9d58</color>
+    <color name="default_load_more_color_tow">#ffdb4437</color>
+    <color name="default_load_more_color_three">#ff4285f4</color>
+    <color name="default_load_more_color_four">#fff4b400</color>
+
+    <!--默认loading提示框的父布局颜色-->
+    <color name="default_loading_color">#70000000</color>
 
 </resources>

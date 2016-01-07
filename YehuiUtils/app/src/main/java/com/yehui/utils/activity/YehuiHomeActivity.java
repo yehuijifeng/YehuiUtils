@@ -1,10 +1,9 @@
 package com.yehui.utils.activity;
 
-import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,11 +12,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.yehui.utils.R;
+import com.yehui.utils.activity.base.BaseActivity;
 
 /**
  * Created by yehuijifeng on 2016/1/4.
  */
-public class YehuiHomeActivity extends AppCompatActivity {
+public class YehuiHomeActivity extends BaseActivity {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -33,17 +33,20 @@ public class YehuiHomeActivity extends AppCompatActivity {
     private ArrayAdapter arrayAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void setContentView() {
         setContentView(R.layout.activity_yehui_main);
-        initView();
     }
 
-    private void initView() {
+    @Override
+    protected String setTitleText() {
+        return null;
+    }
+
+    @Override
+    protected void initView() {
         toolbar = (Toolbar) findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
         //toolbar.setLogo(R.drawable.ic_launcher);//标题栏的logo图标
-
         //toolbar.setSubtitle(R.string.loading_refresh);//二级标题
         toolbar.setTitle("夜辉宝典");//设置Toolbar标题
         toolbar.setTitleTextColor(getResources().getColor(R.color.white)); //设置标题颜色
@@ -77,6 +80,11 @@ public class YehuiHomeActivity extends AppCompatActivity {
         layout_drawer_list.setAdapter(arrayAdapter);
         // Menu item click 的監聽事件一樣要設定在 setSupportActionBar 才有作用
         toolbar.setOnMenuItemClickListener(onMenuItemClick);
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener() {
@@ -131,5 +139,21 @@ public class YehuiHomeActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    long exitTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                showShortToast("再按一次退出应用");
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

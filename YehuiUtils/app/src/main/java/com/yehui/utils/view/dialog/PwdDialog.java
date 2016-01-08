@@ -62,11 +62,7 @@ public class PwdDialog extends View implements TextWatcher, View.OnClickListener
         pwd_ok_btn.setEnabled(false);
         alertDialog = new AlertDialog.Builder(getContext()).setView(new EditText(getContext())).create();
         alertDialog.setCancelable(false);
-
     }
-
-
-
     /**
      * 确定和返回键的回调接口
      */
@@ -76,11 +72,11 @@ public class PwdDialog extends View implements TextWatcher, View.OnClickListener
         void onCancel();
     }
 
-
     /**
      * 关闭dialog，不占内存，中断dialog中的操作
      */
     public void dismissPwdDialog() {
+        if(alertDialog!=null)
         alertDialog.dismiss();
     }
 
@@ -88,9 +84,9 @@ public class PwdDialog extends View implements TextWatcher, View.OnClickListener
      * 隐藏dialog，占内存，但不中断dialog中的操作
      */
     public void hidePwdDialog() {
+        if(alertDialog!=null)
         alertDialog.hide();
     }
-
 
     /**
      * 显示dialog
@@ -115,11 +111,11 @@ public class PwdDialog extends View implements TextWatcher, View.OnClickListener
                 imm.showSoftInput(pwdEdit, 0);//editText为需要点击的文本框
                 break;
             case R.id.dialog_default_ok_btn:
-                alertDialog.dismiss();
+                dismissPwdDialog();
                 pwdDialogListener.onDetermine(pwdEdit != null && pwdEdit.length() == 6 ? MD5Util.MD5(pwdEdit.getText().toString()) : null);
                 break;
             case R.id.dialog_default_cancel_btn:
-                alertDialog.dismiss();
+                dismissPwdDialog();
                 pwdDialogListener.onCancel();
                 break;
         }

@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import com.yehui.utils.R;
 import com.yehui.utils.activity.base.BaseActivity;
+import com.yehui.utils.view.dialog.CustomDialog;
+import com.yehui.utils.view.dialog.ListDialog;
 import com.yehui.utils.view.dialog.LoadingDialog;
 import com.yehui.utils.view.dialog.PromptDialog;
 import com.yehui.utils.view.dialog.PwdDialog;
@@ -17,12 +19,13 @@ import com.yehui.utils.view.dialog.PwdDialog;
  */
 public class DialogActivity extends BaseActivity implements View.OnClickListener {
 
-    private Button btn_dialog_pwd, btn_dialog_loading, btn_dialog_prompt, btn_dialog_list;
+    private Button btn_dialog_pwd, btn_dialog_loading, btn_dialog_prompt, btn_dialog_list,btn_dialog_custom;
     private TextView show_text;
     private PwdDialog pwdDialog;
     private LoadingDialog loadingDialog;
     private PromptDialog promptDialog;
-
+    private CustomDialog customDialog;
+    private ListDialog listDialog;
     @Override
     protected void setContentView() {
         setContentView(R.layout.activity_test_dialog);
@@ -39,10 +42,12 @@ public class DialogActivity extends BaseActivity implements View.OnClickListener
         btn_dialog_loading = (Button) findViewById(R.id.btn_dialog_loading);
         btn_dialog_prompt = (Button) findViewById(R.id.btn_dialog_prompt);
         btn_dialog_list = (Button) findViewById(R.id.btn_dialog_list);
+        btn_dialog_custom = (Button) findViewById(R.id.btn_dialog_custom);
         btn_dialog_pwd.setOnClickListener(this);
         btn_dialog_loading.setOnClickListener(this);
         btn_dialog_prompt.setOnClickListener(this);
         btn_dialog_list.setOnClickListener(this);
+        btn_dialog_custom.setOnClickListener(this);
         show_text = (TextView) findViewById(R.id.show_text);
 
     }
@@ -52,6 +57,8 @@ public class DialogActivity extends BaseActivity implements View.OnClickListener
         pwdDialog = new PwdDialog(this);
         loadingDialog = new LoadingDialog(this);
         promptDialog=new PromptDialog(this);
+        customDialog=new CustomDialog(this);
+        listDialog=new ListDialog(this);
     }
 
 
@@ -74,11 +81,20 @@ public class DialogActivity extends BaseActivity implements View.OnClickListener
                 loadingDialog.showLoadingDialog("test");
                 break;
             case R.id.btn_dialog_list:
-                startActivity(YehuiHomeActivity.class);
-                finish();
+                listDialog.showListDialog(new String[]{"设置", "关于", "退出"}, new ListDialog.ListOnClickListener() {
+                    @Override
+                    public void onCancel() {
+
+                    }
+
+                    @Override
+                    public void onItems(int item, String itemName) {
+                        showShortToast("点击了第"+item+"个"+" 内容："+itemName);
+                    }
+                });
                 break;
             case R.id.btn_dialog_prompt:
-                promptDialog.showPromptDialog("这是内容啊啊啊啊 啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊这是内容啊啊啊啊 啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊这是内容啊啊啊啊 啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊这是内容啊啊啊啊 啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊这是内容啊啊啊啊 啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", new PromptDialog.PromptOnClickListener() {
+                promptDialog.showPromptDialog("这是内容啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊这是内容啊啊啊啊 啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊这是内容啊啊啊啊 啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊这是内容啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊这是内容啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", new PromptDialog.PromptOnClickListener() {
                     @Override
                     public void onDetermine() {
                         showShortToast("确定");
@@ -86,7 +102,21 @@ public class DialogActivity extends BaseActivity implements View.OnClickListener
 
                     @Override
                     public void onCancel() {
-                        promptDialog.dismissPromptDialog();
+
+                    }
+                });
+                break;
+            case R.id.btn_dialog_custom:
+                View view=inflate(R.layout.item_test_recycler,null);
+                customDialog.showCustomDialog(view, new CustomDialog.CustomOnClickListener() {
+                    @Override
+                    public void onDetermine() {
+                        showShortToast("确定");
+                    }
+
+                    @Override
+                    public void onCancel() {
+
                     }
                 });
                 break;

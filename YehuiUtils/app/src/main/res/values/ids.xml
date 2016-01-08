@@ -13,4 +13,6 @@
     <item name="viewpager_tab_text" type="id" />
     <item name="dialog_default_cancel_btn" type="id" />
     <item name="dialog_default_ok_btn" type="id" />
+    <item name="dialog_custom_layout" type="id" />
+
 </resources>

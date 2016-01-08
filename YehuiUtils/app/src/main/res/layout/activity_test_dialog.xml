@@ -39,6 +39,12 @@
                 android:layout_width="wrap_content"
                 android:text="列表选择框" />
 
+            <Button
+                android:id="@+id/btn_dialog_custom"
+                style="@style/default_button_style"
+                android:layout_width="wrap_content"
+                android:text="自定义提示框" />
+
             <TextView
                 android:id="@+id/show_text"
                 style="@style/default_textview_style"

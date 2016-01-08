@@ -42,8 +42,10 @@ public class PromptDialog extends View implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.dialog_default_ok_btn) {
+            dismissPromptDialog();
             promptOnClickListener.onDetermine();
         } else {
+            dismissPromptDialog();
             promptOnClickListener.onCancel();
         }
     }

@@ -59,7 +59,7 @@ public class FileOperationUtil {
      */
     public static long getSDCardAllSize() {
         if (isSDCardEnable()) {
-            StatFs stat = new StatFs(FileContact.SD_PATH);
+            StatFs stat = new StatFs(FileContact.getSDPath());
             // 获取空闲的数据块的数量
             long availableBlocks = (long) stat.getAvailableBlocks() - 4;
             // 获取单个数据块的大小（byte）
@@ -77,8 +77,8 @@ public class FileOperationUtil {
      */
     public static long getFreeBytes(String filePath) {
         // 如果是sd卡的下的路径，则获取sd卡可用容量
-        if (filePath.startsWith(FileContact.SD_PATH)) {
-            filePath = FileContact.SD_PATH;
+        if (filePath.startsWith(FileContact.getSDPath())) {
+            filePath = FileContact.getSDPath();
         } else {// 如果是内部存储的路径，则获取内存存储的可用容量
             filePath = Environment.getDataDirectory().getAbsolutePath();
         }
@@ -120,7 +120,7 @@ public class FileOperationUtil {
      * 外部调用，获得本机所有的文件集合
      */
     public static List<FileBean> querySDFileByAll() {
-        queryFileByAll(FileContact.SD_FILE);
+        queryFileByAll(FileContact.getSDFile());
         return sdFileListFind;
     }
 
@@ -128,7 +128,7 @@ public class FileOperationUtil {
      * 查询本机sd卡所有文件夹，内部自己调用的方法，不需要外部调用
      */
     private static void queryFileByAll(File filePath) {
-        if (filePath == FileContact.SD_FILE) {
+        if (filePath == FileContact.getSDFile()) {
             sdFileListFind = new ArrayList<>();
             threadPoolFind = Executors.newFixedThreadPool(5);
         }
@@ -158,7 +158,7 @@ public class FileOperationUtil {
      * 外部调用，获得本机搜索出来的文件
      */
     public static List<FileBean> querySDFileByName(String name) {
-        queryFileByName(FileContact.SD_FILE, name);
+        queryFileByName(FileContact.getSDFile(), name);
         return sdFileListSerch;
     }
 
@@ -166,7 +166,7 @@ public class FileOperationUtil {
      * 根据关键词查询本地文件
      */
     private static void queryFileByName(File filePath, final String name) {
-        if (filePath == FileContact.SD_FILE) {
+        if (filePath == FileContact.getSDFile()) {
             sdFileListSerch = new ArrayList<>();
             threadPoolSerch = Executors.newFixedThreadPool(5);
         }

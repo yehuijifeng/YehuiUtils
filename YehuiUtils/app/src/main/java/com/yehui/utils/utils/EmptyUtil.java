@@ -41,4 +41,8 @@ public class EmptyUtil {
         }
         return false;
     }
+
+    public static int abs(int t) {
+        return t * (1 - ((t >>> 31) << 1));
+    }
 }

@@ -2,6 +2,8 @@
     package="com.yehui.utils">
     <!--操作sd卡-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--调用相机权限-->
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".application.YehuiApplication"
@@ -57,11 +59,30 @@
         <activity
             android:name=".activity.DialogActivity"
             android:launchMode="singleTop">
+
+        </activity>
+
+        <!--操作图片-->
+        <activity
+            android:name=".activity.TouchImageActivity"
+            android:launchMode="singleTop">
+
+
+        </activity>
+        <!--剪切图片-->
+        <activity
+            android:name=".activity.ImageCroppingActivity"
+            android:launchMode="singleTop"/>
+
+        <!--轮番图-->
+        <activity
+            android:name=".activity.ViewFlipperActivity"
+            android:launchMode="singleTop">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

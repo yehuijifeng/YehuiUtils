@@ -1,11 +1,21 @@
 package com.yehui.utils.activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yehui.utils.R;
 import com.yehui.utils.activity.base.BaseActivity;
+import com.yehui.utils.application.YehuiApplication;
+import com.yehui.utils.utils.BitmapUtil;
+import com.yehui.utils.utils.DateUtils;
+import com.yehui.utils.utils.PickLocalImageUtils;
+import com.yehui.utils.utils.files.FileContact;
+import com.yehui.utils.view.CircularImageView;
 import com.yehui.utils.view.dialog.CustomDialog;
 import com.yehui.utils.view.dialog.ListDialog;
 import com.yehui.utils.view.dialog.LoadingDialog;
@@ -26,6 +36,9 @@ public class DialogActivity extends BaseActivity implements View.OnClickListener
     private PromptDialog promptDialog;
     private CustomDialog customDialog;
     private ListDialog listDialog;
+    private String imageFileName;
+    private ImageView show_image;
+    private CircularImageView civUserInfoHead;
     @Override
     protected void setContentView() {
         setContentView(R.layout.activity_test_dialog);
@@ -43,13 +56,14 @@ public class DialogActivity extends BaseActivity implements View.OnClickListener
         btn_dialog_prompt = (Button) findViewById(R.id.btn_dialog_prompt);
         btn_dialog_list = (Button) findViewById(R.id.btn_dialog_list);
         btn_dialog_custom = (Button) findViewById(R.id.btn_dialog_custom);
+        show_image= (ImageView) findViewById(R.id.show_image);
         btn_dialog_pwd.setOnClickListener(this);
         btn_dialog_loading.setOnClickListener(this);
         btn_dialog_prompt.setOnClickListener(this);
         btn_dialog_list.setOnClickListener(this);
         btn_dialog_custom.setOnClickListener(this);
         show_text = (TextView) findViewById(R.id.show_text);
-
+        civUserInfoHead= (CircularImageView) findViewById(R.id.civ_user_info_head);
     }
 
     @Override
@@ -81,7 +95,7 @@ public class DialogActivity extends BaseActivity implements View.OnClickListener
                 loadingDialog.showLoadingDialog("test");
                 break;
             case R.id.btn_dialog_list:
-                listDialog.showListDialog(new String[]{"设置", "关于", "退出"}, new ListDialog.ListOnClickListener() {
+                listDialog.showListDialog(new String[]{"相册", "照相机"}, new ListDialog.ListOnClickListener() {
                     @Override
                     public void onCancel() {
 
@@ -89,7 +103,12 @@ public class DialogActivity extends BaseActivity implements View.OnClickListener
 
                     @Override
                     public void onItems(int item, String itemName) {
-                        showShortToast("点击了第"+item+"个"+" 内容："+itemName);
+                        if(item==0){
+                            PickLocalImageUtils.toAlbum(DialogActivity.this);
+                        }else{
+                            imageFileName = DateUtils.format(System.currentTimeMillis(), "'IMG'_yyyyMMddHHmmss") + ".jpg";
+                            PickLocalImageUtils.toCamera(DialogActivity.this, imageFileName);
+                        }
                     }
                 });
                 break;
@@ -124,8 +143,40 @@ public class DialogActivity extends BaseActivity implements View.OnClickListener
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            String imagePath;
+            switch (requestCode) {
+                case PickLocalImageUtils.CODE_FOR_ALBUM://来自于系统相册的回调
+                    if (data == null) return;
+                    Uri uri = data.getData();
+                    imagePath = PickLocalImageUtils.getPath(uri, getContentResolver());
+                    showImage(imagePath);
+                    break;
+                case PickLocalImageUtils.CODE_FOR_CAMERA://来自于系统相机的回调
+                    imagePath = FileContact.YEHUI_SAVE_IMG_PATH + imageFileName;
+                    PickLocalImageUtils.toCrop(this, imagePath);
+                    break;
+                case PickLocalImageUtils.CODE_FOR_CROP://来自于剪切照片的回调
+                    imagePath = data.getStringExtra(ImageCroppingActivity.KEY_SAVE_IMAGE_PATH);
+                    Bitmap bitmap = BitmapUtil.decodeSampledBitmapFromFile(imagePath, 100, 100);
+                    civUserInfoHead.setImageBitmap(bitmap);
+                    BitmapUtil.saveBitmap(bitmap, imagePath,100);
+                    showImage(imagePath);
+                    break;
+            }
+
+        }
+    }
+
+    private void showImage(String imagePath){
+        imageLoader.displayImage("file:///" + imagePath, show_image, YehuiApplication.defaultOptions);
+
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
-        pwdDialog.dismissPwdDialog();
     }
 }

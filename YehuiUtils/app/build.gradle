@@ -32,4 +32,5 @@ dependencies {
     compile project(':pay-service')
     compile files('blis/ormlite-android-4.48.jar')
     compile files('blis/ormlite-core-4.48.jar')
+    compile project(':cropper')
 }

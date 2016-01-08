@@ -11,8 +11,9 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
-import com.yehui.utils.utils.files.FileContact;
 import com.yehui.utils.utils.LogUtil;
+import com.yehui.utils.utils.PickLocalImageUtils;
+import com.yehui.utils.utils.files.FileContact;
 import com.yehui.utils.utils.imageloader.ImageOptions;
 
 import java.io.File;
@@ -34,14 +35,6 @@ import java.io.File;
  * GifView
  */
 public class YehuiApplication extends Application {
-    /***
-     * Application 单例
-     */
-//    private static YehuiApplication yehuiApplication;
-//
-//    public static YehuiApplication getInstance(){
-//        return yehuiApplication;
-//    }
 
     //日志统一管理
     public static final String TAG = "YehuiUtils";
@@ -49,14 +42,12 @@ public class YehuiApplication extends Application {
     public static DisplayImageOptions defaultOptions = ImageOptions.defaultOptions();
     //取得圆形image的配置类
     public static DisplayImageOptions roundOptions = ImageOptions.roundOptions();
-//    //imageloader的实例化
-//    public static ImageLoader imageLoader = ImageLoader.getInstance();
-
     public boolean normal_app=false;
     @Override
     public void onCreate() {
         super.onCreate();
-        //yehuiApplication = this;
+        //创建图片文件夹
+        PickLocalImageUtils.createSDCardDir();
 
         /**
          * 全局捕获异常的代理类

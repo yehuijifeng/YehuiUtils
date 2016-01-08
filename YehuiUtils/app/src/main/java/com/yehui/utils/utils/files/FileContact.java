@@ -19,22 +19,32 @@ public class FileContact {
     /**
      * sd卡根目录
      */
-    public static File SD_FILE = Environment.getExternalStorageDirectory();
+    public static String getSDPath(){
+        return Environment.getExternalStorageDirectory().getPath();
+    }
 
     /**
      * sd卡根目录路径
      */
-    public static String SD_PATH = Environment.getExternalStorageDirectory().getPath();
+    public static File getSDFile(){
+        return Environment.getExternalStorageDirectory();
+    }
 
     /**
      * app根目录
      */
-    public final static String YEHUI_PATH = SD_PATH + "/YehuiUtils/";
+    public final static String YEHUI_PATH = getSDPath() + "/YehuiUtils/";
 
     /**
      * app图片缓存路径
      */
     public final static String YEHUI_CACHE_IMG_PATH = YEHUI_PATH + "CacheImage/";
+
+    /**
+     * app图片保存路径
+     */
+    public final static String YEHUI_SAVE_IMG_PATH = YEHUI_PATH + "SaveImage/";
+
 
     /**
      * app日志存放路径
@@ -45,6 +55,7 @@ public class FileContact {
      * app配置文件存放路径
      */
     public final static String YEHUI_SETTINGS_PATH = YEHUI_PATH + "Settings/";
+
 
 
 }

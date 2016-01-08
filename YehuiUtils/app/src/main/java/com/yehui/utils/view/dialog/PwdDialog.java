@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -31,6 +30,7 @@ public class PwdDialog extends View implements TextWatcher, View.OnClickListener
     private Button pwd_ok_btn, pwd_cancel_btn;
     private AlertDialog alertDialog;
     private View root;
+    private PwdDialogListener pwdDialogListener;
     /**
      * 因为所有的提示框都只会在一个app中同时实例化一个，所以可以用单例控制
      */
@@ -55,9 +55,9 @@ public class PwdDialog extends View implements TextWatcher, View.OnClickListener
         image_pwd_four = (ImageView) root.findViewById(R.id.image_pwd_four);
         image_pwd_five = (ImageView) root.findViewById(R.id.image_pwd_five);
         image_pwd_six = (ImageView) root.findViewById(R.id.image_pwd_six);
-        pwd_ok_btn = (Button) root.findViewById(R.id.pwd_ok_btn);
+        pwd_ok_btn = (Button) root.findViewById(R.id.dialog_default_ok_btn);
         pwd_ok_btn.setOnClickListener(this);
-        pwd_cancel_btn = (Button) root.findViewById(R.id.pwd_cancel_btn);
+        pwd_cancel_btn = (Button) root.findViewById(R.id.dialog_default_cancel_btn);
         pwd_cancel_btn.setOnClickListener(this);
         pwd_ok_btn.setEnabled(false);
         alertDialog = new AlertDialog.Builder(getContext()).setView(new EditText(getContext())).create();
@@ -65,16 +65,7 @@ public class PwdDialog extends View implements TextWatcher, View.OnClickListener
 
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            alertDialog.dismiss();
-            pwdDialogListener.onCancel();
-        }
-        return false;
-    }
 
-    private PwdDialogListener pwdDialogListener;
 
     /**
      * 确定和返回键的回调接口
@@ -89,14 +80,14 @@ public class PwdDialog extends View implements TextWatcher, View.OnClickListener
     /**
      * 关闭dialog，不占内存，中断dialog中的操作
      */
-    public void dismissDialog() {
+    public void dismissPwdDialog() {
         alertDialog.dismiss();
     }
 
     /**
      * 隐藏dialog，占内存，但不中断dialog中的操作
      */
-    public void closeCacheDialog() {
+    public void hidePwdDialog() {
         alertDialog.hide();
     }
 
@@ -107,7 +98,7 @@ public class PwdDialog extends View implements TextWatcher, View.OnClickListener
      * @param wpdStr            提示框中的文字
      * @param pwdDialogListener 确定，返回键的回调函数
      */
-    public void showDialog(final String wpdStr, final PwdDialogListener pwdDialogListener) {
+    public void showPwdDialog(final String wpdStr, final PwdDialogListener pwdDialogListener) {
         this.pwdDialogListener = pwdDialogListener;
         initView();
         alertDialog.show();
@@ -123,11 +114,11 @@ public class PwdDialog extends View implements TextWatcher, View.OnClickListener
                 //显示键盘
                 imm.showSoftInput(pwdEdit, 0);//editText为需要点击的文本框
                 break;
-            case R.id.pwd_ok_btn:
+            case R.id.dialog_default_ok_btn:
                 alertDialog.dismiss();
                 pwdDialogListener.onDetermine(pwdEdit != null && pwdEdit.length() == 6 ? MD5Util.MD5(pwdEdit.getText().toString()) : null);
                 break;
-            case R.id.pwd_cancel_btn:
+            case R.id.dialog_default_cancel_btn:
                 alertDialog.dismiss();
                 pwdDialogListener.onCancel();
                 break;

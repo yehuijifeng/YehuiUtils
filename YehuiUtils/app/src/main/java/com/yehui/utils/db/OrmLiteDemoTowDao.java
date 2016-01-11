@@ -3,7 +3,7 @@ package com.yehui.utils.db;
 import android.content.Context;
 
 import com.j256.ormlite.dao.Dao;
-import com.yehui.utils.bean.OrmLiteDemoTowBean;
+import com.yehui.utils.bean.ormlite.OrmLiteDemoTowBean;
 import com.yehui.utils.db.base.DBBaseDao;
 
 import java.sql.SQLException;

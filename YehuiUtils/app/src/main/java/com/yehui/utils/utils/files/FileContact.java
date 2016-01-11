@@ -57,5 +57,60 @@ public class FileContact {
     public final static String YEHUI_SETTINGS_PATH = YEHUI_PATH + "Settings/";
 
 
+    /**
+     * 创建sd卡下存放照片的文件夹
+     */
+    public static void createSaveImage() {
+        if (Environment.MEDIA_MOUNTED.equals(Environment
+                .getExternalStorageState())) {
+            String path = FileContact.YEHUI_SAVE_IMG_PATH;
+            File path1 = new File(path);
+            if (!path1.exists()) {
+                path1.mkdirs();
+            }
+        }
+    }
+
+    /**
+     * 创建sd卡下存放缓存图片的文件夹
+     */
+    public static void createCacheImage() {
+        if (Environment.MEDIA_MOUNTED.equals(Environment
+                .getExternalStorageState())) {
+            String path = FileContact.YEHUI_CACHE_IMG_PATH;
+            File path1 = new File(path);
+            if (!path1.exists()) {
+                path1.mkdirs();
+            }
+        }
+    }
+
+    /**
+     * 创建sd卡下存放日志的文件夹
+     */
+    public static void createLog() {
+        if (Environment.MEDIA_MOUNTED.equals(Environment
+                .getExternalStorageState())) {
+            String path = FileContact.YEHUI_LOG_PATH;
+            File path1 = new File(path);
+            if (!path1.exists()) {
+                path1.mkdirs();
+            }
+        }
+    }
+
+    /**
+     * 创建sd卡下存放配置文件的文件夹
+     */
+    public static void createSettigns() {
+        if (Environment.MEDIA_MOUNTED.equals(Environment
+                .getExternalStorageState())) {
+            String path = FileContact.YEHUI_SETTINGS_PATH;
+            File path1 = new File(path);
+            if (!path1.exists()) {
+                path1.mkdirs();
+            }
+        }
+    }
 
 }

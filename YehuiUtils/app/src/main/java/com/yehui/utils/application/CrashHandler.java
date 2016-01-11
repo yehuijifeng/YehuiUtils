@@ -9,6 +9,8 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yehui.utils.utils.files.FileContact;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -31,12 +33,11 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     //系统默认的UncaughtException处理类
     private Thread.UncaughtExceptionHandler mDefaultHandler;
 
-
     //程序的Context对象
     private Context context;
 
     //用来存储设备信息和异常信息
-    private Map<String, String> infos = new HashMap<String, String>();
+    private Map<String, String> infos = new HashMap<>();
 
     //用于格式化日期,作为日志文件名的一部分
     private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
@@ -140,7 +141,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 /**
                  * 这里换成自定义路径
                  */
-                String path = "/sdcard/crash/";
+                String path = FileContact.YEHUI_LOG_PATH;
                 File dir = new File(path);
                 if (!dir.exists()) {
                     dir.mkdirs();

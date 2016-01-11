@@ -4,6 +4,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!--调用相机权限-->
     <uses-permission android:name="android.permission.CAMERA" />
+    <!--震动-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!--硬件相机-->
+    <uses-feature android:name="android.hardware.camera" />
+    <!--硬件相机自动对焦-->
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:name=".application.YehuiApplication"
@@ -13,6 +19,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!--主页面-->
+        <activity
+            android:name=".activity.YehuiHomeActivity"
+            android:launchMode="singleTop">
+
+
+        </activity>
+
+        <!--加入购物车动画-->
         <activity
             android:name=".activity.CartAnimationActivity"
             android:launchMode="singleTop">
@@ -40,13 +55,7 @@
 
 
         </activity>
-        <!--主页面-->
-        <activity
-            android:name=".activity.YehuiHomeActivity"
-            android:launchMode="singleTop">
 
-
-        </activity>
         <!--数据库操作类-->
         <activity
             android:name=".activity.SqliteUtilsDemoActivity"
@@ -72,16 +81,59 @@
         <!--剪切图片-->
         <activity
             android:name=".activity.ImageCroppingActivity"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop" />
 
         <!--轮番图-->
         <activity
             android:name=".activity.ViewFlipperActivity"
             android:launchMode="singleTop">
 
+        </activity>
+
+        <!--popupwindow-->
+        <activity
+            android:name=".activity.PopupwindowActivity"
+            android:launchMode="singleTop">
+
+
+        </activity>
+
+        <!--webview-->
+        <activity
+            android:name=".activity.WebViewActivity"
+            android:launchMode="singleTop">
+
+        </activity>
+
+        <!--二维码-->
+        <activity
+            android:name=".activity.ZxingActivity"
+            android:launchMode="singleTop">
+
+
+        </activity>
+
+        <!--二维码扫描区-->
+        <activity
+            android:name=".view.zxingview.activity.CaptureActivity"
+            android:launchMode="singleTop">
+
+        </activity>
+        <!--图片查看-->
+        <activity
+            android:name=".activity.PhotoViewActivity"
+            android:launchMode="singleTop">
+
+        </activity>
+
+        <!--okhttp网络请求-->
+        <activity
+            android:name=".activity.OkHttpActivity"
+            android:launchMode="singleTop">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
     </application>

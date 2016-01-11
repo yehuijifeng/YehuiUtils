@@ -27,4 +27,11 @@
     <!--默认loading提示框的父布局颜色-->
     <color name="default_loading_color">#70000000</color>
 
+    <!--二维码扫描需要的颜色-->
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="viewfinder_frame">#ff000000</color>
+    <color name="capture_text_cover_bg">#99535353</color>
+
 </resources>

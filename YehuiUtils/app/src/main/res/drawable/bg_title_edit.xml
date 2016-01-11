@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!--设置为false为显示状态-->
-    <item android:state_selected="false">
+    <item android:state_selected="true">
         <shape>
             <!-- 文本框里面的颜色 -->
             <solid android:color="@color/default_gray" />
         </shape>
     </item>
 
-    <item android:state_selected="true">
+    <item android:state_selected="false">
         <shape>
             <!-- 文本框里面的颜色 -->
             <solid android:color="@color/colorPrimary" />

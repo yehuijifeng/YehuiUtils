@@ -12,7 +12,6 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.yehui.utils.utils.LogUtil;
-import com.yehui.utils.utils.PickLocalImageUtils;
 import com.yehui.utils.utils.files.FileContact;
 import com.yehui.utils.utils.imageloader.ImageOptions;
 
@@ -47,7 +46,7 @@ public class YehuiApplication extends Application {
     public void onCreate() {
         super.onCreate();
         //创建图片文件夹
-        PickLocalImageUtils.createSDCardDir();
+        FileContact.createSaveImage();
 
         /**
          * 全局捕获异常的代理类

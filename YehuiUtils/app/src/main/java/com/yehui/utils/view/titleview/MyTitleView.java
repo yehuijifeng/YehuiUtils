@@ -204,7 +204,8 @@ public class MyTitleView extends LinearLayout {
 
     //图片按钮的图片资源
     public void setImageButtonDra(Drawable drawable) {
-        title_default_right_image.setBackgroundDrawable(drawable);
+
+        title_default_right_image.setImageDrawable(drawable);
     }
 
 

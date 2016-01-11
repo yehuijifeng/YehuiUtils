@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.yehui.utils.R;
 import com.yehui.utils.activity.base.BaseActivity;
-import com.yehui.utils.bean.OrmLiteDemoThreeBean;
-import com.yehui.utils.bean.OrmLiteDemoTowBean;
+import com.yehui.utils.bean.ormlite.OrmLiteDemoThreeBean;
+import com.yehui.utils.bean.ormlite.OrmLiteDemoTowBean;
 import com.yehui.utils.db.OrmLiteDemoThreeDao;
 import com.yehui.utils.db.OrmLiteDemoTowDao;
 

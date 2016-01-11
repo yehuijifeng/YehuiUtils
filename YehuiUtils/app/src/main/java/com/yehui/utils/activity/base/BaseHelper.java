@@ -15,7 +15,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.yehui.utils.application.ActivityCollector;
+import com.yehui.utils.http.action.RequestAction;
+import com.yehui.utils.http.interfaces.RequestInterface;
+import com.yehui.utils.http.request.RequestHandle;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,13 +67,74 @@ public class BaseHelper {
      */
     protected Toast toast;
 
+    /**
+     * 网络请求的方法接口
+     */
+    protected RequestInterface requestInterface;
+
     public BaseHelper(Context context) {
         activity = (BaseActivity) context;
         activity.getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
+        requestInterface = RequestHandle.getRequestInterface(activity);
         eventBus = EventBus.getDefault();
         resources = activity.getResources();
         inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         inflater = activity.getLayoutInflater();
+    }
+
+    /**
+     * get请求
+     * @param action action的枚举
+     */
+    public void sendGetRequest(RequestAction action) {
+        requestInterface.sendGetRequest(action);
+    }
+
+    /**
+     * post请求
+     * @param action action的枚举
+     */
+    public void sendPostRequest(RequestAction action) {
+        requestInterface.sendPostRequest(action);
+    }
+
+    /**
+     * post传文件请求
+     * @param files 文件组
+     * @param action action的枚举
+     */
+    public void sendPostAddFileRequest(File[] files, RequestAction action) {
+        requestInterface.sendPostAddFileRequest(files, action);
+    }
+
+    /**
+     * 下载大文件
+     * @param files 文件组
+     * @param url 下载的地址
+     */
+    public void downloadFile(String url, File[] files ) {
+        requestInterface.downloadFile(url, files);
+    }
+
+    /**
+     * 网络请求设置超时时间
+     */
+    public void setTimeOut(int value) {
+        requestInterface.setTimeOut(value);
+    }
+
+    /**断开/启动，所有正在进行的请求
+     * @param bl true断开，false开启
+     */
+    public void cancelAllRequests(boolean bl) {
+        requestInterface.cancelAllRequests(bl);
+    }
+
+    /**断开某个请求
+     * @param action action的枚举
+     */
+    public void cancelByActionRequests(RequestAction action) {
+        requestInterface.cancelByActionRequests(action);
     }
 
     /**
@@ -392,6 +457,14 @@ public class BaseHelper {
 //        }
 //        return false;
 //    }
+
+    /**
+     * 释放activity
+     * 如果该activity被内存泄漏则需要手动释放该资源
+     */
+    protected void releaseActivity() {
+        activity = null;
+    }
 
     /**
      * 退出程序

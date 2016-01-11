@@ -77,19 +77,7 @@ public class PickLocalImageUtils {
         toCrop(activity, imagePath, ImageCroppingActivity.DEFAULT_CROP_WIDTH, ImageCroppingActivity.DEFAULT_CROP_HEIGHT, ImageCroppingActivity.DEFAULT_ASPECT_RATIO_VALUES, ImageCroppingActivity.DEFAULT_ASPECT_RATIO_VALUES, null);
     }
 
-    /**
-     * 创建sd卡下存放照片的文件夹
-     */
-    public static void createSDCardDir() {
-        if (Environment.MEDIA_MOUNTED.equals(Environment
-                .getExternalStorageState())) {
-            String path = FileContact.YEHUI_SAVE_IMG_PATH;
-            File path1 = new File(path);
-            if (!path1.exists()) {
-                path1.mkdirs();
-            }
-        }
-    }
+
 
     /**获得照片存放路径
      * @param uri

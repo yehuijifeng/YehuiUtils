@@ -26,7 +26,7 @@ import android.widget.ImageView;
 import com.yehui.utils.R;
 
 
-/**
+/**圆形图片
  * Custom ImageView for circular images in Android while maintaining the
  * best draw performance and supporting custom borders & selectors.
  */

@@ -18,9 +18,15 @@ import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yehui.utils.R;
 import com.yehui.utils.application.ActivityCollector;
+import com.yehui.utils.http.action.RequestAction;
+import com.yehui.utils.http.request.ResponseComplete;
+import com.yehui.utils.http.request.ResponseFailure;
+import com.yehui.utils.http.request.ResponseResult;
+import com.yehui.utils.http.request.ResponseSuccess;
 import com.yehui.utils.utils.SharedPreferencesUtil;
 import com.yehui.utils.view.titleview.MyTitleView;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -132,7 +138,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 更改当前title类型
      */
-    public void setTitleMode(MyTitleView.TitleMode titleMode) {
+    protected void setTitleMode(MyTitleView.TitleMode titleMode) {
         this.titleMode = titleMode;
         addTitleMode();
     }
@@ -234,11 +240,84 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * EventBus工具类接收消息的特定类，需要注册后才能使用
      */
-    public void onEventMainThread() {
+
+    /**
+     * get请求
+     * @param action action的枚举
+     */
+    public void sendGetRequest(RequestAction action) {
+        helper.sendGetRequest(action);
     }
+
+    /**
+     * post请求
+     * @param action action的枚举
+     */
+    public void sendPostRequest(RequestAction action) {
+        helper.sendPostRequest(action);
+    }
+
+    /**
+     * post传文件请求
+     * @param files 文件组
+     * @param action action的枚举
+     */
+    public void sendPostAddFileRequest(File[] files, RequestAction action) {
+        helper.sendPostAddFileRequest(files, action);
+    }
+
+    /**
+     * 下载大文件
+     * @param files 文件组
+     * @param url 下载的地址
+     */
+    public void downloadFile(String url, File[] files ) {
+        helper.downloadFile(url, files);
+    }
+
+    /**
+     * 网络请求设置超时时间
+     */
+    public void setTimeOut(int value) {
+        helper.setTimeOut(value);
+    }
+
+    /**断开/启动，所有正在进行的请求
+     * @param bl true断开，false开启
+     */
+    public void cancelAllRequests(boolean bl) {
+        helper.cancelAllRequests(bl);
+    }
+
+    /**断开某个请求
+     * @param action action的枚举
+     */
+    public void cancelByActionRequests(RequestAction action) {
+        helper.cancelByActionRequests(action);
+    }
+
+    /**
+     * 需要实现eventbus中的一个方法，不然报错
+     */
+    /**
+     * 事件总线的方法，此方法为接收请求结果的方法。
+     *
+     * @param result
+     */
+    public void onEventMainThread(ResponseResult result) {
+        if (result instanceof ResponseSuccess) {
+            onRequestSuccess((ResponseSuccess) result);
+        } else if (result instanceof ResponseFailure) {
+            onRequestFailure((ResponseFailure) result);
+        } else if (result instanceof ResponseComplete) {
+            onRequestCompleted((ResponseComplete) result);
+        }
+    }
+
     /**EventBus工具类的四种方法
      1、onEvent
      2、onEventMainThread
@@ -282,11 +361,25 @@ public abstract class BaseActivity extends AppCompatActivity {
         return helper.isRegistered(o);
     }
 
+
     /**
-     * 需要实现eventbus中的一个方法，不然报错
+     * 根据app的实际情况是否将这三个方法设置成抽象方法（如果app全程每个页面都有请求网络，则设置成抽象类，子类必须实现，简化工作）
      */
-    public void onEventMainThread(Object obj) {
-    }
+    /**
+     * 请求成功的回调，子类应该实现此方法做相应的处理
+     */
+    protected void onRequestSuccess(ResponseSuccess success) {}
+
+    /**
+     * 请求成功的回调，子类应该实现此方法做相应的处理
+     */
+    protected void onRequestFailure(ResponseFailure failure) {}
+
+    /**
+     * 请求成功的回调，子类应该实现此方法做相应的处理
+     */
+    protected void onRequestCompleted(ResponseComplete complete) {}
+
 
     /**
      * 隐藏/显示软键盘的方法
@@ -516,13 +609,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-    private boolean isFastClick=true;
+    private boolean isFastClick = true;
 
     protected boolean isFastClick() {
         return isFastClick;
     }
 
-    /**供子类调用的方法，是否需要快速点击回避事件
+    /**
+     * 供子类调用的方法，是否需要快速点击回避事件
+     *
      * @param isFastClick
      */
     protected void setIsFastClick(boolean isFastClick) {
@@ -532,12 +627,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 快速点击回避
      * 防止快速点击重复页面
+     *
      * @param ev
      * @return
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_DOWN&&isFastClick()) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN && isFastClick()) {
             if (isFastClick(500)) return true;
         }
         return super.dispatchTouchEvent(ev);
@@ -558,6 +654,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (helper.isRegistered(this)) {
             helper.unregisterEventBus(this);
         }
+        helper.releaseActivity();
         helper = null;
         ActivityCollector.removeActivity(this);
     }

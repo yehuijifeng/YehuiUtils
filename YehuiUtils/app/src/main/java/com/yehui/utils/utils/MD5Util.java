@@ -21,7 +21,7 @@ public class MD5Util {
         String s = null;
         try {
             /**特殊字符串用encoder转码，并且把所有iso-8859码转成国际通用码utf-8*/
-            sourceStr = URLEncoder.encode(sourceStr, "utf-8").replace("*", "%2A").replace("+", "%20");
+            sourceStr = URLEncoder.encode(sourceStr, "utf-8").replace(" ", "%20");
             sourceStr = new String(sourceStr.getBytes("ISO-8859-1"), "UTF-8");
 
             byte[] source = sourceStr.getBytes();
@@ -54,7 +54,7 @@ public class MD5Util {
         String s = null;
         try {
             /**特殊字符串用encoder转码，并且把所有iso-8859码转成国际通用码utf-8*/
-            sourceStr = URLEncoder.encode(sourceStr, "utf-8").replace("*", "%2A").replace("+", "%20");
+            sourceStr = URLEncoder.encode(sourceStr, "utf-8").replace(" ", "%20");
             sourceStr = new String(sourceStr.getBytes("ISO-8859-1"), "UTF-8");
 
             byte[] source = sourceStr.getBytes();

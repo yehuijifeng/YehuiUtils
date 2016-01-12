@@ -5,7 +5,7 @@ package com.yehui.utils.projectmodel;
  * on 2016/1/7.
  * 23中设计模式——单例模式
  */
-public class OneModel {
+public class Instance {
     /**
      * 将该类设置成单例模式
      * 当某个项目不用这个工具类则不会占用内存
@@ -23,16 +23,16 @@ public class OneModel {
      * 但是编译器却会对上述四条语句进行优化，认为只有XBYTE[2]=0x58（即忽略前三条语句，只产生一条机器代码）。
      * 如果键入volatile，则编译器会逐一的进行编译并产生相应的机器代码（产生四条代码）.
      */
-    private static volatile OneModel oneModel = null;
+    private static volatile Instance oneModel = null;
 
-    private OneModel() {
+    private Instance() {
     }
 
-    public synchronized static OneModel getOneModel() {
+    public synchronized static Instance getOneModel() {
         if (oneModel == null) {
-            synchronized (OneModel.class) {
+            synchronized (Instance.class) {
                 if (oneModel == null) {
-                    oneModel = new OneModel();
+                    oneModel = new Instance();
                 }
             }
         }

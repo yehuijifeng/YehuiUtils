@@ -19,6 +19,8 @@ public interface RequestInterface {
     String TAG_RESULT = "result";
     //数据2
     String TAG_DATA = "data";
+    //数据3
+    String TAG_FILES = "files";
     //数据集合
     String TAG_OBJECTS = "objects";
 
@@ -28,9 +30,17 @@ public interface RequestInterface {
      * get请求
      * 获取单个json对象的请求（不传文件）
      *
-     * @param action 请求的哪个接口
+     * @param action 请求的哪个接口,异步请求
      */
     void sendGetRequest(RequestAction action);
+
+    /**
+     * get请求
+     * 获取单个json对象的请求（不传文件）
+     *
+     * @param action 请求的哪个接口,单线程阻塞请求
+     */
+    void sendGetInstanceRequest(RequestAction action);
 
     /**
      * post请求
@@ -39,6 +49,14 @@ public interface RequestInterface {
      * @param action 请求的哪个接口
      */
     void sendPostRequest(RequestAction action);
+
+    /**
+     * get请求
+     * 获取单个json对象的请求（不传文件）
+     *
+     * @param action 请求的哪个接口,单线程阻塞请求
+     */
+    void sendPostInstanceRequest(RequestAction action);
 
     /**
      * 获取单个json对象的请求（传文件）
@@ -72,10 +90,8 @@ public interface RequestInterface {
 
     /**
      * 大文件下载
-     *
      * @param url
-     * @param files
      */
-    void downloadFile(String url, File[] files);
-
+    void downloadFile(String url);
+    void downloadFile(RequestAction action);
 }

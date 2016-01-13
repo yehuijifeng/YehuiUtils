@@ -83,7 +83,7 @@ public class BaseHelper {
     }
 
     /**
-     * get请求
+     * get请求，异步
      * @param action action的枚举
      */
     public void sendGetRequest(RequestAction action) {
@@ -91,13 +91,27 @@ public class BaseHelper {
     }
 
     /**
-     * post请求
+     * get请求，线程阻塞请求
+     * @param action action的枚举
+     */
+    public void sendGetInstanceRequest(RequestAction action) {
+        requestInterface.sendGetInstanceRequest(action);
+    }
+    /**
+     * post请求，异步
      * @param action action的枚举
      */
     public void sendPostRequest(RequestAction action) {
         requestInterface.sendPostRequest(action);
     }
 
+    /**
+     * get请求，线程阻塞请求
+     * @param action action的枚举
+     */
+    public void sendPostInstanceRequest(RequestAction action) {
+        requestInterface.sendPostInstanceRequest(action);
+    }
     /**
      * post传文件请求
      * @param files 文件组
@@ -109,11 +123,13 @@ public class BaseHelper {
 
     /**
      * 下载大文件
-     * @param files 文件组
      * @param url 下载的地址
      */
-    public void downloadFile(String url, File[] files ) {
-        requestInterface.downloadFile(url, files);
+    public void sendDownloadFile(String url) {
+        requestInterface.downloadFile(url);
+    }
+    public void sendDownloadFile(RequestAction action) {
+        requestInterface.downloadFile(action);
     }
 
     /**

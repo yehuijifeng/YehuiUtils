@@ -34,4 +34,6 @@
     <string name="network_error">网络连接异常，请检查您的网络设置</string>
     <string name="network_null">服务器未返回数据</string>
     <string name="json_error">json数据解析错误</string>
+    <string name="call_error">无法停止请求，因为有线程正在读or写它</string>
+    <string name="file_error">文件下载失败</string>
 </resources>

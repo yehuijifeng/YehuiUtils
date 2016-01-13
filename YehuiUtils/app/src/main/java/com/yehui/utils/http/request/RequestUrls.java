@@ -1,5 +1,6 @@
 package com.yehui.utils.http.request;
 
+import com.yehui.utils.contacts.FileContact;
 import com.yehui.utils.contacts.WeatherKey;
 
 /**
@@ -21,5 +22,16 @@ public class RequestUrls {
      * 天气预报
      */
     public static final String POST_WEATHER_URL = ROOT_URL + "query";
+
+    /**
+     * 下载文件,大文件，566MB
+     */
+    public static final String POST_DOWN_FILE= FileContact.downFileUrl;
+
+
+    /**
+     * 下载文件，小文件，96KB
+     */
+    public static final String POST_DOWN_FILE_SMALL= FileContact.downFileSmallUrl;
 
 }

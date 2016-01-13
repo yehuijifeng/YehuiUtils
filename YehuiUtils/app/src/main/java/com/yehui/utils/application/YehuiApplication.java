@@ -47,7 +47,10 @@ public class YehuiApplication extends Application {
         super.onCreate();
         //创建图片文件夹
         FileContact.createSaveImage();
-
+        FileContact.createFiles();
+        FileContact.createLog();
+        FileContact.createCacheImage();
+        FileContact.createSettigns();
         /**
          * 全局捕获异常的代理类
          */

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -21,7 +22,7 @@ import com.yehui.utils.utils.MD5Util;
  * on 2015/10/15.
  * 密码输入框
  */
-public class PwdDialog extends View implements TextWatcher, View.OnClickListener {
+public class PwdDialog extends View implements TextWatcher, View.OnClickListener, View.OnKeyListener {
 
     private EditText pwdEdit;
     private TextView pwd_frame_content;
@@ -31,6 +32,7 @@ public class PwdDialog extends View implements TextWatcher, View.OnClickListener
     private AlertDialog alertDialog;
     private View root;
     private PwdDialogListener pwdDialogListener;
+
     /**
      * 因为所有的提示框都只会在一个app中同时实例化一个，所以可以用单例控制
      */
@@ -61,8 +63,23 @@ public class PwdDialog extends View implements TextWatcher, View.OnClickListener
         pwd_cancel_btn.setOnClickListener(this);
         pwd_ok_btn.setEnabled(false);
         alertDialog = new AlertDialog.Builder(getContext()).setView(new EditText(getContext())).create();
-        alertDialog.setCancelable(false);
+        //alertDialog.setCancelable(false);
+        alertDialog.setCanceledOnTouchOutside(false);
     }
+
+    @Override
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (keyCode == KeyEvent.KEYCODE_BACK) {  //表示按返回键 时的操作
+                dismissPwdDialog();
+                pwdDialogListener.onCancel();
+                return true;
+            }
+            return false;//已处理
+        }
+        return false;
+    }
+
     /**
      * 确定和返回键的回调接口
      */
@@ -76,16 +93,16 @@ public class PwdDialog extends View implements TextWatcher, View.OnClickListener
      * 关闭dialog，不占内存，中断dialog中的操作
      */
     public void dismissPwdDialog() {
-        if(alertDialog!=null)
-        alertDialog.dismiss();
+        if (alertDialog != null)
+            alertDialog.dismiss();
     }
 
     /**
      * 隐藏dialog，占内存，但不中断dialog中的操作
      */
     public void hidePwdDialog() {
-        if(alertDialog!=null)
-        alertDialog.hide();
+        if (alertDialog != null)
+            alertDialog.hide();
     }
 
     /**

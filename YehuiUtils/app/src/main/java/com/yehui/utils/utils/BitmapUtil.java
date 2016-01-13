@@ -23,11 +23,12 @@ public class BitmapUtil {
      * 谨慎使用!
      * 压缩图片，制定宽高，原图片会被压缩
      */
-    public static void compressImageFile(String filePath, int width, int height) {
+    public static boolean compressImageFile(String filePath, int width, int height) {
         try {
-            BitmapUtil.saveBitmapByFile(BitmapUtil.decodeSampledBitmapFromFile(filePath, width, height), filePath);
+            return BitmapUtil.saveBitmapByFile(BitmapUtil.decodeSampledBitmapFromFile(filePath, width, height), filePath);
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -162,9 +163,9 @@ public class BitmapUtil {
     /**
      * 添加图片到sd卡并规定压缩比例，100默认原图
      */
-    public static void saveBitmap(Bitmap bitmap, String savePath, int quality) {
+    public static boolean saveBitmap(Bitmap bitmap, String savePath, int quality) {
         if (bitmap == null)
-            return;
+            return false;
         try {
             File f = new File(savePath);
             if (f.exists()) f.delete();
@@ -174,8 +175,10 @@ public class BitmapUtil {
             bitmap.compress(Bitmap.CompressFormat.PNG, quality, fos);
             fos.flush();
             fos.close();
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -236,7 +239,7 @@ public class BitmapUtil {
      * @return
      */
     public static int readPictureDegree(String filename) {
-        int rotate = 0;
+        int rotate;
         try {
             ExifInterface exifInterface = new ExifInterface(filename);
             int result = exifInterface.getAttributeInt(
@@ -253,18 +256,22 @@ public class BitmapUtil {
                 case ExifInterface.ORIENTATION_ROTATE_270:
                     rotate = 270;
                     break;
+                case ExifInterface.ORIENTATION_NORMAL:
                 default:
+                    rotate = 0;
                     break;
             }
+
         } catch (IOException e) {
             e.printStackTrace();
+            rotate = -1;
         }
-
         return rotate;
     }
 
     /**
      * 旋转图片
+     *
      * @param angle
      * @param bitmap
      * @return
@@ -273,7 +280,6 @@ public class BitmapUtil {
         // 旋转图片 动作
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
-
         // 创建新的图片
         Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0,
                 bitmap.getWidth(), bitmap.getHeight(), matrix, true);
@@ -281,7 +287,6 @@ public class BitmapUtil {
             bitmap.recycle();
             bitmap = null;
         }
-
         return resizedBitmap;
     }
 

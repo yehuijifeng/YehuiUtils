@@ -66,6 +66,10 @@ public class MyLoadingView extends LinearLayout {
      */
     public void loadingVISIBLE() {
         root.setVisibility(VISIBLE);
+        loading_img.setVisibility(GONE);
+        loading_empty_click_text.setVisibility(GONE);
+        loading_empty_text.setVisibility(GONE);
+        loading_btn.setVisibility(GONE);
     }
 
     /**
@@ -85,7 +89,9 @@ public class MyLoadingView extends LinearLayout {
     public void loadingFail() {
         loadingFail("", "");
     }
-
+    public void loadingFail(String textStr) {
+        loadingFail(textStr, "");
+    }
     /**
      * 加载失败，提示语
      *
@@ -116,13 +122,14 @@ public class MyLoadingView extends LinearLayout {
      * 加载出空数据的时候
      */
     public void loadingEmpty() {
-        loadingEmpty("","");
+        loadingEmpty("", "");
     }
-        /**
-         * 加载出空数据的时候
-         *
-         * @param emptyStr 空数据提示语
-         */
+
+    /**
+     * 加载出空数据的时候
+     *
+     * @param emptyStr 空数据提示语
+     */
     public void loadingEmpty(String emptyStr, String fialBtnStr) {
         root.setVisibility(VISIBLE);
         loading_empty_text.setVisibility(VISIBLE);
@@ -149,6 +156,7 @@ public class MyLoadingView extends LinearLayout {
     public void loadingView() {
         loadingView("");
     }
+
     /**
      * 正在加载中
      *

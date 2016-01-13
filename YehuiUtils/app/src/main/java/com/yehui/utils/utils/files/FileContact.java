@@ -56,6 +56,10 @@ public class FileContact {
      */
     public final static String YEHUI_SETTINGS_PATH = YEHUI_PATH + "Settings/";
 
+    /**
+     * app文件存放路径
+     */
+    public final static String YEHUI_FILES_PATH = YEHUI_PATH + "Files/";
 
     /**
      * 创建sd卡下存放照片的文件夹
@@ -106,6 +110,20 @@ public class FileContact {
         if (Environment.MEDIA_MOUNTED.equals(Environment
                 .getExternalStorageState())) {
             String path = FileContact.YEHUI_SETTINGS_PATH;
+            File path1 = new File(path);
+            if (!path1.exists()) {
+                path1.mkdirs();
+            }
+        }
+    }
+
+    /**
+     * 创建sd卡下存放配置文件的文件夹
+     */
+    public static void createFiles() {
+        if (Environment.MEDIA_MOUNTED.equals(Environment
+                .getExternalStorageState())) {
+            String path = FileContact.YEHUI_FILES_PATH;
             File path1 = new File(path);
             if (!path1.exists()) {
                 path1.mkdirs();

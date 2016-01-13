@@ -71,7 +71,7 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
     protected RecyclerView recyclerView;
     protected SwipeRefreshLayout swipeRefreshLayout;
     protected LinearLayoutManager layoutManager;
-    protected MyLoadingView mLoadingView;
+    private MyLoadingView mLoadingView;
     protected boolean isLoadMore = true, isRefresh = true;
 
 
@@ -97,7 +97,6 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
         mRecyclerView = (MyRecyclerView) findViewById(R.id.my_recycler_view);
         recyclerView = mRecyclerView.recyclerView;
         mLoadingView = mRecyclerView.loadingLayout;
-        //recyclerView = (RecyclerView) mRecyclerView.findViewById(R.id.recycler_view_widget);
         // 创建一个线性布局管理器
         layoutManager = new LinearLayoutManager(this);
         // 默认是Vertical
@@ -126,26 +125,6 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
         }
     }
 
-    /**
-     * 显示遮罩层
-     */
-    protected void loadingVISIBLE() {
-        mLoadingView.loadingVISIBLE();
-    }
-
-    /**
-     * 加载成功，隐藏遮罩层
-     */
-    protected void loadingSuccess() {
-        mLoadingView.loadingGONE();
-    }
-
-    /**
-     * 加载失败，提示语
-     */
-    protected void loadingFail() {
-        loadingFail("", "");
-    }
 
     /**
      * 加载失败，提示语
@@ -153,42 +132,12 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
      * @param failTextStr 文本提示
      * @param fialBtnStr  按钮上的文字
      */
+    @Override
     protected void loadingFail(String failTextStr, String fialBtnStr) {
         mLoadingView.loadingFail(failTextStr, fialBtnStr);
         mLoadingView.loadingFailOnClick(new loadingFailBtnClick());
     }
 
-    /**
-     * 加载出空数据的时候
-     */
-    protected void loadingEmpty() {
-        mLoadingView.loadingEmpty("", "");
-    }
-
-    /**
-     * 加载出空数据的时候
-     *
-     * @param emptyStr 空数据提示语
-     */
-    protected void loadingEmpty(String emptyStr, String fialBtnStr) {
-        mLoadingView.loadingEmpty(emptyStr, fialBtnStr);
-    }
-
-    /**
-     * 正在加载中
-     */
-    protected void loadingView() {
-        mLoadingView.loadingView("");
-    }
-
-    /**
-     * 正在加载中
-     *
-     * @param loadingStr 正在加载中提示语
-     */
-    protected void loadingView(String loadingStr) {
-        mLoadingView.loadingView(loadingStr);
-    }
 
     /**
      * 下拉刷新监听事件
@@ -314,7 +263,7 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
         if (isLoadMore()) {
             mRecyclerView.closeLoadMoreView();
         }
-        loadingSuccess();
+        loadingClose();
     }
 
     /**
@@ -357,7 +306,7 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
         if (isRefresh()) {
             mRecyclerView.closeRefreshView();
         }
-        loadingSuccess();
+        loadingClose();
     }
 
     /**

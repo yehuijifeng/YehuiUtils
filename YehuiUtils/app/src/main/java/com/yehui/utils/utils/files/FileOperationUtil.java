@@ -179,7 +179,7 @@ public class FileOperationUtil {
                         sdFileListSerch.add(fileBean);
                     }
                 } else {
-                    threadPoolFind.execute(new Runnable() {
+                    threadPoolSerch.execute(new Runnable() {
                         @Override
                         public void run() {
                             queryFileByName(f, name);

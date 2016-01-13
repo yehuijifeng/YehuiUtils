@@ -5,20 +5,24 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Created by yehuijifeng
  * on 2016/1/5.
  * 创建文件工具类，复制粘贴等
  */
-public class FileFoundUtils {
+public class FileFoundUtil {
     /**
      * 防止被实例化
      */
-    private FileFoundUtils() {
+    private FileFoundUtil() {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
+
     /**
      * 删除文件
      * 递归删除
@@ -41,6 +45,63 @@ public class FileFoundUtils {
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * 将一个InputStream里面的数据写入到SD卡中
+     */
+    public static boolean writeSDCardFromInput(String path, String fileName,
+                                               InputStream input) {
+        File file;
+        OutputStream output = null;
+        try {
+            if (!FileOperationUtil.isSDCardEnable()) return false;
+            file = insertFile(path, fileName);
+            output = new FileOutputStream(file);
+            byte buffer[] = new byte[1024];
+            while (true) {
+                int temp = input.read(buffer, 0, buffer.length);
+                if (temp == -1) {
+                    break;
+                }
+                output.write(buffer, 0, temp);
+            }
+            output.flush();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                output.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+    }
+
+    /**
+     * 添加文件到指定路径,该文件创建出来是空的
+     *
+     * @param filePath
+     * @param fileName
+     * @return
+     */
+    public static File insertFile(String filePath, String fileName) {
+        try {
+            File file = new File(filePath, fileName);
+            if (!file.exists()) {
+                file.createNewFile();
+            }else{
+                file.delete();
+                file.createNewFile();
+            }
+            return file;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

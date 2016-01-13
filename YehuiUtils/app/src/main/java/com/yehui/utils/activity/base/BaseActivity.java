@@ -13,17 +13,21 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yehui.utils.R;
 import com.yehui.utils.application.ActivityCollector;
 import com.yehui.utils.http.action.RequestAction;
+import com.yehui.utils.http.bean.DownloadFileBean;
+import com.yehui.utils.http.bean.UploadFileBean;
 import com.yehui.utils.http.request.ResponseComplete;
 import com.yehui.utils.http.request.ResponseFailure;
 import com.yehui.utils.http.request.ResponseResult;
 import com.yehui.utils.http.request.ResponseSuccess;
 import com.yehui.utils.utils.SharedPreferencesUtil;
+import com.yehui.utils.view.loadingview.MyLoadingView;
 import com.yehui.utils.view.titleview.MyTitleView;
 
 import java.io.File;
@@ -66,6 +70,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * -------------------------------------------------------------------------------------
      */
+    /**
+     * 根布局
+     */
+    protected ViewGroup root;
 
     /**
      * 获取屏幕宽高
@@ -75,7 +83,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * gson,解析json数据或者类转json时能用到
      */
-    protected Gson gson = new Gson();
+    protected Gson gson;
 
     /**
      * BaseActivity和BaseFragment的代理类，不用管。
@@ -114,7 +122,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 实现的方法：
      *
      * @Override public void onReceive(Context context, Intent intent) {}
-     * <p>
+     * <p/>
      * （发送）：
      * Intent intent = new Intent("yehui.utils.broadcast");
      * intent.putExtra("yehuiBroadcase","这是广播接收者传递过来的消息");
@@ -127,6 +135,10 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected MyTitleView.TitleMode titleMode;
 
+    /**
+     * loading页
+     */
+    private MyLoadingView myLoadingView;
 
     /**
      * 获得当前title类型
@@ -175,11 +187,21 @@ public abstract class BaseActivity extends AppCompatActivity {
         initData();
     }
 
+    private FrameLayout frameLayout;
+
     /**
      * baseactivity的初始化
      */
     private void initProperties() {
         helper = new BaseHelper(this);
+        root = (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
+        /**
+         * 注意：
+         * 如果activity布局中没有加入：  <include layout="@layout/layout_my_loading" />
+         * myLoadingView则为null
+         * 子类调用myLoadingView中的方法则会报NullException
+         */
+        myLoadingView = (MyLoadingView) findViewById(R.id.my_loading_layout);
         eventBus = helper.eventBus;
         mTitleView = (MyTitleView) findViewById(R.id.my_title_view);
         if (mTitleView != null) {
@@ -197,6 +219,83 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (!helper.isRegistered(this)) {
             helper.registerEventBus(this);
         }
+    }
+
+    /**
+     * 显示正在加载中
+     */
+    protected void loadingShow() {
+        if (myLoadingView == null) return;
+        myLoadingView.loadingVISIBLE();
+    }
+
+    /**
+     * 隐藏正在加载中
+     */
+    protected void loadingClose() {
+        if (myLoadingView == null) return;
+        myLoadingView.loadingGONE();
+    }
+
+    /**
+     * 加载失败的点击事件
+     */
+    protected void loadingFailOnClick(View.OnClickListener l) {
+        if (myLoadingView == null) return;
+        myLoadingView.loadingFailOnClick(l);
+    }
+
+    /**
+     * 加载失败的提示语
+     */
+    protected void loadingFail(String textStr, String btnStr) {
+        if (myLoadingView == null) return;
+        myLoadingView.loadingFail(textStr, btnStr);
+    }
+
+    protected void loadingFail(String textStr) {
+        myLoadingView.loadingFail(textStr, null);
+    }
+
+    protected void loadingFail() {
+        myLoadingView.loadingFail(null, null);
+    }
+
+    /**
+     * 加载出空数据的时候
+     */
+    protected void loadingEmpty(String textStr, String btnStr) {
+        if (myLoadingView == null) return;
+        myLoadingView.loadingEmpty(textStr, btnStr);
+    }
+
+    protected void loadingEmpty(String textStr) {
+        loadingEmpty(textStr, "");
+    }
+
+    protected void loadingEmpty() {
+        loadingEmpty("", "");
+    }
+
+    /**
+     * 正在加载中
+     */
+    protected void loadingView(String textStr) {
+        if (myLoadingView == null) return;
+        myLoadingView.loadingView(textStr);
+    }
+
+    protected void loadingView() {
+        myLoadingView.loadingView("");
+    }
+
+    /**
+     * 获得gson实例
+     *
+     * @return
+     */
+    protected Gson getGson() {
+        return gson = new Gson();
     }
 
     /**
@@ -240,13 +339,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * EventBus工具类接收消息的特定类，需要注册后才能使用
      */
 
     /**
-     * get请求
+     * get请求异步请求
+     *
      * @param action action的枚举
      */
     public void sendGetRequest(RequestAction action) {
@@ -254,16 +353,29 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * get请求线程阻塞
+     */
+    public void sendGetInstanceRequest(RequestAction action) {
+        helper.sendGetInstanceRequest(action);
+    }
+
+    /**
      * post请求
+     *
      * @param action action的枚举
      */
     public void sendPostRequest(RequestAction action) {
         helper.sendPostRequest(action);
     }
 
+    public void sendPostInstanceRequest(RequestAction action) {
+        helper.sendPostInstanceRequest(action);
+    }
+
     /**
      * post传文件请求
-     * @param files 文件组
+     *
+     * @param files  文件组
      * @param action action的枚举
      */
     public void sendPostAddFileRequest(File[] files, RequestAction action) {
@@ -272,11 +384,15 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 下载大文件
-     * @param files 文件组
+     *
      * @param url 下载的地址
      */
-    public void downloadFile(String url, File[] files ) {
-        helper.downloadFile(url, files);
+    public void sendDownloadFile(String url) {
+        helper.sendDownloadFile(url);
+    }
+
+    public void sendDownloadFile(RequestAction action) {
+        helper.sendDownloadFile(action);
     }
 
     /**
@@ -286,14 +402,18 @@ public abstract class BaseActivity extends AppCompatActivity {
         helper.setTimeOut(value);
     }
 
-    /**断开/启动，所有正在进行的请求
+    /**
+     * 断开/启动，所有正在进行的请求
+     *
      * @param bl true断开，false开启
      */
     public void cancelAllRequests(boolean bl) {
         helper.cancelAllRequests(bl);
     }
 
-    /**断开某个请求
+    /**
+     * 断开某个请求
+     *
      * @param action action的枚举
      */
     public void cancelByActionRequests(RequestAction action) {
@@ -303,10 +423,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 需要实现eventbus中的一个方法，不然报错
      */
+
     /**
      * 事件总线的方法，此方法为接收请求结果的方法。
-     *
-     * @param result
+     * @param result 返回结果
      */
     public void onEventMainThread(ResponseResult result) {
         if (result instanceof ResponseSuccess) {
@@ -316,6 +436,20 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else if (result instanceof ResponseComplete) {
             onRequestCompleted((ResponseComplete) result);
         }
+    }
+
+    /**
+     * 接受下载文件的进度显示
+     */
+    public void onEventMainThread(DownloadFileBean downloadFileBean) {
+        onRequestDownFile(downloadFileBean);
+    }
+
+    /**
+     * 接受上传文件的进度显示
+     */
+    public void onEventMainThread(UploadFileBean uploadFileBean) {
+        onRequestUploadFile(uploadFileBean);
     }
 
     /**EventBus工具类的四种方法
@@ -330,7 +464,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * <p>
      * onEvent:如果使用onEvent作为订阅函数，那么该事件在哪个线程发布出来的，onEvent就会在这个线程中运行，也就是说发布事件和接收事件线程在同一个线程。使用这个方法时，在onEvent方法中不能执行耗时操作，如果执行耗时操作容易导致事件分发延迟。
      * onEventMainThread:如果使用onEventMainThread作为订阅函数，那么不论事件是在哪个线程中发布出来的，onEventMainThread都会在UI线程中执行，接收事件就会在UI线程中运行，这个在Android中是非常有用的，因为在Android中只能在UI线程中跟新UI，所以在onEvnetMainThread方法中是不能执行耗时操作的。
-     * onEventBackground:如果使用onEventBackgrond作为订阅函数，那么如果事件是在UI线程中发布出来的，那么onEventBackground就会在子线程中运行，如果事件本来就是子线程中发布出来的，那么onEventBackground函数直接在该子线程中执行。
+     * onEventBackgroundThread:如果使用onEventBackgrond作为订阅函数，那么如果事件是在UI线程中发布出来的，那么onEventBackground就会在子线程中运行，如果事件本来就是子线程中发布出来的，那么onEventBackground函数直接在该子线程中执行。
      * onEventAsync：如果使用onEventAsync函数作为订阅函数，那么无论事件在哪个线程发布，都会创建新的子线程在执行onEventAsync.
      */
     /**
@@ -368,18 +502,32 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 请求成功的回调，子类应该实现此方法做相应的处理
      */
-    protected void onRequestSuccess(ResponseSuccess success) {}
+    protected void onRequestSuccess(ResponseSuccess success) {
+    }
 
     /**
      * 请求成功的回调，子类应该实现此方法做相应的处理
      */
-    protected void onRequestFailure(ResponseFailure failure) {}
+    protected void onRequestFailure(ResponseFailure failure) {
+    }
 
     /**
      * 请求成功的回调，子类应该实现此方法做相应的处理
      */
-    protected void onRequestCompleted(ResponseComplete complete) {}
+    protected void onRequestCompleted(ResponseComplete complete) {
+    }
 
+    /**
+     * 下载文件的进度回调
+     */
+    protected void onRequestDownFile(DownloadFileBean downloadFileBean) {
+    }
+
+    /**
+     * 上传文件的进度回调
+     */
+    protected void onRequestUploadFile(UploadFileBean uploadFileBean) {
+    }
 
     /**
      * 隐藏/显示软键盘的方法

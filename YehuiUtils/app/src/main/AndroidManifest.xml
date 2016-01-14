@@ -27,36 +27,36 @@
     <!--注册极光推送消息，前置包名-->
     <uses-permission android:name="com.yehui.utils.permission.JPUSH_MESSAGE" />
     <!--接收当前用户-->
-    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="com.yehui.utils.permission.RECEIVE_USER_PRESENT" />
     <!--联网-->
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.yehui.utils.permission.INTERNET" />
     <!--锁屏-->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.yehui.utils.permission.WAKE_LOCK" />
     <!--读取手机状态-->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="com.yehui.utils.permission.READ_PHONE_STATE" />
     <!--写sd卡-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.yehui.utils.permission.WRITE_EXTERNAL_STORAGE" />
     <!--读sd卡-->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.yehui.utils.permission.READ_EXTERNAL_STORAGE" />
     <!--写设置-->
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="com.yehui.utils.permission.WRITE_SETTINGS" />
     <!--震动-->
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.yehui.utils.permission.VIBRATE" />
     <!--安装卸载文件系统-->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="com.yehui.utils.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <!--联网状态-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.yehui.utils.permission.ACCESS_NETWORK_STATE" />
     <!--wifi状态-->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="com.yehui.utils.permission.ACCESS_WIFI_STATE" />
     <!--系统警告窗口-->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="com.yehui.utils.permission.SYSTEM_ALERT_WINDOW" />
 
     <!-- 极光推送 可选权限 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="com.yehui.utils.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="com.yehui.utils.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="com.yehui.utils.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="com.yehui.utils.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="com.yehui.utils.permission.CHANGE_NETWORK_STATE" />
 
 
     <application
@@ -85,19 +85,14 @@
             android:enabled="true">
             <!--优先级-->
             <intent-filter android:priority="1000">
-                <!--收到通知代理-->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
-                <action android:name="cn.jpush.android.intent.REGISTRATION" />
-                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
-                <!--包名-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />   <!--Required  显示通知栏 -->
                 <category android:name="com.yehui.utils" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
+            <!-- Optional -->
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />

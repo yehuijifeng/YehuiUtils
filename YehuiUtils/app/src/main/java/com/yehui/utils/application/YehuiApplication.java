@@ -11,7 +11,6 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
-import com.yehui.utils.jpush.JPushInterfaces;
 import com.yehui.utils.utils.LogUtil;
 import com.yehui.utils.utils.files.FileContact;
 import com.yehui.utils.utils.imageloader.ImageOptions;
@@ -53,9 +52,6 @@ public class YehuiApplication extends Application {
         FileContact.createLog();
         FileContact.createCacheImage();
         FileContact.createSettigns();
-        //极光推送启动服务
-        JPushInterfaces.initJPush(this);
-        JPushInterfaces.setJPushDebugMode(true);
         /**
          * 全局捕获异常的代理类
          */

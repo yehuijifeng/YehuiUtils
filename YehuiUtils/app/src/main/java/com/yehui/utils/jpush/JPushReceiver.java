@@ -1,5 +1,7 @@
 package com.yehui.utils.jpush;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -105,5 +107,6 @@ public class JPushReceiver {
         list.add(id);
         return list;
     }
+
 
 }

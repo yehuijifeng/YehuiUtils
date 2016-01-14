@@ -17,6 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -32,10 +37,9 @@ dependencies {
     compile project(':umeng-sdk')
     compile project(':pay-service')
     compile project(':cropper')
-    compile files('blis/ormlite-android-4.48.jar')
-    compile files('blis/ormlite-core-4.48.jar')
-    compile files('blis/zxing.jar')
-    compile files('blis/core-3.1.1-SNAPSHOT.jar')
-    compile files('blis/android-core-3.1.1-SNAPSHOT.jar')
-    compile files('blis/jpush-android-2.0.5.jar')
+    compile files('libs/ormlite-android-4.48.jar')
+    compile files('libs/ormlite-core-4.48.jar')
+    compile files('libs/zxing.jar')
+    compile files('libs/jpush-android-2.0.5.jar')
+
 }

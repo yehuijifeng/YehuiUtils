@@ -1,11 +1,9 @@
 package com.yehui.utils.jpush;
 
-import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
 
 import java.util.List;
 
@@ -16,10 +14,15 @@ import cn.jpush.android.api.JPushInterface;
  * on 2016/1/14.
  * 极光推送服务推送
  */
-public class JPushService extends Service {
+public class JPushService  extends BroadcastReceiver {
     private Intent intent;//接受到的极光推送的意图
     private Class cla;//用户点击通知后跳转的activity
     private Context context;//接收的上下文
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        setReceive();
+    }
 
     public JPushService(Intent intent, Context context, Class cla) {
         this.intent = intent;
@@ -48,9 +51,4 @@ public class JPushService extends Service {
         }
     }
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
 }

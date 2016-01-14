@@ -20,6 +20,11 @@ public enum RequestAction {
      */
     POST_WEATHER(new RequestParameter(RequestUrls.POST_WEATHER_URL, WeathersBean.class)),
 
+    /**
+     * 天气预报
+     */
+    POST_UP_FILE(new RequestParameter(RequestUrls.POST_UP_FILE_URL, String.class)),
+
 
     ;
     public RequestParameter parameter;

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_my_title" />
+
+    <TextView
+        android:id="@+id/jpush_id_text"
+        style="@style/default_textview_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="jpushId:" />
+
+    <TextView
+        android:id="@+id/jpush_key_text"
+        style="@style/default_textview_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="jpushKey:" />
+
+    <TextView
+        android:id="@+id/jpush_version_text"
+        style="@style/default_textview_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="jpushVersion:" />
+
+    <Button
+        android:id="@+id/init_btn"
+        style="@style/default_button_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="初始化jpush" />
+
+    <Button
+        android:id="@+id/stop_btn"
+        style="@style/default_button_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="杀掉jpush" />
+
+    <Button
+        android:id="@+id/restart_btn"
+        style="@style/default_button_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="重启jpush" />
+
+    <TextView
+        android:id="@+id/jpush_text"
+        style="@style/default_textview_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="jpush信息：" />
+</LinearLayout>

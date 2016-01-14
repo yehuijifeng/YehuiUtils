@@ -403,11 +403,11 @@ public class RequestHandle implements RequestInterface {
         uploadFileBean.setUrl(action.parameter.getRequestUrl());
         //多部分组成的建造器
         MultipartBuilder builder = new MultipartBuilder().type(MultipartBuilder.FORM);
-        Map<String, Object> parameters = action.parameter.getParameters();
-        //遍历map中所有参数到builder
-        for (String key : parameters.keySet()) {
-            builder.addFormDataPart(key, (String) parameters.get(key));
-        }
+//        Map<String, Object> parameters = action.parameter.getParameters();
+//        //遍历map中所有参数到builder
+//        for (String key : parameters.keySet()) {
+//            builder.addFormDataPart(key, (String) parameters.get(key));
+//        }
         if (files != null || files.length != 0) {
             //遍历file数组，得到所有file文件
             for (File file : files) {

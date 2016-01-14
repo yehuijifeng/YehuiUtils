@@ -28,6 +28,7 @@ public class RequestUrls {
      */
     public static final String POST_DOWN_FILE= FileContact.downFileUrl;
 
+    public static final String POST_UP_FILE_URL="http://115.29.224.175:9999/alsfoxShop/site/shopcomment/insertShopComment.action?&shopComment.commentCon=Fggggg&shopComment.commentLv=5.0&shopComment.orderDetailId=672&shopComment.orderId=519&shopComment.shopId=99&shopComment.userId=27&timestamp=1452690374918&sign=499A25444D903BA751D3E0E470F9B949";
 
     /**
      * 下载文件，小文件，96KB

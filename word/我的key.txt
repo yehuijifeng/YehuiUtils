@@ -1,9 +1,30 @@
-友盟：夜辉宝典key:56449b0ae0f55af0240017c0
+包名：com.yehui.utils
+友盟：
+key:56449b0ae0f55af0240017c0
 
-3.3  方法B：添加工程引用（升级方便，推荐）
-解压SDK压缩包，将文件夹中的social_sdk_library_project文件夹导入Eclipse，并在您的工程中添加对此项目的引用即可。
+极光推送：
+AppKey:072b61ea14d45b38ae622e16
+Master Secret(用于服务器端 API 调用与 appkey 配合使用达到鉴权的目的，请保管好 Master Secret 防止外泄):e952ed60969149d2a31ffec7
+
 
 
 qq:
 APP ID:1104967462
 APP KEY:8SKqUN5ap6zc5GtK
+
+select a.dcy_id, b.dimensionality, b.longitude
+from t_surveyfamily a, q_100000000001002 b
+where a.surveyanswerid = b.id order by dcy_id
+
+
+根据调查员ID 修改经纬度
+longitude
+dimensionality
+这两个就是经纬度 
+根据上面的表，
+
+
+update q_100000000001002 
+set dimensionality=#dimensionality#
+and longitude = #longitude#
+where id =#id#

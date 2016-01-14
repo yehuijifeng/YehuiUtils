@@ -11,11 +11,13 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.yehui.utils.jpush.JPushInterfaces;
 import com.yehui.utils.utils.LogUtil;
 import com.yehui.utils.utils.files.FileContact;
 import com.yehui.utils.utils.imageloader.ImageOptions;
 
 import java.io.File;
+
 
 /**
  * Created by yehuijifeng
@@ -45,12 +47,15 @@ public class YehuiApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        //创建图片文件夹
+        //创建本地项目文件夹
         FileContact.createSaveImage();
         FileContact.createFiles();
         FileContact.createLog();
         FileContact.createCacheImage();
         FileContact.createSettigns();
+        //极光推送启动服务
+        JPushInterfaces.initJPush(this);
+        JPushInterfaces.setJPushDebugMode(true);
         /**
          * 全局捕获异常的代理类
          */

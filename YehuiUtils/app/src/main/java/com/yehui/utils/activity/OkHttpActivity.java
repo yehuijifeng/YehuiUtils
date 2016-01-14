@@ -15,7 +15,9 @@ import com.yehui.utils.http.request.ResponseComplete;
 import com.yehui.utils.http.request.ResponseFailure;
 import com.yehui.utils.http.request.ResponseSuccess;
 import com.yehui.utils.utils.files.FileBean;
+import com.yehui.utils.utils.files.FileContact;
 
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -115,6 +117,8 @@ public class OkHttpActivity extends BaseActivity implements View.OnClickListener
                 sendPostRequest(RequestAction.POST_WEATHER);
                 break;
             case R.id.post_file_btn:
+                File[] files=new File[]{new File(FileContact.getSDFile()+"/Pictures/Screenshots/S60102-000146.jpg"),new File(FileContact.getSDFile()+"/Pictures/Screenshots/S60102-000143.jpg")};
+                sendPostAddFileRequest(files,RequestAction.POST_UP_FILE);
                 break;
             case R.id.down_btn:
                 sendDownloadFile(RequestUrls.POST_DOWN_FILE_SMALL);

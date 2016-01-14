@@ -46,9 +46,8 @@ public class JPushUtil {
         }
         return appKey;
     }
-
     // 取得版本号
-    public static String GetVersion(Context context) {
+    public static String getVersion(Context context) {
         try {
             PackageInfo manager = context.getPackageManager().getPackageInfo(
                     context.getPackageName(), 0);

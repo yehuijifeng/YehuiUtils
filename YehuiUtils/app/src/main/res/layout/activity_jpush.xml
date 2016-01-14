@@ -48,6 +48,12 @@
         android:layout_height="wrap_content"
         android:text="重启jpush" />
 
+    <Button
+        android:id="@+id/restart_id_btn"
+        style="@style/default_button_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获得RegistrationID" />
     <TextView
         android:id="@+id/jpush_text"
         style="@style/default_textview_style"

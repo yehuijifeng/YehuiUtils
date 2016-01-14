@@ -114,6 +114,10 @@ public class JPushInterfaces {
     }
 
 
+    public static void setLatestNotificationNumber(Context context, int maxNum){
+        JPushInterface.setLatestNotificationNumber(context, maxNum);
+    }
+
     /**设置某编号的通知栏样式构建类（setPushNotificationBuilder 可以在 JPushInterface.init() 之后任何地方调用）
      * 1，当开发者需要为不同的通知，指定不同的通知栏样式（行为）时，则需要调用此方法设置多个通知栏构建类。
      * 2，设置时，开发者自己维护 notificationBuilderId 这个编号，下发通知时使用 n_builder_id 指定该编号，

@@ -1,6 +1,7 @@
 package com.yehui.utils.application;
 
 import android.app.Application;
+import android.app.Notification;
 import android.content.Context;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
@@ -11,17 +12,21 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.yehui.utils.R;
+import com.yehui.utils.jpush.JPushInterfaces;
 import com.yehui.utils.utils.LogUtil;
 import com.yehui.utils.utils.files.FileContact;
 import com.yehui.utils.utils.imageloader.ImageOptions;
 
 import java.io.File;
 
+import cn.jpush.android.api.BasicPushNotificationBuilder;
+
 
 /**
  * Created by yehuijifeng
  * on 2015/11/26.
- * <p/>
+ * <p>
  * 夜辉宝典
  * 2015年10月27日
  * android-studio 1.51
@@ -42,7 +47,8 @@ public class YehuiApplication extends Application {
     public static DisplayImageOptions defaultOptions = ImageOptions.defaultOptions();
     //取得圆形image的配置类
     public static DisplayImageOptions roundOptions = ImageOptions.roundOptions();
-    public boolean normal_app=false;
+    public boolean normal_app = false;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -52,10 +58,13 @@ public class YehuiApplication extends Application {
         FileContact.createLog();
         FileContact.createCacheImage();
         FileContact.createSettigns();
+
+        JPushInterfaces.setJPushDebugMode(true);// 设置开启日志,发布时请关闭日志
+        JPushInterfaces.initJPush(this);// 初始化 JPush
         /**
          * 全局捕获异常的代理类
          */
-        if(normal_app) {
+        if (normal_app) {
             CrashHandler crashHandler = CrashHandler.getInstance();
             crashHandler.init(getApplicationContext());
         }
@@ -72,8 +81,8 @@ public class YehuiApplication extends Application {
     /**
      * 设置打印日志
      */
-    private void isLog(boolean bl){
-        LogUtil.model=bl;
+    private void isLog(boolean bl) {
+        LogUtil.model = bl;
     }
 
     /**

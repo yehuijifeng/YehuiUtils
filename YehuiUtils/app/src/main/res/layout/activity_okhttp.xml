@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_my_title" />
+    <include layout="@layout/layout_my_loading" />
+    <Button
+        android:id="@+id/get_btn"
+        style="@style/default_button_style"
+        android:layout_width="wrap_content"
+        android:text="get异步请求" />
+    <Button
+        android:id="@+id/get_instance_btn"
+        style="@style/default_button_style"
+        android:layout_width="wrap_content"
+        android:text="get线程阻塞请求" />
+    <Button
+        android:id="@+id/post_btn"
+        android:layout_width="wrap_content"
+        style="@style/default_button_style"
+        android:text="post异步请求" />
+
+    <Button
+        android:id="@+id/post_instance_btn"
+        android:layout_width="wrap_content"
+        style="@style/default_button_style"
+        android:text="post线程阻塞请求" />
+
+    <Button
+        android:id="@+id/post_file_btn"
+        style="@style/default_button_style"
+        android:layout_width="wrap_content"
+        android:text="post请求上传文件" />
+
+    <Button
+        android:id="@+id/down_btn"
+        style="@style/default_button_style"
+        android:text="文件下载" />
+
+    <TextView
+        android:id="@+id/http_text"
+        style="@style/default_textview_style"
+        android:text="http请求返回内容" />
+
+    <ImageView
+        android:id="@+id/http_image"
+        style="@style/default_textview_style" />
+
+</LinearLayout>

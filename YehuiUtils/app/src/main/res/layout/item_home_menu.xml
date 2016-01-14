@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_default_view">
+
+    <ImageView
+        android:id="@+id/home_menu_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_xingxing" />
+
+    <TextView
+        android:id="@+id/home_menu_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="@dimen/default_padding_and_margin"
+        android:text="侧滑菜单"
+        android:textColor="@color/default_gray" />
+
+    <ImageView
+        android:id="@+id/home_menu_go"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding_and_margin"
+        android:src="@drawable/ic_drop_right" />
+</LinearLayout>

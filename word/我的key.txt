@@ -28,3 +28,7 @@ update q_100000000001002
 set dimensionality=#dimensionality#
 and longitude = #longitude#
 where id =#id#
+
+
+Get sdk version fail![ªÒ»°sdk∞Ê±æ ß∞‹!]
+JPush.so file do not match JPush.jar file in the project,Failed to init JPush 

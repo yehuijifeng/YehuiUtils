@@ -173,7 +173,10 @@
         <activity
             android:name=".activity.YehuiHomeActivity"
             android:launchMode="singleTop">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
@@ -221,13 +224,6 @@
 
         </activity>
 
-        <!--操作图片-->
-        <activity
-            android:name=".activity.TouchImageActivity"
-            android:launchMode="singleTop">
-
-
-        </activity>
         <!--剪切图片-->
         <activity
             android:name=".activity.ImageCroppingActivity"
@@ -260,7 +256,6 @@
             android:name=".activity.ZxingActivity"
             android:launchMode="singleTop">
 
-
         </activity>
 
         <!--二维码扫描区-->
@@ -279,16 +274,15 @@
         <!--okhttp网络请求-->
         <activity
             android:name=".activity.OkHttpActivity"
-            android:launchMode="singleTop"></activity>
+            android:launchMode="singleTop">
+
+        </activity>
 
         <!--极光推送-->
         <activity
             android:name=".activity.JPushActivity"
             android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
     </application>
 

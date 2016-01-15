@@ -65,7 +65,7 @@ public class CartAnimationActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        setTitleMode(MyTitleView.TitleMode.NO_BACK_IMAGE);
+        setTitleMode(MyTitleView.TitleMode.NORMAL);
 
         mTitleView.setTextButtonOnClick(new View.OnClickListener() {
             @Override
@@ -88,6 +88,7 @@ public class CartAnimationActivity extends BaseActivity {
 
         });
         listView.setAdapter(goodAdapter);
+        setIsFastClick(false);
     }
 
     private void doAnim(Drawable drawable,int[] start_location){

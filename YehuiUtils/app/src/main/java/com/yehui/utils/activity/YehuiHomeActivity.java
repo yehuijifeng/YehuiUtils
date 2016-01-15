@@ -1,12 +1,15 @@
 package com.yehui.utils.activity;
 
+import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,13 +20,18 @@ import com.yehui.utils.activity.base.BaseActivity;
 import com.yehui.utils.bean.MenuBean;
 import com.yehui.utils.bean.MenuTowBean;
 import com.yehui.utils.contacts.MenuContact;
+import com.yehui.utils.utils.ResourcesUtil;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 /**
- * Created by yehuijifeng on 2016/1/4.
+ * Created by yehuijifeng
+ * on 2016/1/4.
+ * 夜辉宝典首页
  */
-public class YehuiHomeActivity extends BaseActivity {
+public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -33,6 +41,7 @@ public class YehuiHomeActivity extends BaseActivity {
     private LinearLayout layout_drawer;
     private TextView home_menu_text;
     private ImageView home_menu_image, home_menu_go;
+    private TextView home_text;
 
     @Override
     protected void setContentView() {
@@ -56,6 +65,7 @@ public class YehuiHomeActivity extends BaseActivity {
         toolbar.setNavigationIcon(R.drawable.ic_launcher);//左菜单图标
         drawerLayout = (DrawerLayout) findViewById(R.id.yehui_drawer_home);
         layout_drawer = (LinearLayout) findViewById(R.id.layout_drawer);
+        home_text = (TextView) findViewById(R.id.home_text);
         //创建返回键，并实现打开关/闭监听
         actionBarDrawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
@@ -94,6 +104,7 @@ public class YehuiHomeActivity extends BaseActivity {
             home_menu_text.setTextColor(getResourceColor(R.color.black));
             for (MenuTowBean menuTowBean : menuBean.getListTow()) {
                 homeMenuView = inflate(R.layout.item_home_menu, null);
+                homeMenuView.setOnClickListener(this);
                 home_menu_text = (TextView) homeMenuView.findViewById(R.id.home_menu_text);
                 home_menu_image = (ImageView) homeMenuView.findViewById(R.id.home_menu_image);
                 home_menu_go = (ImageView) homeMenuView.findViewById(R.id.home_menu_go);
@@ -103,6 +114,16 @@ public class YehuiHomeActivity extends BaseActivity {
                 home_menu_text.setText(menuTowBean.getName());
             }
         }
+        String explain;
+        try {
+            InputStream in = getResources().getAssets().open("yehui-explain.txt");
+            explain = ResourcesUtil.getFromRaw(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+            explain = "获取说明文档失败！";
+        }
+
+        home_text.setText(Html.fromHtml(getResourceString(R.string.app_explain)));
     }
 
     @Override
@@ -149,5 +170,96 @@ public class YehuiHomeActivity extends BaseActivity {
             return false;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.closeContextMenu();
+        this.closeOptionsMenu();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        Bundle bundle=new Bundle();
+        home_menu_text = (TextView) v.findViewById(R.id.home_menu_text);
+        switch (home_menu_text.getText().toString().trim()) {
+            case MenuContact.activityBase://baseactivity
+                startActivity(CartAnimationActivity.class);
+                break;
+            case MenuContact.activityList://activityList
+                startActivity(ListActivity.class);
+                break;
+            case MenuContact.activityGrid://activityGrid
+                startActivity(GridActivity.class);
+                break;
+            case MenuContact.activityExpandable://两级列表
+                startActivity(ExpandableListActivity.class);
+                break;
+            case MenuContact.activityStaggered://瀑布流
+                startActivity(StaggeredActivity.class);
+                break;
+            case MenuContact.fragmentBase://fragmentBase
+                bundle.putInt("viewpagerPage",0);
+                startActivity(ViewpagerActivity.class,bundle);
+                break;
+            case MenuContact.fragmentList://fragmentList
+                bundle.putInt("viewpagerPage",1);
+                startActivity(ViewpagerActivity.class,bundle);
+                break;
+            case MenuContact.fragmentGrid://fragmentGrid
+                bundle.putInt("viewpagerPage",2);
+                startActivity(ViewpagerActivity.class,bundle);
+                break;
+            case MenuContact.fragmentExpandable://两级列表
+                bundle.putInt("viewpagerPage",4);
+                startActivity(ViewpagerActivity.class,bundle);
+                break;
+            case MenuContact.fragmentStaggered://瀑布流
+                bundle.putInt("viewpagerPage",3);
+                startActivity(ViewpagerActivity.class,bundle);
+                break;
+            case MenuContact.viewpager://viewpager
+                bundle.putInt("viewpagerPage",0);
+                startActivity(ViewpagerActivity.class,bundle);
+                break;
+            case MenuContact.sqllite://ormLite的数据库存储
+                startActivity(SqliteUtilsDemoActivity.class);
+                break;
+            case MenuContact.file://本地文件存储
+
+                break;
+            case MenuContact.okhttp://okhttp网络请求
+                startActivity(OkHttpActivity.class);
+                break;
+            case MenuContact.dialog://dialog
+                startActivity(DialogActivity.class);
+                break;
+            case MenuContact.popupwindow://popupwindow
+                startActivity(PopupwindowActivity.class);
+                break;
+            case MenuContact.photoview://方法旋转图片三方库
+                startActivity(PhotoViewActivity.class);
+                break;
+            case MenuContact.webview://webview
+                startActivity(WebViewActivity.class);
+                break;
+            case MenuContact.turnsview://轮番图
+                startActivity(ViewFlipperActivity.class);
+                break;
+            case MenuContact.jpush://极光推送
+                startActivity(JPushActivity.class);
+                break;
+            case MenuContact.zxing://扫码google官方库
+                startActivity(ZxingActivity.class);
+                break;
+
+        }
     }
 }

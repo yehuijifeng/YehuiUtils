@@ -10,6 +10,7 @@ import com.umeng.utils.umengshare.share.QQShare;
 /**
  * Created by yehuijifeng
  * on 2015/11/25.
+ * 友盟分享
  */
 public class UmengService {
 
@@ -18,7 +19,7 @@ public class UmengService {
     public static final String QQappKey = "8SKqUN5ap6zc5GtK";
 
     //分享的地址来源
-    public static final String DESCRIPTOR = "http://www.alsfox.com/";
+    public static final String DESCRIPTOR = "http://www.yehuijifeng.icoc.in/";
 
     public static UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
 

@@ -1,6 +1,5 @@
 package com.yehui.utils.http.request;
 
-import com.google.gson.Gson;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
@@ -57,7 +56,7 @@ public class RequestHandle implements RequestInterface {
 
     private EventBus eventBus;
 
-    private Gson gson;
+    private GsonUtil gsonUtil;
 
     private OkHttpClient mOkHttpClient;
 
@@ -119,24 +118,23 @@ public class RequestHandle implements RequestInterface {
         mOkHttpClient.setWriteTimeout(VALUE_DEFAULT_TIME_OUT, TimeUnit.MILLISECONDS);//写入超时
         eventBus = EventBus.getDefault();
         eventBus.register(this);//注册eventbus事件
-        gson = new Gson();
     }
 
 
     //网络请求成功
-    private ResponseResult createResponseSuccess(JSONObject response, Class<?> cls, RequestAction requestAction) {
+    private ResponseResult createResponseSuccess(JSONObject response, RequestAction requestAction) {
         try {
             ResponseSuccess responseSuccess = new ResponseSuccess();
             responseSuccess.setStatusCode(response.getInt(TAG_STATUS_CODE));
             responseSuccess.setMessage(response.getString(TAG_MESSAGE));
             responseSuccess.setRequestAction(requestAction);
-            if (cls == null) return responseSuccess;
+            if (requestAction.parameter.getCls() == null) return responseSuccess;
             //单个数据
             if (response.has(TAG_RESULT)) {
-                JSONObject result = new JSONObject(response.getString(TAG_RESULT));
-                responseSuccess.setResultContent(GsonUtil.fromJsonObject(result.getString(TAG_DATA), cls));
+                JSONObject result = gsonUtil.toJSONObject(response.getString(TAG_RESULT));
+                responseSuccess.setResultContent(gsonUtil.fromJsonObject(result.getString(TAG_DATA), requestAction.parameter.getCls()));
             }
-//                //数据集合
+// 数据集合
 //                JSONArray array = response.getJSONArray(TAG_OBJECT);
 //                int length = array.length();
 //                List<Object> data = new ArrayList<>();
@@ -144,8 +142,13 @@ public class RequestHandle implements RequestInterface {
 //                    data.add(gson.fromJson(array.getString(i), cls));
 //                }
 //                responseSuccess.setResultContent(data);
-            else
-                responseSuccess.setResultContent(mContext.getResourceString(R.string.json_error));
+            else {
+                try {
+                    responseSuccess.setResultContent(response.toString());
+                } catch (Exception e) {
+                    responseSuccess.setResultContent(mContext.getResourceString(R.string.json_error));
+                }
+            }
             return responseSuccess;
         } catch (JSONException e) {
             e.printStackTrace();
@@ -200,7 +203,7 @@ public class RequestHandle implements RequestInterface {
             JSONObject jsonObject = new JSONObject(jsonStr);
             final int statusCode = jsonObject.getInt(TAG_STATUS_CODE);
             if (statusCode == StatusCode.REQUEST_SUCCESS) {
-                eventBus.post(createResponseSuccess(jsonObject, action.parameter.getCls(), action));
+                eventBus.post(createResponseSuccess(jsonObject, action));
             } else {
                 eventBus.post(createResponseFailure(statusCode, jsonObject.getString(TAG_MESSAGE), action));
             }
@@ -243,7 +246,6 @@ public class RequestHandle implements RequestInterface {
                     statusCode = StatusCode.SERVER_NO_NETWORK;
                 } else {
                     message = e.getLocalizedMessage();
-                    //message = mContext.getResourceString(R.string.server_error);
                     statusCode = StatusCode.SERVER_BUSY;
                 }
                 eventBus.post(createResponseFailure(statusCode, message, action));
@@ -378,9 +380,11 @@ public class RequestHandle implements RequestInterface {
             downloadFileBean.setBytesRead(bytesRead);
             downloadFileBean.setContentLength(contentLength);
             //长度未知的情况下回返回-1
-            if (contentLength != -1) {
+            if (contentLength != -1 && (100 * bytesRead) / contentLength >= 0) {
                 String donePercent = (100 * bytesRead) / contentLength + "%";//上传进度
+                downloadFileBean.setDownSuccess(false);
             }
+            downloadFileBean.setDownSuccess(true);
             eventBus.post(downloadFileBean);
         }
     };
@@ -441,7 +445,7 @@ public class RequestHandle implements RequestInterface {
                     call.cancel();
             } catch (Exception e) {
                 e.printStackTrace();
-                mContext.showShortToast(mContext.getResourceString(R.string.call_error));
+                LogUtil.e(mContext.getResourceString(R.string.call_error));
             }
         }
     }
@@ -454,7 +458,7 @@ public class RequestHandle implements RequestInterface {
                     call.cancel();
             } catch (Exception e) {
                 e.printStackTrace();
-                mContext.showShortToast(mContext.getResourceString(R.string.call_error));
+                LogUtil.e(mContext.getResourceString(R.string.call_error));
             }
         }
     }
@@ -484,21 +488,21 @@ public class RequestHandle implements RequestInterface {
                             statusCode = StatusCode.SERVER_NO_NETWORK;
                         } else {
                             message = e.getLocalizedMessage();
-                            //message = mContext.getResourceString(R.string.server_error);
                             statusCode = StatusCode.SERVER_BUSY;
                         }
                         if (action != null) {
-                            mContext.showShortToast(message);
+                            LogUtil.e(message);
                             eventBus.post(createResponseFailure(statusCode, message, action));
                             eventBus.post(createResponseComplete(statusCode, message, action));
-                        } else {
-                            mContext.showShortToast(message);
                         }
+                        LogUtil.e("文件保存失败");
+                        downloadFileBean.setDone(false);
+                        eventBus.post(downloadFileBean);
                     }
 
                     @Override
                     public void onResponse(Response response) throws IOException {
-                        String fileName;
+                        String fileName, message;
                         if (action != null)
                             fileName = DateUtils.getNow("yyyyMMddHHmmss") + "_" + action.parameter.getRequestUrl().substring(action.parameter.getRequestUrl().lastIndexOf("/") + 1, action.parameter.getRequestUrl().length());
                         else if (url != null)
@@ -506,11 +510,19 @@ public class RequestHandle implements RequestInterface {
                         else return;
                         InputStream inputStream = response.body().byteStream();//输入流
                         if (FileFoundUtil.writeSDCardFromInput(FileContact.YEHUI_FILES_PATH, fileName, inputStream))
-                            LogUtil.e("下载完成");
+                            message = "下载完成";
                         else
-                            LogUtil.e("文件保存失败");
+                            message = "文件保存失败";
+                        if (action != null) {
+                            try {
+                                eventBus.post(createResponseSuccess(new JSONObject(message), action));
+                                eventBus.post(createResponseComplete(StatusCode.SERVER_ERROR, message, action));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
                         downloadFileBean.setDone(true);
-                        downloadFileBean.setFileBean(FileOperationUtil.queryFileByDetails(new File(FileContact.YEHUI_FILES_PATH,fileName)));
+                        downloadFileBean.setFileBean(FileOperationUtil.queryFileByDetails(new File(FileContact.YEHUI_FILES_PATH, fileName)));
                         eventBus.post(downloadFileBean);
                     }
                 });

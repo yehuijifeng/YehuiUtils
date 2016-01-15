@@ -9,7 +9,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.yehui.utils.R;
-import com.yehui.utils.activity.base.BaseListActivity;
+import com.yehui.utils.activity.base.BaseGridActivity;
 import com.yehui.utils.adapter.base.BaseViewHolder;
 import com.yehui.utils.utils.LogUtil;
 import com.yehui.utils.view.titleview.MyTitleView;
@@ -20,9 +20,9 @@ import java.util.List;
 /**
  * Created by yehuijifeng
  * on 2015/12/9.
- * recycler代替listview
+ * recycler代替表格布局
  */
-public class RecyclerListActivity extends BaseListActivity {
+public class GridActivity extends BaseGridActivity {
 
     /**
      * 自定义toolbar的优先级高于toolbarmodel
@@ -31,37 +31,24 @@ public class RecyclerListActivity extends BaseListActivity {
 //    protected View setCustomToolbar() {
 //        return inflate(R.layout.item_test_recycler, null);
 //    }
-
+    @Override
+    protected float[] decorationSize() {
+        return new float[]{3f, 0f, 0f, 3f};
+    }
     @Override
     protected int isHorizaontalOrVertical() {
         return 0;
     }
 
-//    @Override
-//    protected float[] decorationSize() {
-//        return new float[]{3f, 0f, 0f, 3f};
-//    }
-
-
-   /* @Override
-    protected int stagViewByNumber() {
+    @Override
+    protected int gridViewByNumber() {
         return 2;
-    }*/
-
-    /*@Override
-    protected int stagViewOrientation() {
-        return 0;
-    }*/
-
-//    @Override
-//    protected int gridViewByNumber() {
-//        return 2;
-//    }
+    }
 
     @Override
     protected void initView() {
         super.initView();
-        setTitleMode(MyTitleView.TitleMode.NO_BACK_IMAGE);
+        setTitleMode(MyTitleView.TitleMode.OPTIONS);
         mTitleView.setImageButtonOnClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,9 +56,6 @@ public class RecyclerListActivity extends BaseListActivity {
             }
         });
         mAdapter.setHeaderView(inflate(R.layout.item_demo_cart, null));
-        //loadingView();
-        //handler.sendEmptyMessageDelayed(1, 2000);
-
     }
 
 
@@ -208,7 +192,7 @@ public class RecyclerListActivity extends BaseListActivity {
 
     @Override
     protected String setTitleText() {
-        return "recycler测试";
+        return "recyclerGrid";
     }
 
 

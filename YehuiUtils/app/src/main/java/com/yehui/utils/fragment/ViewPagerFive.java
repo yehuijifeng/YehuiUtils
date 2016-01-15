@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.yehui.utils.R;
 import com.yehui.utils.adapter.base.BaseExpandableViewHolder;
 import com.yehui.utils.fragment.base.BaseExpandableListViewFragment;
+import com.yehui.utils.view.titleview.MyTitleView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +27,7 @@ import java.util.Map;
 public class ViewPagerFive extends BaseExpandableListViewFragment {
 
     private ImageView groupImage;
-
+    private MyTitleView my_title_view;
     @Override
     protected int setFragmentLayoutId() {
         return R.layout.activity_test_expandable_list_view;
@@ -50,7 +51,8 @@ public class ViewPagerFive extends BaseExpandableListViewFragment {
             addChildAll(i, list);
         }
         showShortToast(getClindCount(0) + "");
-
+        my_title_view = (MyTitleView) parentView.findViewById(R.id.my_title_view);
+        my_title_view.setVisibility(View.GONE);
     }
 
     @Override

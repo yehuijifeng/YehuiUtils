@@ -26,7 +26,7 @@ import java.util.Map;
  * 基于okhttp的网络请求
  */
 public class OkHttpActivity extends BaseActivity implements View.OnClickListener {
-    private Button get_btn, post_btn, post_file_btn, down_btn, get_instance_btn, post_instance_btn;
+    private Button get_btn, post_btn, post_file_btn, down_btn, get_instance_btn, post_instance_btn,error_btn;
     private ImageView http_image;
     private TextView http_text;
 
@@ -49,6 +49,8 @@ public class OkHttpActivity extends BaseActivity implements View.OnClickListener
         post_instance_btn = (Button) findViewById(R.id.post_instance_btn);
         post_file_btn = (Button) findViewById(R.id.post_file_btn);
         down_btn = (Button) findViewById(R.id.down_btn);
+        error_btn= (Button) findViewById(R.id.error_btn);
+        error_btn.setOnClickListener(this);
         get_instance_btn.setOnClickListener(this);
         post_instance_btn.setOnClickListener(this);
         get_btn.setOnClickListener(this);
@@ -88,6 +90,11 @@ public class OkHttpActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     protected void onRequestCompleted(ResponseComplete complete) {
+        switch (complete.getRequestAction()) {
+            case GET_WEATHER:
+                loadingClose();
+                break;
+        }
     }
 
     @Override
@@ -128,7 +135,12 @@ public class OkHttpActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.post_instance_btn:
                 Map<String, Object> param2 = RequestAction.POST_WEATHER.parameter.getParameters();
-                param2.put("cityname", "松花江");//城市
+                param2.put("cityname", "上海");//城市
+                sendPostInstanceRequest(RequestAction.POST_WEATHER);
+                break;
+            case R.id.error_btn:
+                Map<String, Object> param3 = RequestAction.POST_WEATHER.parameter.getParameters();
+                param3.put("cityname", "松花江");//城市
                 sendPostInstanceRequest(RequestAction.POST_WEATHER);
                 break;
         }

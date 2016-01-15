@@ -18,14 +18,27 @@
         android:layout_height="match_parent">
 
         <!--主布局要放在侧滑布局的前面，这有助于系统分辨哪个是主布局-->
-        <LinearLayout
-            android:id="@+id/layout_home"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:scrollbars="none">
 
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/default_gray"
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/home_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/default_x_text_size"/>
+
+            </LinearLayout>
+        </ScrollView>
 
         <ScrollView
             android:layout_width="wrap_content"

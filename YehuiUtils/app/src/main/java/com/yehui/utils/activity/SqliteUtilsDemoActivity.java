@@ -38,7 +38,7 @@ public class SqliteUtilsDemoActivity extends BaseActivity implements View.OnClic
 
     @Override
     protected String setTitleText() {
-        return "三方工具库操作sqlite";
+        return "ormLite工具类操作sqlite";
     }
 
     @Override
@@ -76,44 +76,48 @@ public class SqliteUtilsDemoActivity extends BaseActivity implements View.OnClic
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_sql_create_db://创建数据库
-                openDB();
-                break;
-            case R.id.btn_sql_create_table:
-                ormListeDemoTowDao.insertTable();
-                show_table.setText("\n添加表成功");
-                break;
-            case R.id.btn_sql_create_insert:
-                ormListeDemoTowDao.insertData(ormLiteDemoTowBean);
-                show_table.setText("\n添加数据成功");
-                ormListeDemoTowDao.queryAll();
-                break;
-            case R.id.btn_sql_create_update:
-                ormListeDemoTowDao.updateData();
-                show_table.setText("\n更新数据成功");
-                ormListeDemoTowDao.queryAll();
-                break;
-            case R.id.btn_sql_create_delete:
-                int i=2;
-                ormListeDemoTowDao.deleteById(i);
-                show_table.setText("\n删除成功：删除id为"+i+"的数据");
-                ormListeDemoTowDao.queryAll();
-                break;
-            case R.id.btn_sql_create_query:
+        try {
+            switch (v.getId()) {
+                case R.id.btn_sql_create_db://创建数据库
+                    openDB();
+                    break;
+                case R.id.btn_sql_create_table:
+                    ormListeDemoTowDao.insertTable();
+                    show_table.setText("\n添加表成功");
+                    break;
+                case R.id.btn_sql_create_insert:
+                    ormListeDemoTowDao.insertData(ormLiteDemoTowBean);
+                    show_table.setText("\n添加数据成功");
+                    ormListeDemoTowDao.queryAll();
+                    break;
+                case R.id.btn_sql_create_update:
+                    ormListeDemoTowDao.updateData();
+                    show_table.setText("\n更新数据成功");
+                    ormListeDemoTowDao.queryAll();
+                    break;
+                case R.id.btn_sql_create_delete:
+                    int i = 1;
+                    ormListeDemoTowDao.deleteById(i);
+                    show_table.setText("\n删除成功：删除id为" + i + "的数据");
+                    ormListeDemoTowDao.queryAll();
+                    break;
+                case R.id.btn_sql_create_query:
 
-                String information = "\n查询成功：";
-                for (OrmLiteDemoTowBean ormLiteDemoBeanTow : ormListeDemoTowDao.queryAll()) {
-                    information += "\nid:  "
-                            + ormLiteDemoBeanTow.getTest_id() + "\nname:  "
-                            + ormLiteDemoBeanTow.getTest_name();
-                }
-                show_table.append(information);
-                break;
-            case R.id.btn_sql_delete_db:
-                ormListeDemoTowDao.deleteDB();
-                show_table.setText("\n清空数据库成功");
-                break;
+                    String information = "\n查询成功：";
+                    for (OrmLiteDemoTowBean ormLiteDemoBeanTow : ormListeDemoTowDao.queryAll()) {
+                        information += "\nid:  "
+                                + ormLiteDemoBeanTow.getTest_id() + "\nname:  "
+                                + ormLiteDemoBeanTow.getTest_name();
+                    }
+                    show_table.append(information);
+                    break;
+                case R.id.btn_sql_delete_db:
+                    ormListeDemoTowDao.deleteDB();
+                    show_table.setText("\n清空数据库成功");
+                    break;
+            }
+        } catch (Exception e) {
+            show_table.setText("\n操作有误");
         }
     }
 

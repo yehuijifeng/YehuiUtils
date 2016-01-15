@@ -16,6 +16,7 @@ import com.yehui.utils.view.titleview.MyTitleView;
 /**
  * Created by yehuijifeng
  * on 2015/12/3.
+ * viewpager的处理
  */
 public class ViewpagerActivity extends BaseViewPagerActivity {
 
@@ -26,18 +27,19 @@ public class ViewpagerActivity extends BaseViewPagerActivity {
 
     @Override
     protected String setTitleText() {
-        return "viewpager的应用";
+        return "viewpager";
     }
 
     @Override
     protected void initView() {
         super.initView();
+        setTitleMode(MyTitleView.TitleMode.NORMAL);
         mViewList.add(new ViewPagerOne());
         mViewList.add(new ViewPagerTow());
         mViewList.add(new ViewPagerThree());
         mViewList.add(new ViewPagerFour());
         mViewList.add(new ViewPagerFive());
-        setTitleMode(MyTitleView.TitleMode.NO_BACK_NORMAL);
+        setPageNumber(getInt("viewpagerPage",0));
     }
 
     @Override
@@ -45,13 +47,6 @@ public class ViewpagerActivity extends BaseViewPagerActivity {
         return true;
     }
 
-    /**
-     * @return 当前显示的页码
-     */
-    @Override
-    protected int setPage() {
-        return 0;
-    }
 
     @Override
     protected void initData() {

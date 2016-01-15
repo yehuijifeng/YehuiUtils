@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.yehui.utils.R;
 import com.yehui.utils.activity.base.BaseExpandableListViewActivity;
 import com.yehui.utils.adapter.base.BaseExpandableViewHolder;
+import com.yehui.utils.view.titleview.MyTitleView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +22,7 @@ import java.util.Map;
 /**
  * Created by yehuijifeng
  * on 2015/12/30.
- * 多级列表
+ * 两级列表
  */
 public class ExpandableListActivity extends BaseExpandableListViewActivity {
 
@@ -30,6 +31,7 @@ public class ExpandableListActivity extends BaseExpandableListViewActivity {
     @Override
     protected void initView() {
         super.initView();
+        setTitleMode(MyTitleView.TitleMode.NORMAL);
         List<String> list = new ArrayList<>();
         List<List<String>> lists = new ArrayList<>();
 

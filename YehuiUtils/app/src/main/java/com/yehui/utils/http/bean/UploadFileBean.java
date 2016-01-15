@@ -12,6 +12,7 @@ public class UploadFileBean {
     private long contentLength;//总长度
     private boolean done;//是否完成
 
+
     public String getUrl() {
         return url;
     }

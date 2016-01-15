@@ -79,7 +79,7 @@ public class ListDialog extends View implements View.OnClickListener {
         this.listOnClickListener = listOnClickListener;
         initView();
         layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.bottomMargin= DisplayUtil.dip2px(getContext(), 3);
+        layoutParams.bottomMargin= DisplayUtil.dip2px(getContext(), 1);
         for (int i = 0; i < itemStr.length; i++) {
             itemView= View.inflate(getContext(), R.layout.dialog_list_item, null);
             textView= (TextView) itemView.findViewById(R.id.list_item_text);

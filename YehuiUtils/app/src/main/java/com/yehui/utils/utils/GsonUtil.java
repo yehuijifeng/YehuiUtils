@@ -53,9 +53,8 @@ public class GsonUtil {
      * @return
      */
     public static JSONObject toJSONObject(String str) {
-        jsonObject = new JSONObject();
         try {
-            return jsonObject.getJSONObject(str);
+            return jsonObject = new JSONObject(str);
         } catch (JSONException e) {
             return null;
         }
@@ -69,8 +68,7 @@ public class GsonUtil {
      */
     public static JSONArray toJSONArray(String str) {
         try {
-            jsonArray = new JSONArray();
-            return jsonArray.put(str);
+            return jsonArray = new JSONArray(str);
         } catch (Exception e) {
             return null;
         }

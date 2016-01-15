@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yehui.utils.activity.base.BaseHelper;
-import com.yehui.utils.view.titleview.MyTitleView;
 
 import java.util.ArrayList;
 
@@ -81,11 +80,6 @@ public abstract class BaseFragment extends Fragment {
      * imageloader工具类的初始化
      */
     protected ImageLoader imageLoader;
-
-    /**
-     * fragment的title
-     */
-    protected MyTitleView defaultTitleView;
 
     /**
      * 父布局填充

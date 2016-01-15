@@ -13,6 +13,15 @@ public class DownloadFileBean {
     private long contentLength;//总长度
     private boolean done;//是否完成
     private FileBean fileBean;//如果下载完成，则获取文件详细信息
+    private boolean isDownSuccess;//是否正确获得下载资源
+
+    public boolean isDownSuccess() {
+        return isDownSuccess;
+    }
+
+    public void setDownSuccess(boolean downSuccess) {
+        isDownSuccess = downSuccess;
+    }
 
     public FileBean getFileBean() {
         return fileBean;

@@ -38,6 +38,10 @@
         android:id="@+id/down_btn"
         style="@style/default_button_style"
         android:text="文件下载" />
+    <Button
+        android:id="@+id/error_btn"
+        style="@style/default_button_style"
+        android:text="错误请求" />
 
     <TextView
         android:id="@+id/http_text"

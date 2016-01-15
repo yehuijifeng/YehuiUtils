@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.yehui.utils.R;
-import com.yehui.utils.activity.RecyclerListActivity;
+import com.yehui.utils.activity.StaggeredActivity;
 import com.yehui.utils.fragment.base.BaseFragment;
 
 /**
@@ -26,7 +26,7 @@ public class ViewPagerOne extends BaseFragment {
         button_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(RecyclerListActivity.class);
+                startActivity(StaggeredActivity.class);
             }
         });
     }

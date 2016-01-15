@@ -43,7 +43,7 @@ public class ResourcesUtil {
      * @param  in context.getResources().getAssets().open(fileName);
      * @return
      */
-    public String getFromAssets(InputStream in){
+    public static String getFromAssets(InputStream in){
         try {
             InputStreamReader inputReader = new InputStreamReader(in);
 

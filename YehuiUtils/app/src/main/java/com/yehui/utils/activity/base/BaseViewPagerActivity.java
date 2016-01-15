@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 
 import com.yehui.utils.R;
 import com.yehui.utils.adapter.MyFragmentPagerAdapter;
+import com.yehui.utils.utils.DisplayUtil;
 import com.yehui.utils.view.viewpager.MyViewPager;
 
 import java.util.ArrayList;
@@ -72,14 +73,14 @@ public abstract class BaseViewPagerActivity extends BaseActivity implements View
         itemSize = mViewList.size();
         fragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mViewList);
         mViewPager.setAdapter(fragmentPagerAdapter);
-        mViewPager.setCurrentItem(setPage());
+        mViewPager.setCurrentItem(getPageNumber());
         initTabView();
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(getWindowWidth() / mViewList.size(), RelativeLayout.LayoutParams.MATCH_PARENT);
-        tabViewList.get(setPage()).setSelected(true);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(getWindowWidth() / mViewList.size(), DisplayUtil.dip2px(this,3));
+        tabViewList.get(getPageNumber()).setSelected(true);
         if (isShowBar()) {
             defaultItemImageView.setLayoutParams(layoutParams);
             currLayoutParams = (LinearLayout.LayoutParams) defaultItemImageView.getLayoutParams();
-            tabMove(setPage() == 0 ? 0 : setPage() - 1, 0);
+            tabMove(getPageNumber() == 0 ? 0 : getPageNumber() - 1, 0);
         }
 
     }
@@ -128,8 +129,14 @@ public abstract class BaseViewPagerActivity extends BaseActivity implements View
     /**
      * @return 初始化显示的页码
      */
-    protected int setPage() {
-        return 0;
+    private int pageNumber;
+
+    public int getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = pageNumber;
     }
 
     /**

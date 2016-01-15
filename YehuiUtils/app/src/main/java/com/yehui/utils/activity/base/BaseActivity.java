@@ -775,14 +775,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 快速点击回避
      * 防止快速点击重复页面
-     *
      * @param ev
      * @return
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN && isFastClick()) {
-            if (isFastClick(500)) return true;
+            if (isFastClick(300)) return true;
         }
         return super.dispatchTouchEvent(ev);
     }

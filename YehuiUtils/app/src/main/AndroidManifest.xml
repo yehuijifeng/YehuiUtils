@@ -187,6 +187,30 @@
 
         </activity>
 
+        <!--list-->
+        <activity
+            android:name=".activity.ListActivity"
+            android:launchMode="singleTop">
+
+        </activity>
+        <!--grid-->
+        <activity
+            android:name=".activity.GridActivity"
+            android:launchMode="singleTop">
+
+        </activity>
+        <!--瀑布流-->
+        <activity
+            android:name=".activity.StaggeredActivity"
+            android:launchMode="singleTop">
+
+        </activity>
+        <!--两级列表-->
+        <activity
+            android:name=".activity.ExpandableListActivity"
+            android:launchMode="singleTop">
+
+        </activity>
         <!--viewpager-->
         <activity
             android:name=".activity.ViewpagerActivity"
@@ -196,7 +220,7 @@
 
         <!--recyclerview-->
         <activity
-            android:name=".activity.RecyclerListActivity"
+            android:name=".activity.StaggeredActivity"
             android:launchMode="singleTop">
 
         </activity>

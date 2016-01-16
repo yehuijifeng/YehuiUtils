@@ -24,24 +24,25 @@ public class FileFoundUtil {
     }
 
     /**
-     * 删除文件
+     * 删除文件夹下全部文件
      * 递归删除
      */
-    public static void deleteFile(File file) {
+    public static void deleteFileByPath(String filePath) {
+        File file=new File(filePath);
         if (file.isFile())
             file.delete();
         else {
             File[] files = file.listFiles();
             if (files == null || files.length == 0) {
                 file.delete();
-                return;
+                return ;
             }
             if (files != null) {
                 for (final File f : files) {
                     if (f.isFile()) {
                         file.delete();
                     } else {
-                        deleteFile(f);
+                        deleteFileByPath(f.getPath());
                     }
                 }
             }
@@ -51,13 +52,13 @@ public class FileFoundUtil {
     /**
      * 将一个InputStream里面的数据写入到SD卡中
      */
-    public static boolean writeSDCardFromInput(String path, String fileName,
-                                               InputStream input) {
+    public static boolean insertSDCardFromInput(String path, String fileName,
+                                                InputStream input) {
         File file;
         OutputStream output = null;
         try {
             if (!FileOperationUtil.isSDCardEnable()) return false;
-            file = insertFile(path, fileName);
+            file = createFile(path, fileName);
             output = new FileOutputStream(file);
             byte buffer[] = new byte[1024];
             while (true) {
@@ -89,12 +90,12 @@ public class FileFoundUtil {
      * @param fileName
      * @return
      */
-    public static File insertFile(String filePath, String fileName) {
+    public static File createFile(String filePath, String fileName) {
         try {
             File file = new File(filePath, fileName);
             if (!file.exists()) {
                 file.createNewFile();
-            }else{
+            } else {
                 file.delete();
                 file.createNewFile();
             }
@@ -124,7 +125,7 @@ public class FileFoundUtil {
                 }
             } else {
                 if (bl) {
-                    deleteFile(file);
+                    deleteFileByPath(file.getPath());
                     try {
                         file.mkdirs();
                         return 1;
@@ -144,7 +145,7 @@ public class FileFoundUtil {
                 }
             } else {
                 if (bl) {
-                    deleteFile(file);
+                    deleteFileByPath(file.getPath());
                     try {
                         file.createNewFile();
                         return 1;
@@ -157,11 +158,17 @@ public class FileFoundUtil {
         }
     }
 
-
     /**
      * 复制
      */
     public static boolean copyFile(File toFile, String filePath) {
+        return copyFile(toFile, filePath, toFile.getName());
+    }
+
+    /**
+     * 复制
+     */
+    public static boolean copyFile(File toFile, String filePath, String fileName) {
         try {
             if (toFile != null && toFile.exists()) {
                 // 另外还需要一个输出流来将复制的内容写入到文件中去
@@ -173,7 +180,7 @@ public class FileFoundUtil {
                 // 为了效率高使用Buffered带缓冲区的输入流去包装fis
                 BufferedInputStream buf = new BufferedInputStream(fis);
 
-                File paste = new File(filePath + "/" + toFile.getName());
+                File paste = new File(filePath + "/" + fileName);
                 if (!paste.exists()) {
                     paste.createNewFile();
                 }
@@ -203,7 +210,18 @@ public class FileFoundUtil {
      * 剪切
      */
     public boolean shearFile(File toFile, String filePath) {
-        if (copyFile(toFile, filePath)) {
+        if (copyFile(toFile, filePath, toFile.getName())) {
+            toFile.delete();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 剪切
+     */
+    public boolean shearFile(File toFile, String filePath,String fileName) {
+        if (copyFile(toFile, filePath, fileName)) {
             toFile.delete();
             return true;
         }

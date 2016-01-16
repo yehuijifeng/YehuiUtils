@@ -509,7 +509,7 @@ public class RequestHandle implements RequestInterface {
                             fileName = DateUtils.getNow("yyyyMMddHHmmss") + "_" + url.substring(url.lastIndexOf("/") + 1, url.length());
                         else return;
                         InputStream inputStream = response.body().byteStream();//输入流
-                        if (FileFoundUtil.writeSDCardFromInput(FileContact.YEHUI_FILES_PATH, fileName, inputStream))
+                        if (FileFoundUtil.insertSDCardFromInput(FileContact.YEHUI_FILES_PATH, fileName, inputStream))
                             message = "下载完成";
                         else
                             message = "文件保存失败";

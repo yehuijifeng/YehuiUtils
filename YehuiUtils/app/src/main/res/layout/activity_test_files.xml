@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_my_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_file_size"
+                style="@style/default_button_style"
+                android:layout_width="wrap_content"
+                android:text="获得sd卡大小" />
+
+            <Button
+                android:id="@+id/btn_cache_size"
+                style="@style/default_button_style"
+                android:layout_width="wrap_content"
+                android:text="获得手机内存大小" />
+
+            <Button
+                android:id="@+id/btn_create_file"
+                style="@style/default_button_style"
+                android:layout_width="wrap_content"
+                android:text="创建文件到指定路径" />
+
+            <Button
+                android:id="@+id/btn_delete_file"
+                style="@style/default_button_style"
+                android:layout_width="wrap_content"
+                android:text="删除指定路径下的文件" />
+
+            <Button
+                android:id="@+id/btn_query_file"
+                style="@style/default_button_style"
+                android:layout_width="wrap_content"
+                android:text="查询指定路径下的文件" />
+
+            <Button
+                android:id="@+id/btn_copy_file"
+                style="@style/default_button_style"
+                android:layout_width="wrap_content"
+                android:text="复制指定路径下的文件" />
+
+            <Button
+                android:id="@+id/btn_insert_file"
+                style="@style/default_button_style"
+                android:layout_width="wrap_content"
+                android:text="流方式写入文件" />
+
+            <TextView
+                android:id="@+id/show_file"
+                style="@style/default_textview_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="文件操作信息\n" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -3,6 +3,8 @@ package com.yehui.utils.utils.files;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.File;
+
 /**
  * Created by yehuijifeng
  * on 2016/1/5.
@@ -10,6 +12,7 @@ import android.os.Parcelable;
  */
 public class FileBean implements Parcelable{
 
+    private File file;//该文件
     private String fileName;//文件名
     private long fileLength;//文件长度
     private String fileSize;//文件大小
@@ -37,12 +40,16 @@ public class FileBean implements Parcelable{
         }
     };
 
-    public boolean isDirectory() {
-        return isDirectory;
+    public FileBean() {
+
     }
 
-    public void setIsDirectory(boolean isDirectory) {
-        this.isDirectory = isDirectory;
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 
     public String getFileName() {
@@ -77,7 +84,13 @@ public class FileBean implements Parcelable{
         this.filePath = filePath;
     }
 
-    public FileBean(){}
+    public boolean isDirectory() {
+        return isDirectory;
+    }
+
+    public void setDirectory(boolean directory) {
+        isDirectory = directory;
+    }
 
     @Override
     public int describeContents() {

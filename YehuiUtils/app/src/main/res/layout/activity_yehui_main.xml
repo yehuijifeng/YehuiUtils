@@ -15,7 +15,8 @@
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/yehui_drawer_home"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clickable="true">
 
         <!--主布局要放在侧滑布局的前面，这有助于系统分辨哪个是主布局-->
         <ScrollView

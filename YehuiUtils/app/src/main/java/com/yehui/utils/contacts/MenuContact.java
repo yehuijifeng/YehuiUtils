@@ -232,8 +232,6 @@ public class MenuContact {
         menuBean2.setId(i++);
         menuBean2.setName(okhttp);
         listTow.add(menuBean2);
-
-
         return listTow;
     }
 

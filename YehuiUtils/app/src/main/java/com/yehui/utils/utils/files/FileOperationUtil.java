@@ -28,6 +28,22 @@ public class FileOperationUtil {
     }
 
     /**
+     * 是否存在该文件夹
+     *
+     * @param path
+     * @return
+     */
+    public static boolean isHaveFileDirectory(String path) {
+
+        File file = new File(path);
+        if (file.isDirectory()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * 是否存在该文件
      *
      * @param path
@@ -36,7 +52,7 @@ public class FileOperationUtil {
     public static boolean isHaveFile(String path) {
 
         File file = new File(path);
-        if (file.isDirectory()) {
+        if (file.isFile()) {
             return true;
         } else {
             return false;
@@ -59,8 +75,8 @@ public class FileOperationUtil {
      *
      * @return
      */
-    public String getSDTotalSize(Context con) {
-        File path = Environment.getExternalStorageDirectory();
+    public static String getSDAllSize(Context con) {
+        File path = FileContact.getSDFile();
         StatFs stat = new StatFs(path.getPath());
         long blockSize = stat.getBlockSize();
         long totalBlocks = stat.getBlockCount();
@@ -72,8 +88,8 @@ public class FileOperationUtil {
      *
      * @return
      */
-    public String getSDAvailableSize(Context con) {
-        File path = Environment.getExternalStorageDirectory();
+    public static String getSDRemainingSize(Context con) {
+        File path = FileContact.getSDFile();
         StatFs stat = new StatFs(path.getPath());
         long blockSize = stat.getBlockSize();
         long availableBlocks = stat.getAvailableBlocks();
@@ -85,8 +101,8 @@ public class FileOperationUtil {
      *
      * @return
      */
-    public String getRomTotalSize(Context con) {
-        File path = Environment.getDataDirectory();
+    public static String getRomAllSize(Context con) {
+        File path = FileContact.getSDFile();
         StatFs stat = new StatFs(path.getPath());
         long blockSize = stat.getBlockSize();
         long totalBlocks = stat.getBlockCount();
@@ -98,13 +114,14 @@ public class FileOperationUtil {
      *
      * @return
      */
-    public String getRomAvailableSize(Context con) {
-        File path = Environment.getDataDirectory();
+    public static String getRomRemainingSize(Context con) {
+        File path = FileContact.getSDFile();
         StatFs stat = new StatFs(path.getPath());
         long blockSize = stat.getBlockSize();
         long availableBlocks = stat.getAvailableBlocks();
         return Formatter.formatFileSize(con, blockSize * availableBlocks);
     }
+
     /**
      * 获取指定路径所在空间的剩余可用容量字节数，单位byte
      *
@@ -129,7 +146,8 @@ public class FileOperationUtil {
     public static FileBean queryFileByDetails(File f) {
         FileBean fileBean = new FileBean();
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
-        fileBean.setIsDirectory(f.isDirectory());
+        fileBean.setFile(f);
+        fileBean.setDirectory(f.isDirectory());
         fileBean.setFileName(f.getName());
         fileBean.setFilePath(f.getPath());
         if (!f.isDirectory()) {
@@ -159,6 +177,18 @@ public class FileOperationUtil {
         queryFileByAll(FileContact.getSDFile());
         return sdFileListFind;
     }
+
+    /**
+     * 外部调用，获得本机指定路径的文件内容
+     */
+    public static FileBean querySDFileByFile(String fileName) {
+        File f = new File(fileName);
+        if (f.isFile()) {
+            return  queryFileByDetails(f);
+        }
+        return null;
+    }
+
 
     /**
      * 查询本机sd卡所有文件夹，内部自己调用的方法，不需要外部调用

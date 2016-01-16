@@ -21,6 +21,7 @@ import com.yehui.utils.bean.MenuBean;
 import com.yehui.utils.bean.MenuTowBean;
 import com.yehui.utils.contacts.MenuContact;
 import com.yehui.utils.utils.ResourcesUtil;
+import com.yehui.utils.utils.UmengUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -136,7 +137,7 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
         // TODO Auto-generated method stub
         switch (item.getItemId()) {
             case R.id.action_edit:
-                Toast.makeText(YehuiHomeActivity.this, "" + "分享", Toast.LENGTH_SHORT).show();
+                UmengUtil.shareDefault(this);
                 break;
             case R.id.action_share:
 
@@ -171,22 +172,16 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        this.closeContextMenu();
-        this.closeOptionsMenu();
-    }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-
+    protected void onPause() {
+        super.onPause();
+        drawerLayout.closeDrawers();
     }
 
     @Override
     public void onClick(View v) {
-        Bundle bundle=new Bundle();
+        Bundle bundle = new Bundle();
         home_menu_text = (TextView) v.findViewById(R.id.home_menu_text);
         switch (home_menu_text.getText().toString().trim()) {
             case MenuContact.activityBase://baseactivity
@@ -205,34 +200,34 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
                 startActivity(StaggeredActivity.class);
                 break;
             case MenuContact.fragmentBase://fragmentBase
-                bundle.putInt("viewpagerPage",0);
-                startActivity(ViewpagerActivity.class,bundle);
+                bundle.putInt("viewpagerPage", 0);
+                startActivity(ViewpagerActivity.class, bundle);
                 break;
             case MenuContact.fragmentList://fragmentList
-                bundle.putInt("viewpagerPage",1);
-                startActivity(ViewpagerActivity.class,bundle);
+                bundle.putInt("viewpagerPage", 1);
+                startActivity(ViewpagerActivity.class, bundle);
                 break;
             case MenuContact.fragmentGrid://fragmentGrid
-                bundle.putInt("viewpagerPage",2);
-                startActivity(ViewpagerActivity.class,bundle);
+                bundle.putInt("viewpagerPage", 2);
+                startActivity(ViewpagerActivity.class, bundle);
                 break;
             case MenuContact.fragmentExpandable://两级列表
-                bundle.putInt("viewpagerPage",4);
-                startActivity(ViewpagerActivity.class,bundle);
+                bundle.putInt("viewpagerPage", 4);
+                startActivity(ViewpagerActivity.class, bundle);
                 break;
             case MenuContact.fragmentStaggered://瀑布流
-                bundle.putInt("viewpagerPage",3);
-                startActivity(ViewpagerActivity.class,bundle);
+                bundle.putInt("viewpagerPage", 3);
+                startActivity(ViewpagerActivity.class, bundle);
                 break;
             case MenuContact.viewpager://viewpager
-                bundle.putInt("viewpagerPage",0);
-                startActivity(ViewpagerActivity.class,bundle);
+                bundle.putInt("viewpagerPage", 0);
+                startActivity(ViewpagerActivity.class, bundle);
                 break;
             case MenuContact.sqllite://ormLite的数据库存储
                 startActivity(SqliteUtilsDemoActivity.class);
                 break;
             case MenuContact.file://本地文件存储
-
+                startActivity(FileActivity.class);
                 break;
             case MenuContact.okhttp://okhttp网络请求
                 startActivity(OkHttpActivity.class);

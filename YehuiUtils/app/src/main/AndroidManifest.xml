@@ -310,6 +310,13 @@
             android:launchMode="singleTop">
 
         </activity>
+
+        <!--本地文件操作-->
+        <activity
+            android:name=".activity.FileActivity"
+            android:launchMode="singleTop">
+
+        </activity>
     </application>
 
 </manifest>

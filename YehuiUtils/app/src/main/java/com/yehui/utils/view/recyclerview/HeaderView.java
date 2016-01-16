@@ -10,6 +10,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.yehui.utils.R;
+import com.yehui.utils.utils.DateUtils;
+
+import java.text.ParseException;
 
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrUIHandler;
@@ -32,6 +35,7 @@ public class HeaderView extends LinearLayout implements PtrUIHandler {
     //正在加载的状态
     private ProgressBar custom_header_bar;
 
+    private String past_time, current_time;
     private HeaderView.RefreshListener refreshListener;
 
     public HeaderView.RefreshListener getRefreshListener() {
@@ -62,6 +66,7 @@ public class HeaderView extends LinearLayout implements PtrUIHandler {
      */
     private void initView(Context context) {
         inflater = LayoutInflater.from(context);//父容器
+        past_time = context.getResources().getString(R.string.past_time);
         /**
          * 头部
          */
@@ -70,15 +75,18 @@ public class HeaderView extends LinearLayout implements PtrUIHandler {
         custom_header_time = (TextView) headView.findViewById(R.id.custom_header_time);
         custom_header_image = (ImageView) headView.findViewById(R.id.custom_header_image);
         custom_header_bar = (ProgressBar) headView.findViewById(R.id.custom_header_bar);
+        custom_header_time.setText(DateUtils.getNow(DateUtils.getDatePattern()));
     }
 
     /**
      * 下拉刷新监听接口
      */
-    public interface RefreshListener{
-        void onRefreshPrepare(boolean bl,PtrFrameLayout frame);
-        void onRefreshBegin(boolean bl,PtrFrameLayout frame);
-        void onRefreshComplete(boolean bl,PtrFrameLayout frame);
+    public interface RefreshListener {
+        void onRefreshPrepare(boolean bl, PtrFrameLayout frame);
+
+        void onRefreshBegin(boolean bl, PtrFrameLayout frame);
+
+        void onRefreshComplete(boolean bl, PtrFrameLayout frame);
     }
 
     /**
@@ -101,7 +109,16 @@ public class HeaderView extends LinearLayout implements PtrUIHandler {
         custom_header_bar.setVisibility(GONE);
         custom_header_image.setVisibility(VISIBLE);
         custom_header_image.setRotation(0);//图片旋转
-         getRefreshListener().onRefreshPrepare(true,frame);
+        getRefreshListener().onRefreshPrepare(true, frame);
+        try {
+            if(current_time!=null)
+            custom_header_time.setText(DateUtils.getTimeReduction(current_time));
+            else
+                custom_header_time.setText(DateUtils.getNow(DateUtils.getDatePattern()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            custom_header_time.setText(DateUtils.getNow(DateUtils.getDatePattern()));
+        }
     }
 
     /**
@@ -124,6 +141,8 @@ public class HeaderView extends LinearLayout implements PtrUIHandler {
         custom_header_bar.setVisibility(GONE);
         custom_header_image.setVisibility(VISIBLE);
         getRefreshListener().onRefreshComplete(true, frame);
+        current_time=DateUtils.getNow(DateUtils.getDatePattern());
+
     }
 
     /**
@@ -157,7 +176,7 @@ public class HeaderView extends LinearLayout implements PtrUIHandler {
                 custom_header_image.setVisibility(VISIBLE);
                 custom_header_image.setRotation(180);//图片旋转
             }
-        }else if (currentPosition < mOffsetToRefresh && oldPosition > mOffsetToRefresh) {
+        } else if (currentPosition < mOffsetToRefresh && oldPosition > mOffsetToRefresh) {
             if (isUnderTouch && status == PtrFrameLayout.PTR_STATUS_PREPARE) {
                 custom_header_hint_text.setText("下拉刷新");
                 custom_header_bar.setVisibility(GONE);

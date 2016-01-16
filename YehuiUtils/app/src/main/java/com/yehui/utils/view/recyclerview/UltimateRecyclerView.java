@@ -5,11 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.yehui.utils.R;
 import com.yehui.utils.view.loadingview.MyLoadingView;
@@ -39,12 +35,7 @@ public class UltimateRecyclerView extends LinearLayout {
     private LayoutInflater inflater;//父容器
     public HeaderView headerView; //头文件的父布局
     public FootView footView;//为布局
-    //public RelativeLayout loadingLayout;//listview的遮罩层
     public MyLoadingView loadingLayout;//listview的遮罩层
-    private ImageView loading_img;
-    private ProgressBar loading_bar;
-    private TextView loading_text, loading_empty_text, loading_empty_click_text;
-    private Button loading_btn;
     public OnRcvScrollListener onRcvScrollListener;
     private boolean isRefresh;//是否可以下拉刷新
 

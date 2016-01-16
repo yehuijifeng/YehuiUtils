@@ -1,7 +1,9 @@
 package com.yehui.utils.utils.files;
 
+import android.content.Context;
 import android.os.Environment;
 import android.os.StatFs;
+import android.text.format.Formatter;
 
 import java.io.File;
 import java.text.DecimalFormat;
@@ -53,22 +55,56 @@ public class FileOperationUtil {
     }
 
     /**
-     * 获取SD卡的剩余容量 单位byte
+     * 获得SD卡总大小
      *
      * @return
      */
-    public static long getSDCardAllSize() {
-        if (isSDCardEnable()) {
-            StatFs stat = new StatFs(FileContact.getSDPath());
-            // 获取空闲的数据块的数量
-            long availableBlocks = (long) stat.getAvailableBlocks() - 4;
-            // 获取单个数据块的大小（byte）
-            long freeBlocks = stat.getAvailableBlocks();
-            return freeBlocks * availableBlocks;
-        }
-        return 0;
+    public String getSDTotalSize(Context con) {
+        File path = Environment.getExternalStorageDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSize();
+        long totalBlocks = stat.getBlockCount();
+        return Formatter.formatFileSize(con, blockSize * totalBlocks);
     }
 
+    /**
+     * 获得sd卡剩余容量，即可用大小
+     *
+     * @return
+     */
+    public String getSDAvailableSize(Context con) {
+        File path = Environment.getExternalStorageDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSize();
+        long availableBlocks = stat.getAvailableBlocks();
+        return Formatter.formatFileSize(con, blockSize * availableBlocks);
+    }
+
+    /**
+     * 获得机身内存总大小
+     *
+     * @return
+     */
+    public String getRomTotalSize(Context con) {
+        File path = Environment.getDataDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSize();
+        long totalBlocks = stat.getBlockCount();
+        return Formatter.formatFileSize(con, blockSize * totalBlocks);
+    }
+
+    /**
+     * 获得机身可用内存
+     *
+     * @return
+     */
+    public String getRomAvailableSize(Context con) {
+        File path = Environment.getDataDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSize();
+        long availableBlocks = stat.getAvailableBlocks();
+        return Formatter.formatFileSize(con, blockSize * availableBlocks);
+    }
     /**
      * 获取指定路径所在空间的剩余可用容量字节数，单位byte
      *

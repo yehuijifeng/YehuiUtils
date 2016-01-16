@@ -77,7 +77,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--极光推送，必须项-->
+        <!--**********************************极光推送***************************************-->
         <!-- Required -->
         <service
             android:name="cn.jpush.android.service.PushService"
@@ -126,7 +126,7 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false"/>
         <!-- Required SDK核心功能-->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
 
@@ -168,6 +168,8 @@
                 <category android:name="com.yehui.utils" />
             </intent-filter>
         </receiver>
+
+        <!--**********************************极光推送***************************************-->
 
         <!--主页面-->
         <activity
@@ -218,20 +220,6 @@
 
         </activity>
 
-        <!--recyclerview-->
-        <activity
-            android:name=".activity.StaggeredActivity"
-            android:launchMode="singleTop">
-
-        </activity>
-
-        <!--多级列表-->
-        <activity
-            android:name=".activity.ExpandableListActivity"
-            android:launchMode="singleTop">
-
-
-        </activity>
 
         <!--数据库操作类-->
         <activity
@@ -305,6 +293,20 @@
         <!--极光推送-->
         <activity
             android:name=".activity.JPushActivity"
+            android:launchMode="singleTop">
+
+        </activity>
+
+        <!--极光推送-->
+        <activity
+            android:name=".activity.UMengActivity"
+            android:launchMode="singleTop">
+
+        </activity>
+
+        <!--极光推送-->
+        <activity
+            android:name=".activity.PayActivity"
             android:launchMode="singleTop">
 
         </activity>

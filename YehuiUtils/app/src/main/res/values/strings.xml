@@ -1,27 +1,5 @@
 <resources>
     <string name="app_name">夜辉宝典</string>
-    <string name="app_explain">
-    <![CDATA[
-	<div>
-	<br/><div class="text" style=" text-align:center;">夜辉宝典说明</div><br />
-	<br/>项目作者：夜辉疾风<br />
-	<br/>夜辉宝典是基于android 5.0的快速开发框架
-	<br/>
-	<br/>定义了activity，fragment，数据存储，网络请求框架
-	<br/>
-	<br/>常用的utils工具类
-	<br/>
-	<br/>常用的三方工具库的封装和应用
-	<br/>
-	<br/>使用夜辉宝典可以快速开发商城/论坛/新闻/贴吧/空间等常用app
-	<br/>
-	<br/>欢迎各位android开发工程师前来学习！
-	<br/>
-	<br/>
-	<br/>更多内容请关注 <a href="http://www.yehuijifeng.icoc.in/">夜辉疾风个人网站</a><br />
-	</div>
-	]]>
-    </string>
     <string name="header_hint_normal">下拉刷新</string>
     <string name="header_hint_ready">松开刷新数据</string>
     <string name="header_hint_loading">正在加载……</string>

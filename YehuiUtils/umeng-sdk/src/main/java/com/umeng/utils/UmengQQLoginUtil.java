@@ -1,9 +1,8 @@
-package com.umeng.utils.umengLogin;
+package com.umeng.utils;
 
 import android.app.Activity;
 
 import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.utils.UmengService;
 import com.umeng.utils.umengLogin.login.QQLogin;
 
 
@@ -12,30 +11,27 @@ import com.umeng.utils.umengLogin.login.QQLogin;
  * on 2015/11/21.
  * 授权登陆
  */
-public class UmengLoginUtil {
+public class UmengQQLoginUtil {
     private Activity activity;
-    public UmengLoginUtil(Activity activity) {
+    public UmengQQLoginUtil(Activity activity) {
         this.activity = activity;
-        /**
-         * 授权
-         */
-        UmengService.doAccredit(activity);
+        UmengService.doAccredit();
         UmengService.byQQShare(activity);
     }
 
     //qq授权登陆
     private QQLogin qqLogin;
 
-    public void QQByLogin() {
+    public void qqByLogin() {
         qqLogin = new QQLogin(activity, SHARE_MEDIA.QQ);
         qqLogin.getLogin();
     }
 
-    public void QQByUserInfo() {
-        qqLogin.getUserInfo();
+    public String qqByUserInfo() {
+        return qqLogin.getUserInfo();
     }
 
-    public void QQByOutLogin() {
+    public void qqByOutLogin() {
         qqLogin.getOutLogin();
     }
 }

@@ -87,7 +87,8 @@ public class UmengLogin {
     /**
      * 获取授权平台的用户信息</br>
      */
-    protected void userInfo() {
+    protected String userInfo() {
+        final String[] userinfo = {""};
         mController.getPlatformInfo(
                 activity, platform,
                 new SocializeListeners.UMDataListener() {
@@ -100,10 +101,11 @@ public class UmengLogin {
                     @Override
                     public void onComplete(int status, Map<String, Object> info) {
                         if (info != null) {
-                            Toast.makeText(activity, info.toString(), Toast.LENGTH_SHORT).show();
+                            userinfo[0] = info.toString();
                         }
                     }
                 });
+        return userinfo[0];
     }
 
     /**

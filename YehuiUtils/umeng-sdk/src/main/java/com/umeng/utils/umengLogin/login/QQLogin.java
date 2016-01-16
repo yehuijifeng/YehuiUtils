@@ -22,8 +22,8 @@ public class QQLogin extends UmengLogin {
     }
 
     //获取登录用户信息
-    public void getUserInfo() {
-        umengLogin.userInfo();
+    public String getUserInfo() {
+        return umengLogin.userInfo();
     }
 
     //登出

@@ -20,6 +20,7 @@ public class MenuContact {
     public static final String activityGrid = activity + "Grid";
     public static final String activityStaggered = activity + "Staggered";
     public static final String activityExpandable = activity + "Expandable";
+
     /*fragment功能区*/
     public static final String fragment = "fragment";
     public static final String fragmentBase = fragment + "Base";
@@ -47,6 +48,8 @@ public class MenuContact {
     public static final String function = "功能区";
     public static final String zxing = "zxing.jar";
     public static final String jpush = "极光推送";
+    public static final String umeng = "友盟";
+    public static final String pay = "支付";
 
     private List<MenuBean> listOne;
     private List<MenuTowBean> listTow;
@@ -194,6 +197,16 @@ public class MenuContact {
         menuBean.setName(jpush);
         listTow.add(menuBean);
 
+        MenuTowBean menuBean3 = new MenuTowBean();
+        menuBean3.setId(i++);
+        menuBean3.setName(umeng);
+        listTow.add(menuBean3);
+
+        MenuTowBean menuBean4 = new MenuTowBean();
+        menuBean4.setId(i++);
+        menuBean4.setName(pay);
+        listTow.add(menuBean4);
+
         MenuTowBean menuBean5 = new MenuTowBean();
         menuBean5.setId(i++);
         menuBean5.setName(zxing);
@@ -210,15 +223,16 @@ public class MenuContact {
         menuBean.setName(sqllite);
         listTow.add(menuBean);
 
-        MenuTowBean menuBean5 = new MenuTowBean();
-        menuBean5.setId(i++);
-        menuBean5.setName(file);
-        listTow.add(menuBean5);
-
         MenuTowBean menuBean1 = new MenuTowBean();
         menuBean1.setId(i++);
-        menuBean1.setName(okhttp);
+        menuBean1.setName(file);
         listTow.add(menuBean1);
+
+        MenuTowBean menuBean2 = new MenuTowBean();
+        menuBean2.setId(i++);
+        menuBean2.setName(okhttp);
+        listTow.add(menuBean2);
+
 
         return listTow;
     }

@@ -122,8 +122,7 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
             e.printStackTrace();
             explain = "获取说明文档失败！";
         }
-
-        home_text.setText(Html.fromHtml(getResourceString(R.string.app_explain)));
+        home_text.setText(Html.fromHtml(explain));
     }
 
     @Override
@@ -259,7 +258,12 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
             case MenuContact.zxing://扫码google官方库
                 startActivity(ZxingActivity.class);
                 break;
-
+            case MenuContact.umeng://友盟
+                startActivity(UMengActivity.class);
+                break;
+            case MenuContact.pay://支付
+                startActivity(PayActivity.class);
+                break;
         }
     }
 }

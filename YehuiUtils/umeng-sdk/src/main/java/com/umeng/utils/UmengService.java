@@ -15,18 +15,19 @@ import com.umeng.utils.umengshare.share.QQShare;
 public class UmengService {
 
     //qq
-    public static final String QQappId = "1104967462";
-    public static final String QQappKey = "8SKqUN5ap6zc5GtK";
+    protected static final String QQappId = "1104967462";
+    protected static final String QQappKey = "8SKqUN5ap6zc5GtK";
 
     //分享的地址来源
-    public static final String DESCRIPTOR = "http://www.yehuijifeng.icoc.in/";
+    protected static final String DESCRIPTOR = "http://www.yehuijifeng.icoc.in/";
 
-    public static UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
+    //友盟社会服务
+    protected static UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
 
     /**
      * 通用app授权
      */
-    public static void doAccredit(Activity activity) {
+    protected static void doAccredit() {
         mController.getConfig().setPlatforms(
                 SHARE_MEDIA.WEIXIN,
                 SHARE_MEDIA.WEIXIN_CIRCLE,
@@ -39,9 +40,8 @@ public class UmengService {
     /**
      * 添加QQ、QZone平台的授权
      */
-    public static QQShare qqShare;
-
-    public static void byQQShare(Activity activity) {
+    protected static QQShare qqShare;
+    protected static void byQQShare(Activity activity) {
         // 添加QQ、QZone平台
         qqShare = QQShare.getQQSHare(mController, activity);//调用分享服务
         qqShare.addQQPlatform(QQappId, QQappKey, DESCRIPTOR);//配置key和id

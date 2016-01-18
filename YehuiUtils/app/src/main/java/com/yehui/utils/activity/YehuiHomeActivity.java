@@ -20,6 +20,7 @@ import com.yehui.utils.activity.base.BaseActivity;
 import com.yehui.utils.bean.MenuBean;
 import com.yehui.utils.bean.MenuTowBean;
 import com.yehui.utils.contacts.MenuContact;
+import com.yehui.utils.utils.AppUtil;
 import com.yehui.utils.utils.ResourcesUtil;
 import com.yehui.utils.utils.UmengUtil;
 
@@ -124,6 +125,9 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
             explain = "获取说明文档失败！";
         }
         home_text.setText(Html.fromHtml(explain));
+
+        if(AppUtil.isOneStart(this))
+            showShortToast("第一次进入应用");
     }
 
     @Override

@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:background="@color/gray"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="horizontal">
+
     <RadioButton
         android:id="@+id/radioButtonTest"
         android:layout_width="wrap_content"
@@ -13,19 +14,20 @@
         android:button="@null"
         android:text="单选"
         android:textColor="@color/black"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/group_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher"
-        android:layout_marginLeft="@dimen/default_x_padding_and_margin"/>
+        android:layout_margin="@dimen/default_padding_and_margin"
+        android:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@+id/textViewTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_weight="1.00"
         android:text="测试数据1" />
 
@@ -39,5 +41,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="删除"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 </LinearLayout>

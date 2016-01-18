@@ -20,6 +20,7 @@ public class AppUtil {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
+
     /**
      * 获取应用程序名称
      */
@@ -55,8 +56,23 @@ public class AppUtil {
         return null;
     }
 
+    private static final String YEHUI_SHARE = "yehui_utils_share";
+    private static final String IS_ONE_START = "is_one_start_app";
+
+    public static boolean isOneStart(Context context) {
+        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(context, YEHUI_SHARE);
+        Boolean isOneStart = sharedPreferencesUtil.getBoolean(IS_ONE_START, true);//获取这个值，如果没有这个值则去第二个参数，即取默认值
+        if (isOneStart) {//第一次
+            sharedPreferencesUtil.saveBoolean(IS_ONE_START, false);
+            return true;
+        }
+        return false;
+    }
+
     /**
      * 判断该activity是否处于栈顶
+     * android 5.0以后弃用，有时候判断不准确，慎用！
+     *
      * @param activty
      * @return
      */

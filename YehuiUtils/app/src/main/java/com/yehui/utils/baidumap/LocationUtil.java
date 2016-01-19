@@ -44,9 +44,9 @@ public class LocationUtil {
 
     private void initLocation() {
         LocationClientOption option = new LocationClientOption();
-        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
-        option.setCoorType("gcj02");//可选，默认gcj02，设置返回的定位结果坐标系，
-        int span = 000;
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备；LocationMode.Hight_Accuracy;LocationMode.Battery_Saving;LocationMode.Device_Sensors;
+        option.setCoorType("gcj02");//可选，默认gcj02，设置返回的定位结果坐标系，"gcj02";//国家测绘局标准；"bd09ll";//百度经纬度标准；"bd09";//百度墨卡托标准
+        int span = 0;
         option.setScanSpan(span);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
         option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
         option.setOpenGps(false);//可选，默认false,设置是否使用gps

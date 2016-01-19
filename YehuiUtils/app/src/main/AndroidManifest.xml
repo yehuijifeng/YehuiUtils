@@ -95,20 +95,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--***********************************百度地图********************************************-->
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="n8FZq0lbd10SeA2AQ6A9NFTl" />
 
-        <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" >
-            <intent-filter>
-                <action android:name="com.baidu.location.service_v2.2" >
-                </action>
-            </intent-filter>
-        </service>
 
         <!--**********************************极光推送***************************************-->
         <!-- Required -->
@@ -204,6 +191,21 @@
         </receiver>
 
         <!--**********************************极光推送***************************************-->
+
+        <!--***********************************百度地图********************************************-->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="n8FZq0lbd10SeA2AQ6A9NFTl" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" >
+                </action>
+            </intent-filter>
+        </service>
 
         <!--主页面-->
         <activity
@@ -331,14 +333,14 @@
 
         </activity>
 
-        <!--极光推送-->
+        <!--友盟推送-->
         <activity
             android:name=".activity.function.UMengActivity"
             android:launchMode="singleTop">
 
         </activity>
 
-        <!--极光推送-->
+        <!--支付-->
         <activity
             android:name=".activity.function.PayActivity"
             android:launchMode="singleTop">

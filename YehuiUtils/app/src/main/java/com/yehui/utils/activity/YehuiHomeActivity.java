@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yehui.utils.R;
+import com.yehui.utils.activity.animation.ViewAnimActivity;
 import com.yehui.utils.activity.base.BaseActivity;
 import com.yehui.utils.activity.function.FileActivity;
 import com.yehui.utils.activity.function.JPushActivity;
@@ -274,6 +275,9 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
                 break;
             case MenuContact.pay://支付
                 startActivity(PayActivity.class);
+                break;
+            case MenuContact.viewAnim://view动画
+                startActivity(ViewAnimActivity.class);
                 break;
         }
     }

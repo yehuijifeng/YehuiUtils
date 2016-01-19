@@ -1,4 +1,4 @@
-package com.yehui.utils.activity.animation;
+package com.yehui.utils.activity;
 
 import android.view.View;
 import android.widget.Button;
@@ -6,15 +6,13 @@ import android.widget.TextView;
 
 import com.yehui.utils.R;
 import com.yehui.utils.activity.base.BaseActivity;
-import com.yehui.utils.baidumap.LocationUtil;
-import com.yehui.utils.baidumap.locations.LocationBean;
 
 /**
  * Created by yehuijifeng
  * on 2016/1/19.
  * 普通view动画
  */
-public class ViewAnimActivity extends BaseActivity implements View.OnClickListener {
+public class DemoActivity extends BaseActivity implements View.OnClickListener {
     private Button
             btn_anim_translate,
             btn_anim_scale,
@@ -24,7 +22,6 @@ public class ViewAnimActivity extends BaseActivity implements View.OnClickListen
             btn_anim_laction;
     private TextView show_anim;
 
-    private LocationUtil locationUtil;
     @Override
     protected void setContentView() {
         setContentView(R.layout.activity_test_view_anim);
@@ -55,13 +52,8 @@ public class ViewAnimActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void initData() {
-        locationUtil=new LocationUtil();
-        locationUtil.initLoaction(this);
     }
 
-    public void onEventMainThread(LocationBean locationBean) {
-        show_anim.append("维度"+locationBean.getLatitude()+"\n经度："+locationBean.getLontitude());
-    }
 
     @Override
     public void onClick(View v) {
@@ -74,7 +66,6 @@ public class ViewAnimActivity extends BaseActivity implements View.OnClickListen
                 case R.id.btn_anim_custom:
                     break;
                 case R.id.btn_anim_laction:
-                    locationUtil.getLoaction();
                     break;
                 case R.id.btn_anim_rotate:
                     break;

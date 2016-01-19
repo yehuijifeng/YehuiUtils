@@ -46,18 +46,12 @@
                 android:layout_width="wrap_content"
                 android:text="自定义" />
 
-            <Button
-                android:id="@+id/btn_anim_laction"
-                style="@style/default_button_style"
-                android:layout_width="wrap_content"
-                android:text="当前位置" />
-
-            <TextView
+            <ImageView
                 android:id="@+id/show_anim"
-                style="@style/default_textview_style"
-                android:layout_width="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="位置信息" />
+                android:src="@drawable/app_refresh_people_0" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

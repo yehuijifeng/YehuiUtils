@@ -5,11 +5,10 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
-import com.yehui.utils.activity.ImageCroppingActivity;
+import com.yehui.utils.activity.function.ImageCroppingActivity;
 import com.yehui.utils.utils.files.FileContact;
 
 import java.io.File;

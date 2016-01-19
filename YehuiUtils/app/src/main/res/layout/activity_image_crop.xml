@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".ImageCropActivity">
+    tools:context=".activity.function.ImageCroppingActivity">
 
     <include
         android:id="@id/my_title_view"

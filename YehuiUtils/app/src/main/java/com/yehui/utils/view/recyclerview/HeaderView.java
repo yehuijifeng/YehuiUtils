@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.yehui.utils.R;
-import com.yehui.utils.utils.DateUtils;
+import com.yehui.utils.utils.DateUtil;
 
 import java.text.ParseException;
 
@@ -75,7 +75,7 @@ public class HeaderView extends LinearLayout implements PtrUIHandler {
         custom_header_time = (TextView) headView.findViewById(R.id.custom_header_time);
         custom_header_image = (ImageView) headView.findViewById(R.id.custom_header_image);
         custom_header_bar = (ProgressBar) headView.findViewById(R.id.custom_header_bar);
-        custom_header_time.setText(DateUtils.getNow(DateUtils.getDatePattern()));
+        custom_header_time.setText(DateUtil.getNow(DateUtil.getDatePattern()));
     }
 
     /**
@@ -112,12 +112,12 @@ public class HeaderView extends LinearLayout implements PtrUIHandler {
         getRefreshListener().onRefreshPrepare(true, frame);
         try {
             if(current_time!=null)
-            custom_header_time.setText(DateUtils.getTimeReduction(current_time));
+            custom_header_time.setText(DateUtil.getTimeReduction(current_time));
             else
-                custom_header_time.setText(DateUtils.getNow(DateUtils.getDatePattern()));
+                custom_header_time.setText(DateUtil.getNow(DateUtil.getDatePattern()));
         } catch (ParseException e) {
             e.printStackTrace();
-            custom_header_time.setText(DateUtils.getNow(DateUtils.getDatePattern()));
+            custom_header_time.setText(DateUtil.getNow(DateUtil.getDatePattern()));
         }
     }
 
@@ -141,7 +141,7 @@ public class HeaderView extends LinearLayout implements PtrUIHandler {
         custom_header_bar.setVisibility(GONE);
         custom_header_image.setVisibility(VISIBLE);
         getRefreshListener().onRefreshComplete(true, frame);
-        current_time=DateUtils.getNow(DateUtils.getDatePattern());
+        current_time= DateUtil.getNow(DateUtil.getDatePattern());
 
     }
 

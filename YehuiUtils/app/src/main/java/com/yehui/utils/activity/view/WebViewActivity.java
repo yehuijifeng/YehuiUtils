@@ -1,4 +1,4 @@
-package com.yehui.utils.activity;
+package com.yehui.utils.activity.view;
 
 import android.view.View;
 import android.webkit.WebChromeClient;

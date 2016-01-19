@@ -11,7 +11,7 @@ import android.support.v4.app.FragmentTransaction;
  * 该工具类的作用在于：
  * 一个activity
  */
-public class FragmentUtils {
+public class FragmentUtil {
 
     public static void finish(Activity activity) {
         activity.finish();

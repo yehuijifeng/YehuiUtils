@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ImageView;
 
 import java.util.List;
 
@@ -22,11 +21,6 @@ public abstract class BaseExpandableAdapter<VH extends BaseExpandableViewHolder>
      * @return
      */
     public abstract VH groupViewHolder(View parent, int groupPosition, boolean isExpanded);
-
-    /**
-     * 父类中旋转的图片
-     */
-    public abstract ImageView groupImageView();
 
     /**
      * 父itemview的视图
@@ -223,14 +217,6 @@ public abstract class BaseExpandableAdapter<VH extends BaseExpandableViewHolder>
             v = convertView;
             // 取出隐藏在行中的Tag--取出隐藏在这一行中的vh控件缓存对象
             baseViewHolder = (BaseExpandableViewHolder) convertView.getTag();
-        }
-        // 判断组视图是否展开
-        if (groupImageView() != null) {
-            if (isExpanded) {
-                groupImageView().setBaseline(0);
-            } else {
-                groupImageView().setBaseline(90);
-            }
         }
         // 从ViewHolder缓存的控件中改变控件的值
         groupItemData(baseViewHolder, groupPosition, isExpanded);

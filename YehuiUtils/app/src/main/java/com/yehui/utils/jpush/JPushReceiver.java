@@ -1,7 +1,5 @@
 package com.yehui.utils.jpush;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -69,14 +67,14 @@ public class JPushReceiver {
         String extrasJson = bundle.getString(JPushInterface.EXTRA_EXTRA);//保存服务器推送下来的附加字段。这是个 JSON 字符串。
         String type = bundle.getString(JPushInterface.EXTRA_CONTENT_TYPE);//对应 API 消息内容的 content_type 字段。
         String fileHtml = bundle.getString(JPushInterface.EXTRA_RICHPUSH_HTML_PATH);//SDK 1.4.0 以上版本支持。,富媒体通消息推送下载后的文件路径和文件名。
-        String id = bundle.getString(JPushInterface.EXTRA_NOTIFICATION_ID);//SDK 1.6.1 以上版本支持。唯一标识消息的 ID, 可用于上报统计等。
+        //String id = bundle.getString(JPushInterface.EXTRA_NOTIFICATION_ID);//SDK 1.6.1 以上版本支持。唯一标识消息的 ID, 可用于上报统计等。
         String fileStr = bundle.getString(JPushInterface.EXTRA_RICHPUSH_HTML_RES);//SDK 1.4.0 以上版本支持。富媒体通知推送下载的图片资源的文件名,多个文件名用 “，” 分开。 与
         list.add(title);
         list.add(message);
         list.add(extrasJson);
         list.add(type);
         list.add(fileHtml);
-        list.add(id);
+        //list.add(id);
         list.add(fileStr);
         return list;
     }

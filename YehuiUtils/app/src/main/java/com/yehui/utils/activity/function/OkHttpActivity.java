@@ -1,4 +1,4 @@
-package com.yehui.utils.activity;
+package com.yehui.utils.activity.function;
 
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +32,7 @@ public class OkHttpActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     protected void setContentView() {
-        setContentView(R.layout.activity_okhttp);
+        setContentView(R.layout.activity_test_okhttp);
     }
 
     @Override

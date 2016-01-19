@@ -1,4 +1,4 @@
-package com.yehui.utils.activity;
+package com.yehui.utils.activity.function;
 
 import android.content.Intent;
 import android.graphics.Bitmap;

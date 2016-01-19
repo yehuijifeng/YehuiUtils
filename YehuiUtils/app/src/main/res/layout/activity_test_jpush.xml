@@ -60,4 +60,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="jpush信息：" />
+    <ImageView
+        android:id="@+id/jpush_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:src="@drawable/ic_drop_right"/>
 </LinearLayout>

@@ -221,11 +221,6 @@ public abstract class BaseExpandableListViewFragment extends BaseFragment {
         }
 
         @Override
-        public ImageView groupImageView() {
-            return BaseExpandableListViewFragment.this.groupImageView();
-        }
-
-        @Override
         public int groupViewByLayout() {
             return BaseExpandableListViewFragment.this.groupViewByLayout();
         }

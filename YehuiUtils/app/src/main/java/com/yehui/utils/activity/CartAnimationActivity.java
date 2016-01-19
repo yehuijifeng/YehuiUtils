@@ -67,12 +67,7 @@ public class CartAnimationActivity extends BaseActivity {
     protected void initView() {
         setTitleMode(MyTitleView.TitleMode.NORMAL);
 
-        mTitleView.setTextButtonOnClick(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(ToolbarActivity.class);
-            }
-        });
+
 
         listView = (ListView)this.findViewById(R.id.listview);
         cart_btn = (Button)this.findViewById(R.id.button);

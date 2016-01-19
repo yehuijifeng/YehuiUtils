@@ -1,4 +1,4 @@
-package com.yehui.utils.activity;
+package com.yehui.utils.activity.function;
 
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -14,9 +14,11 @@ import com.yehui.utils.db.OrmLiteDemoThreeDao;
 import com.yehui.utils.db.OrmLiteDemoTowDao;
 
 /**
- * Created by yehuijifeng on 2016/1/5.
+ * Created by yehuijifeng
+ * on 2016/1/5.
+ * ormlite操作数据库
  */
-public class SqliteUtilsDemoActivity extends BaseActivity implements View.OnClickListener {
+public class OrmLiteActivity extends BaseActivity implements View.OnClickListener {
     private Button
             btn_sql_create_db,
             btn_sql_create_table,

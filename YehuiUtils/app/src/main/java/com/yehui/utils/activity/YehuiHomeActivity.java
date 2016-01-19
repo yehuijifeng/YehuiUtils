@@ -17,6 +17,18 @@ import android.widget.Toast;
 
 import com.yehui.utils.R;
 import com.yehui.utils.activity.base.BaseActivity;
+import com.yehui.utils.activity.function.FileActivity;
+import com.yehui.utils.activity.function.JPushActivity;
+import com.yehui.utils.activity.function.OkHttpActivity;
+import com.yehui.utils.activity.function.OrmLiteActivity;
+import com.yehui.utils.activity.function.PayActivity;
+import com.yehui.utils.activity.function.UMengActivity;
+import com.yehui.utils.activity.function.ZxingActivity;
+import com.yehui.utils.activity.view.DialogActivity;
+import com.yehui.utils.activity.view.PhotoViewActivity;
+import com.yehui.utils.activity.view.PopupwindowActivity;
+import com.yehui.utils.activity.view.ViewFlipperActivity;
+import com.yehui.utils.activity.view.WebViewActivity;
 import com.yehui.utils.bean.MenuBean;
 import com.yehui.utils.bean.MenuTowBean;
 import com.yehui.utils.contacts.MenuContact;
@@ -228,7 +240,7 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
                 startActivity(ViewpagerActivity.class, bundle);
                 break;
             case MenuContact.sqllite://ormLite的数据库存储
-                startActivity(SqliteUtilsDemoActivity.class);
+                startActivity(OrmLiteActivity.class);
                 break;
             case MenuContact.file://本地文件存储
                 startActivity(FileActivity.class);

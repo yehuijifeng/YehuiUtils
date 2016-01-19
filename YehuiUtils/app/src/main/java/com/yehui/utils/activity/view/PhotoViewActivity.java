@@ -1,4 +1,4 @@
-package com.yehui.utils.activity;
+package com.yehui.utils.activity.view;
 
 import android.graphics.BitmapFactory;
 import android.support.v4.view.PagerAdapter;

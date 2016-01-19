@@ -1,4 +1,4 @@
-package com.yehui.utils.activity;
+package com.yehui.utils.activity.view;
 
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -43,7 +43,7 @@ public class PopupwindowActivity extends BaseActivity {
     private View contentview;
     @Override
     protected void setContentView() {
-        setContentView(R.layout.activity_popupwindow);
+        setContentView(R.layout.activity_test_popupwindow);
 
     }
 
@@ -54,7 +54,7 @@ public class PopupwindowActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        contentview=inflate(R.layout.activity_popupwindow,null);
+        contentview=inflate(R.layout.activity_test_popupwindow,null);
         ok_btn= (Button) findViewById(R.id.ok_btn);
         ok_btn.setOnClickListener(new View.OnClickListener() {
             @Override

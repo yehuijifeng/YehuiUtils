@@ -1,4 +1,4 @@
-package com.yehui.utils.activity;
+package com.yehui.utils.activity.function;
 
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +19,7 @@ public class UMengActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void setContentView() {
-        setContentView(R.layout.activity_umeng);
+        setContentView(R.layout.activity_test_umeng);
     }
 
     @Override

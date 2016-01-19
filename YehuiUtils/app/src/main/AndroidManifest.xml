@@ -223,7 +223,7 @@
 
         <!--数据库操作类-->
         <activity
-            android:name=".activity.SqliteUtilsDemoActivity"
+            android:name=".activity.function.OrmLiteActivity"
             android:launchMode="singleTop">
 
 
@@ -231,26 +231,26 @@
 
         <!--提示框-->
         <activity
-            android:name=".activity.DialogActivity"
+            android:name=".activity.view.DialogActivity"
             android:launchMode="singleTop">
 
         </activity>
 
         <!--剪切图片-->
         <activity
-            android:name=".activity.ImageCroppingActivity"
+            android:name=".activity.function.ImageCroppingActivity"
             android:launchMode="singleTop" />
 
         <!--轮番图-->
         <activity
-            android:name=".activity.ViewFlipperActivity"
+            android:name=".activity.view.ViewFlipperActivity"
             android:launchMode="singleTop">
 
         </activity>
 
         <!--popupwindow-->
         <activity
-            android:name=".activity.PopupwindowActivity"
+            android:name=".activity.view.PopupwindowActivity"
             android:launchMode="singleTop">
 
 
@@ -258,14 +258,14 @@
 
         <!--webview-->
         <activity
-            android:name=".activity.WebViewActivity"
+            android:name=".activity.view.WebViewActivity"
             android:launchMode="singleTop">
 
         </activity>
 
         <!--二维码-->
         <activity
-            android:name=".activity.ZxingActivity"
+            android:name=".activity.function.ZxingActivity"
             android:launchMode="singleTop">
 
         </activity>
@@ -278,42 +278,42 @@
         </activity>
         <!--图片查看-->
         <activity
-            android:name=".activity.PhotoViewActivity"
+            android:name=".activity.view.PhotoViewActivity"
             android:launchMode="singleTop">
 
         </activity>
 
         <!--okhttp网络请求-->
         <activity
-            android:name=".activity.OkHttpActivity"
+            android:name=".activity.function.OkHttpActivity"
             android:launchMode="singleTop">
 
         </activity>
 
         <!--极光推送-->
         <activity
-            android:name=".activity.JPushActivity"
+            android:name=".activity.function.JPushActivity"
             android:launchMode="singleTop">
 
         </activity>
 
         <!--极光推送-->
         <activity
-            android:name=".activity.UMengActivity"
+            android:name=".activity.function.UMengActivity"
             android:launchMode="singleTop">
 
         </activity>
 
         <!--极光推送-->
         <activity
-            android:name=".activity.PayActivity"
+            android:name=".activity.function.PayActivity"
             android:launchMode="singleTop">
 
         </activity>
 
         <!--本地文件操作-->
         <activity
-            android:name=".activity.FileActivity"
+            android:name=".activity.function.FileActivity"
             android:launchMode="singleTop">
 
         </activity>

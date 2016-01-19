@@ -1,4 +1,4 @@
-package com.yehui.utils.activity;
+package com.yehui.utils.activity.function;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,7 +12,7 @@ import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.yehui.utils.R;
 import com.yehui.utils.activity.base.BaseActivity;
 import com.yehui.utils.application.YehuiApplication;
-import com.yehui.utils.utils.DateUtils;
+import com.yehui.utils.utils.DateUtil;
 import com.yehui.utils.utils.files.FileContact;
 
 import java.io.File;
@@ -85,7 +85,7 @@ public class ImageCroppingActivity extends BaseActivity implements OnClickListen
         imagePath = getString(KEY_IMAGE_PATH, "");
         saveImagePath = getString(KEY_SAVE_IMAGE_PATH,
                 getCacheDir().getAbsolutePath() + "/cropImage/"
-                        + DateUtils.getNow("'CROP'_yyyyMMddHHmmss") + ".jpg");
+                        + DateUtil.getNow("'CROP'_yyyyMMddHHmmss") + ".jpg");
         mCropImageView = (CropImageView) findViewById(R.id.mCropImageView);
         btn_crop_rotate = (Button) findViewById(R.id.btn_crop_rotate);
         btn_crop_confirm = (Button) findViewById(R.id.btn_crop_confirm);

@@ -3,7 +3,6 @@ package com.yehui.utils.activity.base;
 import android.app.Activity;
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
 
 import com.yehui.utils.R;
 import com.yehui.utils.adapter.base.BaseExpandableAdapter;
@@ -29,11 +28,6 @@ public abstract class BaseExpandableListViewActivity extends BaseActivity {
      * @return
      */
     protected abstract BaseExpandableViewHolder getGroupViewHolder(View parent, int groupPosition, boolean isExpanded);
-
-    /**
-     * 父类中旋转的方向箭头图片，若为空则使用默认的
-     */
-    public abstract ImageView groupImageView();
 
     /**
      * 父itemview
@@ -218,11 +212,6 @@ public abstract class BaseExpandableListViewActivity extends BaseActivity {
         @Override
         public BaseExpandableViewHolder groupViewHolder(View parent, int groupPosition, boolean isExpanded) {
                        return BaseExpandableListViewActivity.this.getGroupViewHolder(parent, groupPosition, isExpanded);
-        }
-
-        @Override
-        public ImageView groupImageView() {
-            return BaseExpandableListViewActivity.this.groupImageView();
         }
 
         @Override

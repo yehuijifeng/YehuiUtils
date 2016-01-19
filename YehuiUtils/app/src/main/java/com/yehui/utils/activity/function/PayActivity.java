@@ -1,4 +1,4 @@
-package com.yehui.utils.activity;
+package com.yehui.utils.activity.function;
 
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +20,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     private AliPayService payByAli;
     @Override
     protected void setContentView() {
-        setContentView(R.layout.activity_pay);
+        setContentView(R.layout.activity_test_pay);
     }
 
     @Override

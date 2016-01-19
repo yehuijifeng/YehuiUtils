@@ -19,7 +19,7 @@ import com.yehui.utils.http.bean.UploadFileBean;
 import com.yehui.utils.http.downfileprogress.helper.ProgressHelper;
 import com.yehui.utils.http.downfileprogress.listener.ProgressListener;
 import com.yehui.utils.http.interfaces.RequestInterface;
-import com.yehui.utils.utils.DateUtils;
+import com.yehui.utils.utils.DateUtil;
 import com.yehui.utils.utils.EmptyUtil;
 import com.yehui.utils.utils.GsonUtil;
 import com.yehui.utils.utils.LogUtil;
@@ -504,9 +504,9 @@ public class RequestHandle implements RequestInterface {
                     public void onResponse(Response response) throws IOException {
                         String fileName, message;
                         if (action != null)
-                            fileName = DateUtils.getNow("yyyyMMddHHmmss") + "_" + action.parameter.getRequestUrl().substring(action.parameter.getRequestUrl().lastIndexOf("/") + 1, action.parameter.getRequestUrl().length());
+                            fileName = DateUtil.getNow("yyyyMMddHHmmss") + "_" + action.parameter.getRequestUrl().substring(action.parameter.getRequestUrl().lastIndexOf("/") + 1, action.parameter.getRequestUrl().length());
                         else if (url != null)
-                            fileName = DateUtils.getNow("yyyyMMddHHmmss") + "_" + url.substring(url.lastIndexOf("/") + 1, url.length());
+                            fileName = DateUtil.getNow("yyyyMMddHHmmss") + "_" + url.substring(url.lastIndexOf("/") + 1, url.length());
                         else return;
                         InputStream inputStream = response.body().byteStream();//输入流
                         if (FileFoundUtil.insertSDCardFromInput(FileContact.YEHUI_FILES_PATH, fileName, inputStream))

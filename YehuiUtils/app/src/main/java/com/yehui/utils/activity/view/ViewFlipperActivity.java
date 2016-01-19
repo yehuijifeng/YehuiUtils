@@ -1,4 +1,4 @@
-package com.yehui.utils.activity;
+package com.yehui.utils.activity.view;
 
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -20,7 +20,7 @@ public class ViewFlipperActivity extends BaseActivity implements View.OnTouchLis
     private Button btn_1,btn_2;
     @Override
     protected void setContentView() {
-        setContentView(R.layout.activity_flipper_view);
+        setContentView(R.layout.activity_test_flipper_view);
     }
 
     @Override

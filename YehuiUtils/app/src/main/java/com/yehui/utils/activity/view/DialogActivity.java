@@ -1,4 +1,4 @@
-package com.yehui.utils.activity;
+package com.yehui.utils.activity.view;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,10 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yehui.utils.R;
+import com.yehui.utils.activity.function.ImageCroppingActivity;
 import com.yehui.utils.activity.base.BaseActivity;
 import com.yehui.utils.application.YehuiApplication;
 import com.yehui.utils.utils.BitmapUtil;
-import com.yehui.utils.utils.DateUtils;
+import com.yehui.utils.utils.DateUtil;
 import com.yehui.utils.utils.PickLocalImageUtils;
 import com.yehui.utils.utils.files.FileContact;
 import com.yehui.utils.view.CircularImageView;
@@ -95,7 +96,7 @@ public class DialogActivity extends BaseActivity implements View.OnClickListener
                 loadingDialog.showLoadingDialog("test");
                 break;
             case R.id.btn_dialog_list:
-                listDialog.showListDialog(new String[]{"相册", "照相机"}, new ListDialog.ListOnClickListener() {
+                listDialog.showListDialog(getResourceStringArray(R.array.image_array), new ListDialog.ListOnClickListener() {
                     @Override
                     public void onCancel() {
 
@@ -106,7 +107,7 @@ public class DialogActivity extends BaseActivity implements View.OnClickListener
                         if(item==0){
                             PickLocalImageUtils.toAlbum(DialogActivity.this);
                         }else{
-                            imageFileName = DateUtils.format(System.currentTimeMillis(), "'IMG'_yyyyMMddHHmmss") + ".jpg";
+                            imageFileName = DateUtil.format(System.currentTimeMillis(), "'IMG'_yyyyMMddHHmmss") + ".jpg";
                             PickLocalImageUtils.toCamera(DialogActivity.this, imageFileName);
                         }
                     }

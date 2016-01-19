@@ -51,6 +51,13 @@ public class MenuContact {
     public static final String umeng = "友盟";
     public static final String pay = "支付";
 
+    /*动画区*/
+    public static final String anim          = "动画";
+    public static final String viewAnim      ="view动画";
+    public static final String customviewAnim="自定义view动画";
+    public static final String layoutAnim    ="LayoutAnimation";
+    public static final String animator      ="属性动画";
+
     private List<MenuBean> listOne;
     private List<MenuTowBean> listTow;
 
@@ -87,6 +94,12 @@ public class MenuContact {
         menuBean5.setName(function);
         menuBean5.setListTow(getUtilsList());
         listOne.add(menuBean5);
+
+        MenuBean menuBean6 = new MenuBean();
+        menuBean6.setId(i++);
+        menuBean6.setName(anim);
+        menuBean6.setListTow(getAnimList());
+        listOne.add(menuBean6);
 
         return listOne;
     }
@@ -189,6 +202,26 @@ public class MenuContact {
         return listTow;
     }
 
+    private List<MenuTowBean> getDBList() {
+        int i = 0;
+        listTow = new ArrayList<>();
+        MenuTowBean menuBean = new MenuTowBean();
+        menuBean.setId(i++);
+        menuBean.setName(sqllite);
+        listTow.add(menuBean);
+
+        MenuTowBean menuBean1 = new MenuTowBean();
+        menuBean1.setId(i++);
+        menuBean1.setName(file);
+        listTow.add(menuBean1);
+
+        MenuTowBean menuBean2 = new MenuTowBean();
+        menuBean2.setId(i++);
+        menuBean2.setName(okhttp);
+        listTow.add(menuBean2);
+        return listTow;
+    }
+
     private List<MenuTowBean> getUtilsList() {
         int i = 0;
         listTow = new ArrayList<>();
@@ -215,24 +248,32 @@ public class MenuContact {
         return listTow;
     }
 
-    private List<MenuTowBean> getDBList() {
+    private List<MenuTowBean> getAnimList() {
         int i = 0;
         listTow = new ArrayList<>();
+
         MenuTowBean menuBean = new MenuTowBean();
         menuBean.setId(i++);
-        menuBean.setName(sqllite);
+        menuBean.setName(viewAnim);
         listTow.add(menuBean);
 
         MenuTowBean menuBean1 = new MenuTowBean();
         menuBean1.setId(i++);
-        menuBean1.setName(file);
+        menuBean1.setName(customviewAnim);
         listTow.add(menuBean1);
 
         MenuTowBean menuBean2 = new MenuTowBean();
         menuBean2.setId(i++);
-        menuBean2.setName(okhttp);
+        menuBean2.setName(layoutAnim);
         listTow.add(menuBean2);
+
+        MenuTowBean menuBean3 = new MenuTowBean();
+        menuBean3.setId(i++);
+        menuBean3.setName(animator);
+        listTow.add(menuBean3);
+
         return listTow;
     }
+
 
 }

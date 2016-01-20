@@ -16,10 +16,12 @@
 
         <ImageView
             android:id="@+id/loading_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_width"
             android:padding="@dimen/default_padding_and_margin"
-            android:src="@android:drawable/ic_menu_rotate" />
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_loading" />
 
         <TextView
             android:id="@+id/loading_text"

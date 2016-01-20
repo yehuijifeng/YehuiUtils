@@ -54,7 +54,7 @@ public class MenuContact {
     /*动画区*/
     public static final String anim          = "动画";
     public static final String viewAnim      ="view动画";
-    public static final String customviewAnim="自定义view动画";
+    public static final String customviewAnim="自定义动画";
     public static final String layoutAnim    ="LayoutAnimation";
     public static final String animator      ="属性动画";
 

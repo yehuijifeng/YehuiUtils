@@ -147,6 +147,7 @@ public class MyTitleView extends LinearLayout {
         @Override
         public void onClick(View v) {
             ((Activity) getContext()).finish();
+            ((Activity) getContext()).overridePendingTransition(0, R.anim.activity_exit_anim);
         }
     };
 

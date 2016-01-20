@@ -1,30 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <include layout="@layout/layout_my_title" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         >
-
         <LinearLayout
-            android:id="@+id/test_linearLayout"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-
-            >
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btn_anim_translate"
                 style="@style/default_button_style"
                 android:layout_width="wrap_content"
-                android:text="平移" />
+                android:text="向上平移" />
 
             <Button
                 android:id="@+id/btn_anim_scale"
@@ -36,27 +28,28 @@
                 android:id="@+id/btn_anim_rotate"
                 style="@style/default_button_style"
                 android:layout_width="wrap_content"
-                android:text="旋转" />
+                android:text="资源动画" />
 
             <Button
                 android:id="@+id/btn_anim_alpha"
                 style="@style/default_button_style"
                 android:layout_width="wrap_content"
-                android:text="透明度" />
+                android:text="改变背景，渐变" />
 
 
             <Button
                 android:id="@+id/btn_anim_custom"
                 style="@style/default_button_style"
                 android:layout_width="wrap_content"
-                android:text="补帧动画" />
+                android:text="集合动画" />
 
             <ImageView
                 android:id="@+id/show_anim"
+                android:background="@color/black"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                 />
+                android:src="@drawable/ic_loading"
+                 android:padding="@dimen/default_xxx_padding_and_margin"/>
         </LinearLayout>
-    </ScrollView>
-</LinearLayout >
+</LinearLayout>

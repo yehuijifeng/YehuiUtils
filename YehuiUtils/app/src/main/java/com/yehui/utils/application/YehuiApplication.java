@@ -1,7 +1,6 @@
 package com.yehui.utils.application;
 
 import android.app.Application;
-import android.app.Notification;
 import android.content.Context;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
@@ -12,15 +11,12 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
-import com.yehui.utils.R;
 import com.yehui.utils.jpush.JPushInterfaces;
 import com.yehui.utils.utils.LogUtil;
 import com.yehui.utils.utils.files.FileContact;
 import com.yehui.utils.utils.imageloader.ImageOptions;
 
 import java.io.File;
-
-import cn.jpush.android.api.BasicPushNotificationBuilder;
 
 
 /**

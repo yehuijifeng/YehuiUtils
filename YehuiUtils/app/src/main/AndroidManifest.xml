@@ -96,7 +96,6 @@
         android:theme="@style/AppTheme">
 
 
-
         <!--**********************************极光推送***************************************-->
         <!-- Required -->
         <service
@@ -200,10 +199,9 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote" >
+            android:process=":remote">
             <intent-filter>
-                <action android:name="com.baidu.location.service_v2.2" >
-                </action>
+                <action android:name="com.baidu.location.service_v2.2"></action>
             </intent-filter>
         </service>
 
@@ -357,8 +355,18 @@
         <!--view动画-->
         <activity
             android:name=".activity.animation.ViewAnimActivity"
-            android:launchMode="singleTop">
-        </activity>
+            android:launchMode="singleTop"
+            ></activity>
+
+        <!--属性动画-->
+        <activity
+            android:name=".activity.animation.ValueAnimActivity"
+            android:launchMode="singleTop"></activity>
+
+        <!--自定义动画-->
+        <activity
+            android:name=".activity.animation.CustomAnimActivity"
+            android:launchMode="singleTop"></activity>
 
     </application>
 

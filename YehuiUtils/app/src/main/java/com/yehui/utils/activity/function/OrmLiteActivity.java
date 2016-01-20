@@ -131,6 +131,7 @@ public class OrmLiteActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if(ormListeDemoTowDao!=null)
         ormListeDemoTowDao.closeDao();
     }
 }

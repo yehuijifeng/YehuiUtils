@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yehui.utils.R;
+import com.yehui.utils.activity.animation.CustomAnimActivity;
+import com.yehui.utils.activity.animation.ValueAnimActivity;
 import com.yehui.utils.activity.animation.ViewAnimActivity;
 import com.yehui.utils.activity.base.BaseActivity;
 import com.yehui.utils.activity.function.FileActivity;
@@ -70,6 +72,7 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
 
     @Override
     protected void initView() {
+        overridePendingTransition(R.anim.activity_start_anim,0 );
         toolbar = (Toolbar) findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
         //toolbar.setLogo(R.mipmap.ic_launcher);//标题栏的logo图标
@@ -101,6 +104,12 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
         };
         actionBarDrawerToggle.syncState();
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        overridePendingTransition(R.anim.activity_start_anim,0 );
     }
 
     @Override
@@ -278,6 +287,16 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
                 break;
             case MenuContact.viewAnim://view动画
                 startActivity(ViewAnimActivity.class);
+                overridePendingTransition(R.anim.activity_start_anim,0);
+                break;
+            case MenuContact.animator://属性动画
+                startActivity(ValueAnimActivity.class);
+                break;
+            case MenuContact.layoutAnim://父动画
+                startActivity(ViewAnimActivity.class);
+                break;
+            case MenuContact.customviewAnim://自定义动画
+                startActivity(CustomAnimActivity.class);
                 break;
         }
     }

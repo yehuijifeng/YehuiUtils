@@ -754,6 +754,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void finishAll() {
         helper.finishAll();
+        overridePendingTransition(0, R.anim.activity_exit_anim);
     }
 
 

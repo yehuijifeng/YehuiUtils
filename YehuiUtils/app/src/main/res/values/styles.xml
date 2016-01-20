@@ -15,6 +15,7 @@ colorAccent 对应EditText编辑时、RadioButton选中、CheckBox等选中时�
         <item name="colorPrimaryDark">@color/colorPrimary</item>
         <!-- 底部导航栏颜色 -->
         <!--<item name="navigationBarColor">#4876FF</item>-->
+
     </style>
 
 

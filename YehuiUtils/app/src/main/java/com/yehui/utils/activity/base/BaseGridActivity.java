@@ -32,18 +32,14 @@ public abstract class BaseGridActivity extends BaseListActivity {
     @Override
     protected void initView() {
         super.initView();
+        /**
+         * 重写baselistview中的加横线方法，为了去掉父类中的横线
+         */
+        setItemDecoration(0);
         layoutManager = new GridLayoutManager(this, gridViewByNumber());
         spaceItemDecoration = new SpaceItemDecoration(decorationSize());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(spaceItemDecoration);
-    }
-
-    /**
-     * 重写baselistview中的加横线方法，为了去掉父类中的横线
-     */
-    @Override
-    protected float itemDecoration() {
-        return 0;
     }
 
     /**

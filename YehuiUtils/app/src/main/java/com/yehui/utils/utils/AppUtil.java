@@ -5,8 +5,14 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.util.DisplayMetrics;
+
+import com.yehui.utils.application.ActivityCollector;
+import com.yehui.utils.contacts.SettingContact;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by yehuijifeng
@@ -56,14 +62,12 @@ public class AppUtil {
         return null;
     }
 
-    private static final String YEHUI_SHARE = "yehui_utils_share";
-    private static final String IS_ONE_START = "is_one_start_app";
 
     public static boolean isOneStart(Context context) {
-        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(context, YEHUI_SHARE);
-        Boolean isOneStart = sharedPreferencesUtil.getBoolean(IS_ONE_START, true);//获取这个值，如果没有这个值则去第二个参数，即取默认值
+        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(context, SettingContact.YEHUI_SHARE);
+        Boolean isOneStart = sharedPreferencesUtil.getBoolean(SettingContact.IS_ONE_START, true);//获取这个值，如果没有这个值则去第二个参数，即取默认值
         if (isOneStart) {//第一次
-            sharedPreferencesUtil.saveBoolean(IS_ONE_START, false);
+            sharedPreferencesUtil.saveBoolean(SettingContact.IS_ONE_START, false);
             return true;
         }
         return false;
@@ -84,5 +88,37 @@ public class AppUtil {
             return topActivity.equals(activty.getComponentName().toString());
         } else
             return false;
+    }
+
+    /**
+     * 获取手机设置的语言
+     */
+    public static Locale getUserLanguage(Context context) {
+        return context.getResources().getConfiguration().locale;
+    }
+
+    /**
+     * 修改当前语言
+     */
+    public static void setUserLanguage(Locale locale) {
+        for (Activity activity : ActivityCollector.activities) {
+            //选择语言
+            Configuration config = activity.getResources().getConfiguration();
+            DisplayMetrics dm = activity.getResources().getDisplayMetrics();
+            config.locale = locale;
+            activity.getResources().updateConfiguration(config, dm);
+        }
+    }
+
+    /**
+     * 修改当前语言
+     */
+    public static String setUserLanguage(Context context, Locale locale) {
+        //选择语言
+        Configuration config = context.getResources().getConfiguration();
+        DisplayMetrics dm = context.getResources().getDisplayMetrics();
+        config.locale = locale;
+        context.getResources().updateConfiguration(config, dm);
+        return context.getResources().getConfiguration().locale.getCountry();
     }
 }

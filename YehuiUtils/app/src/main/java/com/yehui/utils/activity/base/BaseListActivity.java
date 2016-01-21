@@ -87,8 +87,14 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
      * 设置每个item的间距,
      * 紧紧针对listview可用！(其他代理类有自己的方法)
      */
-    protected float itemDecoration() {
-        return 1;
+    private int itemDecoration=1;
+
+    protected int getItemDecoration() {
+        return itemDecoration;
+    }
+
+    protected void setItemDecoration(int itemDecoration) {
+        this.itemDecoration = DisplayUtil.dip2px(this,itemDecoration);
     }
 
     @Override
@@ -108,7 +114,7 @@ public abstract class BaseListActivity extends BaseActivity implements SwipeRefr
         //添加适配器
         recyclerView.setAdapter(mAdapter);
         //添加item的间距
-        recyclerView.addItemDecoration(new SpaceItemDecoration(DisplayUtil.dip2px(this, itemDecoration())));
+        recyclerView.addItemDecoration(new SpaceItemDecoration(DisplayUtil.dip2px(this, getItemDecoration())));
         setIsRefresh(false);
         setIsLoadMore(true);
         if (mRecyclerView.footView != null) mRecyclerView.footView.onFootViewEmpty();

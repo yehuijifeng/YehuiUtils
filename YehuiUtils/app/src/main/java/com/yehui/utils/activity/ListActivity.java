@@ -48,6 +48,7 @@ public class ListActivity extends BaseListActivity {
             }
         });
         mAdapter.setHeaderView(inflate(R.layout.item_demo_cart, null));
+        setItemDecoration(2);
         //loadingView();
         //handler.sendEmptyMessageDelayed(1, 2000);
     }

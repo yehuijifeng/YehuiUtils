@@ -9,6 +9,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yehui.utils.R;
 import com.yehui.utils.utils.files.FileContact;
 
 import java.io.File;
@@ -172,7 +173,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             @Override
             public void run() {
                 Looper.prepare();
-                Toast.makeText(context, "很抱歉,程序出现异常,即将退出.", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, context.getResources().getString(R.string.error_exit_app), Toast.LENGTH_LONG).show();
                 Looper.loop();
             }
         }.start();

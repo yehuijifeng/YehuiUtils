@@ -13,7 +13,6 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.yehui.utils.R;
 import com.yehui.utils.activity.animation.CustomAnimActivity;
@@ -35,9 +34,11 @@ import com.yehui.utils.activity.view.WebViewActivity;
 import com.yehui.utils.bean.MenuBean;
 import com.yehui.utils.bean.MenuTowBean;
 import com.yehui.utils.contacts.MenuContact;
+import com.yehui.utils.contacts.SettingContact;
 import com.yehui.utils.utils.AppUtil;
 import com.yehui.utils.utils.ResourcesUtil;
 import com.yehui.utils.utils.UmengUtil;
+import com.yehui.utils.view.dialog.PromptDialog;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -72,7 +73,7 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
 
     @Override
     protected void initView() {
-        overridePendingTransition(R.anim.activity_start_anim,0 );
+        overridePendingTransition(R.anim.activity_start_anim, 0);
         toolbar = (Toolbar) findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
         //toolbar.setLogo(R.mipmap.ic_launcher);//标题栏的logo图标
@@ -109,12 +110,13 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-        overridePendingTransition(R.anim.activity_start_anim,0 );
+        overridePendingTransition(R.anim.activity_start_anim, 0);
+        root.invalidate();
     }
 
     @Override
     protected void initData() {
-        MenuContact menuContact = new MenuContact();
+        MenuContact menuContact = new MenuContact(this);
         list = menuContact.getMenuList();
         for (MenuBean menuBean : list) {
             homeMenuView = inflate(R.layout.item_home_menu, null);
@@ -140,7 +142,14 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
         }
         String explain;
         try {
-            InputStream in = getResources().getAssets().open("yehui-explain.txt");
+            InputStream in;
+            if (sharedPreferences.getString(SettingContact.APP_LANGUAGE).equalsIgnoreCase("cn")) {
+                in = getResources().getAssets().open("yehui-explain-zh.txt");
+            } else if (sharedPreferences.getString(SettingContact.APP_LANGUAGE).equalsIgnoreCase("gb")) {
+                in = getResources().getAssets().open("yehui-explain-en.txt");
+            } else {
+                in = getResources().getAssets().open("yehui-explain-zh.txt");
+            }
             explain = ResourcesUtil.getFromRaw(in);
         } catch (IOException e) {
             e.printStackTrace();
@@ -148,8 +157,9 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
         }
         home_text.setText(Html.fromHtml(explain));
 
-        if(AppUtil.isOneStart(this))
-            showShortToast("第一次进入应用");
+        if (AppUtil.isOneStart(this))
+            showShortToast(getResourceString(R.string.welcome_to_use));
+
     }
 
     @Override
@@ -166,12 +176,21 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
                 UmengUtil.shareDefault(this);
                 break;
             case R.id.action_share:
+                PromptDialog promptDialog = new PromptDialog(this);
+                promptDialog.showPromptDialog(getResourceString(R.string.welcome_learning), getResourceString(R.string.learning_content), new PromptDialog.PromptOnClickListener() {
+                    @Override
+                    public void onDetermine() {
 
-                Toast.makeText(YehuiHomeActivity.this, "" + "关于", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+                });
                 break;
             case R.id.action_settings:
-
-                Toast.makeText(YehuiHomeActivity.this, "" + "设置", Toast.LENGTH_SHORT).show();
+                startActivity(SettingsActivity.class);
                 break;
             case R.id.action_exit:
                 finishAll();
@@ -188,13 +207,14 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
-                showShortToast("再按一次退出应用");
+                showShortToast(getResourceString(R.string.exit_app));
                 exitTime = System.currentTimeMillis();
             } else {
                 finishAll();
             }
             return false;
         }
+
         return super.onKeyDown(keyCode, event);
     }
 
@@ -205,11 +225,14 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
         drawerLayout.closeDrawers();
     }
 
+
     @Override
     public void onClick(View v) {
         Bundle bundle = new Bundle();
         home_menu_text = (TextView) v.findViewById(R.id.home_menu_text);
-        switch (home_menu_text.getText().toString().trim()) {
+        String menuStr = home_menu_text.getText().toString().trim();
+        switch (menuStr) {
+
             case MenuContact.activityBase://baseactivity
                 startActivity(CartAnimationActivity.class);
                 break;
@@ -226,34 +249,31 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
                 startActivity(StaggeredActivity.class);
                 break;
             case MenuContact.fragmentBase://fragmentBase
-                bundle.putInt("viewpagerPage", 0);
+                bundle.putInt(MenuContact.viewpagerPage, 0);
                 startActivity(ViewpagerActivity.class, bundle);
                 break;
             case MenuContact.fragmentList://fragmentList
-                bundle.putInt("viewpagerPage", 1);
+                bundle.putInt(MenuContact.viewpagerPage, 1);
                 startActivity(ViewpagerActivity.class, bundle);
                 break;
             case MenuContact.fragmentGrid://fragmentGrid
-                bundle.putInt("viewpagerPage", 2);
+                bundle.putInt(MenuContact.viewpagerPage, 2);
                 startActivity(ViewpagerActivity.class, bundle);
                 break;
             case MenuContact.fragmentExpandable://两级列表
-                bundle.putInt("viewpagerPage", 4);
+                bundle.putInt(MenuContact.viewpagerPage, 4);
                 startActivity(ViewpagerActivity.class, bundle);
                 break;
             case MenuContact.fragmentStaggered://瀑布流
-                bundle.putInt("viewpagerPage", 3);
+                bundle.putInt(MenuContact.viewpagerPage, 3);
                 startActivity(ViewpagerActivity.class, bundle);
                 break;
             case MenuContact.viewpager://viewpager
-                bundle.putInt("viewpagerPage", 0);
+                bundle.putInt(MenuContact.viewpagerPage, 0);
                 startActivity(ViewpagerActivity.class, bundle);
                 break;
             case MenuContact.sqllite://ormLite的数据库存储
                 startActivity(OrmLiteActivity.class);
-                break;
-            case MenuContact.file://本地文件存储
-                startActivity(FileActivity.class);
                 break;
             case MenuContact.okhttp://okhttp网络请求
                 startActivity(OkHttpActivity.class);
@@ -270,34 +290,31 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
             case MenuContact.webview://webview
                 startActivity(WebViewActivity.class);
                 break;
-            case MenuContact.turnsview://轮番图
-                startActivity(ViewFlipperActivity.class);
-                break;
-            case MenuContact.jpush://极光推送
-                startActivity(JPushActivity.class);
-                break;
             case MenuContact.zxing://扫码google官方库
                 startActivity(ZxingActivity.class);
-                break;
-            case MenuContact.umeng://友盟
-                startActivity(UMengActivity.class);
-                break;
-            case MenuContact.pay://支付
-                startActivity(PayActivity.class);
-                break;
-            case MenuContact.viewAnim://view动画
-                startActivity(ViewAnimActivity.class);
-                overridePendingTransition(R.anim.activity_start_anim,0);
-                break;
-            case MenuContact.animator://属性动画
-                startActivity(ValueAnimActivity.class);
                 break;
             case MenuContact.layoutAnim://父动画
                 startActivity(ViewAnimActivity.class);
                 break;
-            case MenuContact.customviewAnim://自定义动画
-                startActivity(CustomAnimActivity.class);
-                break;
+        }
+
+        if (menuStr == getResources().getString(R.string.file_storage)) {
+            startActivity(FileActivity.class);
+        } else if (menuStr == getResources().getString(R.string.turns_image)) {
+            startActivity(ViewFlipperActivity.class);
+        } else if (menuStr == getResources().getString(R.string.jpush_propelling)) {
+            startActivity(JPushActivity.class);
+        } else if (menuStr == getResources().getString(R.string.umeng)) {
+            startActivity(UMengActivity.class);
+        } else if (menuStr == getResources().getString(R.string.pay)) {
+            startActivity(PayActivity.class);
+        } else if (menuStr == getResources().getString(R.string.view_anim)) {
+            startActivity(ViewAnimActivity.class);
+            overridePendingTransition(R.anim.activity_start_anim, 0);
+        } else if (menuStr == getResources().getString(R.string.value_anim)) {
+            startActivity(ValueAnimActivity.class);
+        } else if (menuStr == getResources().getString(R.string.custom_anim)) {
+            startActivity(CustomAnimActivity.class);
         }
     }
 }

@@ -1,5 +1,8 @@
 package com.yehui.utils.contacts;
 
+import android.content.Context;
+
+import com.yehui.utils.R;
 import com.yehui.utils.bean.MenuBean;
 import com.yehui.utils.bean.MenuTowBean;
 
@@ -12,6 +15,12 @@ import java.util.List;
  * 首页侧滑菜单数据
  */
 public class MenuContact {
+
+    private Context context;
+
+    public MenuContact(Context context) {
+        this.context = context;
+    }
 
     /*activity功能区*/
     public static final String activity = "activity";
@@ -29,34 +38,23 @@ public class MenuContact {
     public static final String fragmentStaggered = fragment + "Staggered";
     public static final String fragmentExpandable = fragment + "Expandable";
     public static final String viewpager = "viewpager";
-
+    public static final String viewpagerPage = "viewpagerPage";
     /*视图样式区*/
     public static final String view = "view";
     public static final String dialog = "dialog";
     public static final String webview = "webview";
     public static final String photoview = "photoview";
     public static final String popupwindow = "popupwindow";
-    public static final String turnsview = "轮番图";
 
     /*数据存储区*/
-    public static final String db = "数据存储";
     public static final String sqllite = "ormLite";
-    public static final String file = "文件存储";
     public static final String okhttp = "okhttp";
 
     /*功能区*/
-    public static final String function = "功能区";
     public static final String zxing = "zxing.jar";
-    public static final String jpush = "极光推送";
-    public static final String umeng = "友盟";
-    public static final String pay = "支付";
 
     /*动画区*/
-    public static final String anim          = "动画";
-    public static final String viewAnim      ="view动画";
-    public static final String customviewAnim="自定义动画";
-    public static final String layoutAnim    ="LayoutAnimation";
-    public static final String animator      ="属性动画";
+    public static final String layoutAnim = "LayoutAnimation";
 
     private List<MenuBean> listOne;
     private List<MenuTowBean> listTow;
@@ -79,7 +77,7 @@ public class MenuContact {
 
         MenuBean menuBean2 = new MenuBean();
         menuBean2.setId(i++);
-        menuBean2.setName(db);
+        menuBean2.setName(context.getResources().getString(R.string.db_storage));
         menuBean2.setListTow(getDBList());
         listOne.add(menuBean2);
 
@@ -91,13 +89,13 @@ public class MenuContact {
 
         MenuBean menuBean5 = new MenuBean();
         menuBean5.setId(i++);
-        menuBean5.setName(function);
+        menuBean5.setName(context.getResources().getString(R.string.functions));
         menuBean5.setListTow(getUtilsList());
         listOne.add(menuBean5);
 
         MenuBean menuBean6 = new MenuBean();
         menuBean6.setId(i++);
-        menuBean6.setName(anim);
+        menuBean6.setName(context.getResources().getString(R.string.animation));
         menuBean6.setListTow(getAnimList());
         listOne.add(menuBean6);
 
@@ -191,7 +189,7 @@ public class MenuContact {
 
         MenuTowBean menuBean2 = new MenuTowBean();
         menuBean2.setId(i++);
-        menuBean2.setName(turnsview);
+        menuBean2.setName(context.getResources().getString(R.string.turns_image));
         listTow.add(menuBean2);
 
         MenuTowBean menuBean3 = new MenuTowBean();
@@ -212,7 +210,7 @@ public class MenuContact {
 
         MenuTowBean menuBean1 = new MenuTowBean();
         menuBean1.setId(i++);
-        menuBean1.setName(file);
+        menuBean1.setName(context.getResources().getString(R.string.file_storage));
         listTow.add(menuBean1);
 
         MenuTowBean menuBean2 = new MenuTowBean();
@@ -227,17 +225,17 @@ public class MenuContact {
         listTow = new ArrayList<>();
         MenuTowBean menuBean = new MenuTowBean();
         menuBean.setId(i++);
-        menuBean.setName(jpush);
+        menuBean.setName(context.getResources().getString(R.string.jpush_propelling));
         listTow.add(menuBean);
 
         MenuTowBean menuBean3 = new MenuTowBean();
         menuBean3.setId(i++);
-        menuBean3.setName(umeng);
+        menuBean3.setName(context.getResources().getString(R.string.umeng));
         listTow.add(menuBean3);
 
         MenuTowBean menuBean4 = new MenuTowBean();
         menuBean4.setId(i++);
-        menuBean4.setName(pay);
+        menuBean4.setName(context.getResources().getString(R.string.pay));
         listTow.add(menuBean4);
 
         MenuTowBean menuBean5 = new MenuTowBean();
@@ -254,22 +252,22 @@ public class MenuContact {
 
         MenuTowBean menuBean = new MenuTowBean();
         menuBean.setId(i++);
-        menuBean.setName(viewAnim);
+        menuBean.setName(context.getResources().getString(R.string.view_anim));
         listTow.add(menuBean);
 
         MenuTowBean menuBean1 = new MenuTowBean();
         menuBean1.setId(i++);
-        menuBean1.setName(customviewAnim);
+        menuBean1.setName(context.getResources().getString(R.string.custom_anim));
         listTow.add(menuBean1);
 
         MenuTowBean menuBean2 = new MenuTowBean();
         menuBean2.setId(i++);
-        menuBean2.setName(layoutAnim);
+        menuBean2.setName(context.getResources().getString(R.string.layout_anim));
         listTow.add(menuBean2);
 
         MenuTowBean menuBean3 = new MenuTowBean();
         menuBean3.setId(i++);
-        menuBean3.setName(animator);
+        menuBean3.setName(context.getResources().getString(R.string.value_anim));
         listTow.add(menuBean3);
 
         return listTow;

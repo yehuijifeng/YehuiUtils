@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import com.yehui.utils.R;
 import com.yehui.utils.activity.base.BaseActivity;
-import com.yehui.utils.popupwindow.PopupWindowAll;
+import com.yehui.utils.view.popupwindow.PopupWindowAll;
 
 /**
  * Created by yehuijifeng
@@ -70,7 +70,7 @@ public class PopupwindowActivity extends BaseActivity {
         popupWindowAll=new PopupWindowAll(this);
     }
     private void show(){
-        popupWindowAll.showAtLocation(root, ok_btn, Gravity.TOP, 0, 50);
+        popupWindowAll.showAtLocationByBottom(ok_btn,root);
     }
 
     @Override

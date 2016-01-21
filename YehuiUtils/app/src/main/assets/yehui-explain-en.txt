@@ -1,0 +1,18 @@
+<div>
+<br/><div class= "text" style= "text-align:center;" > </div><br > nightglow collection
+<br/> Author: <br / night glow blast
+<br/> nightglow collection is a rapid development framework based on Android 5
+<br/>
+<br/> defines activity, fragment, data storage, network request framework
+<br/>
+<br/> commonly used utils tools
+<br/>
+Encapsulation and application of three party tools library <br/>
+<br/>
+<br/> nightglow can quickly develop collection mall / forum / news / Post Bar / space app
+<br/>
+<br/> welcome to Android development engineers to learn!
+<br/>
+<br/>
+Please pay attention to more <br/> <a href= "http://www.yehuijifeng.icoc.in/" > > </a><br nightglow blast website
+</div>

@@ -81,11 +81,7 @@
     <string name="en_us">英语（美国）</string>
     <string name="en_gb">英语（英国）</string>
 
-    <string name="other_setting">其他设置</string>
-
     <string name="exit_app">再按一次退出程序</string>
     <string name="error_exit_app">很抱歉,程序出现异常,即将退出... ...</string>
     <string name="welcome_to_use">欢迎使用夜辉宝典！</string>
-
-
 </resources>

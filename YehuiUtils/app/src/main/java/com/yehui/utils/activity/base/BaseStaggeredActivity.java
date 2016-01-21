@@ -32,6 +32,10 @@ public abstract class BaseStaggeredActivity extends BaseListActivity {
     @Override
     protected void initView() {
         super.initView();
+        /**
+         * 重写baselistview中的加横线方法，为了去掉父类中的横线
+         */
+        setItemDecoration(0);
         layoutManager = new StaggeredGridLayoutManager(stagViewByNumber(), stagViewOrientation()==0?StaggeredGridLayoutManager.VERTICAL:StaggeredGridLayoutManager.HORIZONTAL);
         spaceItemDecoration = new SpaceItemDecoration(decorationSize());
         recyclerView.setLayoutManager(layoutManager);
@@ -45,15 +49,6 @@ public abstract class BaseStaggeredActivity extends BaseListActivity {
      * 1,水平
      */
     protected int stagViewOrientation(){
-        return 0;
-    }
-
-
-    /**
-     * 重写baselistview中的加横线方法，为了去掉父类中的横线
-     */
-    @Override
-    protected float itemDecoration() {
         return 0;
     }
 

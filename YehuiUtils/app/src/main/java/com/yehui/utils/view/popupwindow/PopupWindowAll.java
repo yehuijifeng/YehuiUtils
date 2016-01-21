@@ -1,4 +1,4 @@
-package com.yehui.utils.popupwindow;
+package com.yehui.utils.view.popupwindow;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -33,13 +33,14 @@ public class PopupWindowAll extends View {
     /**
      * 是否使popupwindow以外的视图被点击
      */
-    public boolean setOutsideTouchable(){
+    public boolean setOutsideTouchable() {
         return true;
     }
+
     /**
      * popupwindow初始化设置
      */
-    private void initSettings(){
+    private void initSettings() {
         /**
          * 如果pop不设置背景的话不会在点击视图以外消失
          */
@@ -60,22 +61,32 @@ public class PopupWindowAll extends View {
     public void showFullWindow(View root) {
         popupWindow = new PopupWindow(root, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         initSettings();
-        popupWindow.showAtLocation(root, Gravity.BOTTOM,0,0);
+        popupWindow.showAtLocation(root, Gravity.BOTTOM, 0, 0);
     }
 
 
     /**
-     * 根据位置显示
+     * 显示在指定控件的下面
      *
-     * @param parent  显示的view
-     * @param gravity 权重
-     * @param x
-     * @param y
+     * @param root
+     * @param parent
      */
-    public void showAtLocation(View root,View parent, int gravity, int x, int y) {
-        popupWindow = new PopupWindow(root, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    public void showAtLocationByBottom(View root, View parent) {
+
+        popupWindow = new PopupWindow(parent, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         initSettings();
-        popupWindow.showAtLocation(parent, gravity, x, y);
+        int parentWidth = parent.getWidth();
+        int parentHeight = parent.getHeight();
+        int rootWidth = root.getWidth();
+        int rootHeight = root.getHeight();
+        int[] location = new int[2];
+        // 获得位置
+        root.getLocationOnScreen(location);
+        popupWindow.setAnimationStyle(R.anim.activity_start_anim);
+        popupWindow.showAtLocation(root,Gravity.NO_GRAVITY, (location[0] + rootWidth / 2) - parentWidth / 2, location[1] + rootHeight);
+//        if (parentWidth == 0 || parentHeight == 0) {
+//            popupWindow.dismiss();
+//        }
     }
 
 
@@ -89,19 +100,19 @@ public class PopupWindowAll extends View {
      * @param gravity 权重
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void showAsDropDown(View root,View anchor, int xoff, int yoff, int gravity) {
+    public void showAsDropDown(View root, View anchor, int xoff, int yoff, int gravity) {
         popupWindow = new PopupWindow(root, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         initSettings();
         popupWindow.showAsDropDown(anchor, xoff, yoff, gravity);
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void showAsDropDown(View root,View anchor, int xoff, int yoff) {
-        showAsDropDown(root,anchor,xoff,yoff,0);
+    public void showAsDropDown(View root, View anchor, int xoff, int yoff) {
+        showAsDropDown(root, anchor, xoff, yoff, 0);
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void showAsDropDown(View root,View anchor) {
+    public void showAsDropDown(View root, View anchor) {
         showAsDropDown(root, anchor, 0, 0, 0);
     }
 

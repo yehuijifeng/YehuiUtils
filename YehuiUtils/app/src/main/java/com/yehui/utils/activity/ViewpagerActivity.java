@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.yehui.utils.R;
 import com.yehui.utils.activity.base.BaseViewPagerActivity;
+import com.yehui.utils.contacts.MenuContact;
 import com.yehui.utils.fragment.ViewPagerFive;
 import com.yehui.utils.fragment.ViewPagerFour;
 import com.yehui.utils.fragment.ViewPagerOne;
@@ -39,7 +40,7 @@ public class ViewpagerActivity extends BaseViewPagerActivity {
         mViewList.add(new ViewPagerThree());
         mViewList.add(new ViewPagerFour());
         mViewList.add(new ViewPagerFive());
-        setPageNumber(getInt("viewpagerPage",0));
+        setPageNumber(getInt(MenuContact.viewpagerPage,0));
     }
 
     @Override

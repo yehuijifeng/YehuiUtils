@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/transparent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/default_padding_and_margin"
+            android:background="@drawable/bg_settings_view"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/default_padding_and_margin">
+
+
+            <TextView
+                android:id="@+id/zh_cn_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_default_view"
+                android:padding="@dimen/default_padding_and_margin"
+                android:text="@string/zh_cn"
+                android:textColor="@color/black"
+                android:textSize="@dimen/default_x_text_size" />
+
+            <View style="@style/default_hour_view" />
+
+
+            <TextView
+                android:id="@+id/en_gb_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_default_view"
+                android:padding="@dimen/default_padding_and_margin"
+                android:text="@string/en_gb"
+                android:textColor="@color/black"
+                android:textSize="@dimen/default_x_text_size" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/drop_top_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_drop_top" />
+
+    </FrameLayout>
+</LinearLayout>

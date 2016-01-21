@@ -368,6 +368,10 @@
             android:name=".activity.animation.CustomAnimActivity"
             android:launchMode="singleTop"></activity>
 
+        <!--设置页面-->
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:launchMode="singleTop"></activity>
     </application>
 
 </manifest>

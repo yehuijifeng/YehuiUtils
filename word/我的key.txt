@@ -1,4 +1,7 @@
+下载地址：
+
 包名：com.yehui.utils
+
 友盟：
 key:56449b0ae0f55af0240017c0
 
@@ -12,23 +15,5 @@ qq:
 APP ID:1104967462
 APP KEY:8SKqUN5ap6zc5GtK
 
-select a.dcy_id, b.dimensionality, b.longitude
-from t_surveyfamily a, q_100000000001002 b
-where a.surveyanswerid = b.id order by dcy_id
-
-
-根据调查员ID 修改经纬度
-longitude
-dimensionality
-这两个就是经纬度 
-根据上面的表，
-
-
-update q_100000000001002 
-set dimensionality=#dimensionality#
-and longitude = #longitude#
-where id =#id#
-
-
-Get sdk version fail![获取sdk版本失败!]
-JPush.so file do not match JPush.jar file in the project,Failed to init JPush 
+环信：
+key：5791e58088bfc90a44234096

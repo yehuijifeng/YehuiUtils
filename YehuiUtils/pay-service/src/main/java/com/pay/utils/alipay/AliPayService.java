@@ -18,7 +18,8 @@ import java.util.Random;
 
 
 /**
- * Created by yehuijifeng on 2015/11/25.
+ * Created by yehuijifeng
+ * on 2015/11/25.
  */
 public class AliPayService {
 
@@ -149,6 +150,7 @@ public class AliPayService {
     public void pay(final Activity activity, String orderNo, double payPrice, String payType) {
         // 订单
         String orderInfo = getOrderInfo(orderNo, "["+activity.getResources().getString(R.string.app_name)+"]商品支付", "来自"+activity.getResources().getString(R.string.app_name)+"商品的订单", payPrice + "", payType);
+        //String orderInfo = getOrderInfo(orderNo, "["+"]商品支付", "来自"+"商品的订单", payPrice + "", payType);
 
         // 对订单做RSA 签名
         String sign = sign(orderInfo);

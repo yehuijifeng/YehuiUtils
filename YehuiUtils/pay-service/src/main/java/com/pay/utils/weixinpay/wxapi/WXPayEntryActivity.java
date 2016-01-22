@@ -1,4 +1,4 @@
-package com.umeng.utils.weixinpay.wxapi;
+package com.pay.utils.weixinpay.wxapi;
 
 
 import android.app.Activity;
@@ -6,14 +6,14 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.pay.utils.R;
+import com.pay.utils.weixinpay.Constants;
 import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
-import com.umeng.utils.R;
-import com.umeng.utils.weixinpay.Constants;
 
 public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler{
 

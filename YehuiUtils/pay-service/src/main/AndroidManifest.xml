@@ -4,39 +4,36 @@
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
-        android:supportsRtl="true">
-
-        <!-- 支付宝配置文件
+        android:supportsRtl="true"> <!-- 支付宝配置文件
         alipay sdk begin -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
         <!-- alipay sdk end -->
 
         <!--微信支付-->
-        <!--<activity-->
-            <!--android:name=".weixinpay.WXEntryActivity"-->
-            <!--android:label="@string/app_name"-->
-            <!-->-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.VIEW" />-->
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-                <!--<data android:scheme="wxd930ea5d5a258f4f" />-->
-            <!--</intent-filter>-->
+        <!--<activity
+            android:name=".weixinpay.wxapi.WXEntryActivity"
+            android:label="@string/app_name"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="wxd930ea5d5a258f4f" />
+            </intent-filter>
 
-        <!--</activity>-->
+        </activity>-->
 
-        <activity android:name=".weixinpay.wxapi.WXPayEntryActivity"
+        <!--<activity android:name=".weixinpay.wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"/>-->
 
     </application>
 

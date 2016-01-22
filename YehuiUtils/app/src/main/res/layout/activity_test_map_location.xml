@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_my_title" />
+
+    <Button
+        android:id="@+id/map_zuobiao_btn"
+        style="@style/default_button_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取当前位置坐标" />
+
+    <Button
+        android:id="@+id/map_zuobiao_name_btn"
+        style="@style/default_button_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="根据坐标获取地理名称" />
+
+    <Button
+        android:id="@+id/map_name_zuobiao_btn"
+        style="@style/default_button_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="根据地理名称获取坐标" />
+
+    <TextView
+        android:id="@+id/map_text"
+        style="@style/default_textview_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

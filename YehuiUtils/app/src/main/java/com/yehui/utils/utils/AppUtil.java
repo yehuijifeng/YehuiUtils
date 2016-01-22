@@ -100,24 +100,6 @@ public class AppUtil {
             return false;
     }
 
-    /**
-     * 获取手机设置的语言
-     */
-    public static Locale getUserLanguage(Context context) {
-        return context.getResources().getConfiguration().locale;
-    }
-
-    /**
-     * 修改当前语言
-     */
-    public static String setUserLanguage(Context context, Locale locale) {
-        //选择语言
-        Configuration config = context.getResources().getConfiguration();
-        DisplayMetrics dm = context.getResources().getDisplayMetrics();
-        config.locale = locale;
-        context.getResources().updateConfiguration(config, dm);
-        return context.getResources().getConfiguration().locale.getCountry();
-    }
 
     private static Handler handler = new Handler();
 

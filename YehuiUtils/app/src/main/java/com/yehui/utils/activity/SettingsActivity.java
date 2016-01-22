@@ -9,6 +9,7 @@ import com.yehui.utils.activity.base.BaseActivity;
 import com.yehui.utils.contacts.SettingContact;
 import com.yehui.utils.utils.AppUtil;
 import com.yehui.utils.utils.EmptyUtil;
+import com.yehui.utils.utils.LanguageUtil;
 import com.yehui.utils.view.popupwindow.PopupWindowAll;
 
 import java.util.Locale;
@@ -69,14 +70,14 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
                 popupWindowAll.showAtLocationByBottom(v, languageView);
                 break;
             case R.id.zh_cn_text:
-                language_str = AppUtil.setUserLanguage(this, Locale.CHINA);
+                language_str = LanguageUtil.setUserLanguage(this, Locale.CHINA);
                 sharedPreferences.saveString(SettingContact.APP_LANGUAGE, EmptyUtil.isStringEmpty(language_str) ? SettingContact.DEFAULT_LANGUAGE : language_str);
                 popupWindowAll.dismissWindow();
                 AppUtil.reStartApp(SettingsActivity.this);
                 showShortToast("设置成功，即将重启app");
                 break;
             case R.id.en_gb_text:
-                language_str = AppUtil.setUserLanguage(this, Locale.UK);
+                language_str = LanguageUtil.setUserLanguage(this, Locale.UK);
                 sharedPreferences.saveString(SettingContact.APP_LANGUAGE, EmptyUtil.isStringEmpty(language_str) ? SettingContact.DEFAULT_LANGUAGE : language_str);
                 popupWindowAll.dismissWindow();
                 AppUtil.reStartApp(this);
@@ -88,7 +89,5 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
-        startActivity(YehuiHomeActivity.class);
     }
 }

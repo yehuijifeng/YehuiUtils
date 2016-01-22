@@ -26,6 +26,7 @@ import com.yehui.utils.activity.function.OrmLiteActivity;
 import com.yehui.utils.activity.function.PayActivity;
 import com.yehui.utils.activity.function.UMengActivity;
 import com.yehui.utils.activity.function.ZxingActivity;
+import com.yehui.utils.activity.map.LocationActivity;
 import com.yehui.utils.activity.view.DialogActivity;
 import com.yehui.utils.activity.view.PhotoViewActivity;
 import com.yehui.utils.activity.view.PopupwindowActivity;
@@ -316,6 +317,8 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
             startActivity(ValueAnimActivity.class);
         } else if (menuStr == getResources().getString(R.string.custom_anim)) {
             startActivity(CustomAnimActivity.class);
+        }else if (menuStr == getResources().getString(R.string.map_location)) {
+            startActivity(LocationActivity.class);
         }
     }
 }

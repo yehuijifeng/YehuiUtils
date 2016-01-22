@@ -56,6 +56,10 @@ public class MenuContact {
     /*动画区*/
     public static final String layoutAnim = "LayoutAnimation";
 
+    /*动画区*/
+    public static final String baiduMap = "BaiduMap";
+    public static final String location = "location";
+
     private List<MenuBean> listOne;
     private List<MenuTowBean> listTow;
 
@@ -98,6 +102,12 @@ public class MenuContact {
         menuBean6.setName(context.getResources().getString(R.string.animation));
         menuBean6.setListTow(getAnimList());
         listOne.add(menuBean6);
+
+        MenuBean menuBean7 = new MenuBean();
+        menuBean7.setId(i++);
+        menuBean7.setName(context.getResources().getString(R.string.baidu_map));
+        menuBean7.setListTow(getMapList());
+        listOne.add(menuBean7);
 
         return listOne;
     }
@@ -273,5 +283,16 @@ public class MenuContact {
         return listTow;
     }
 
+    private List<MenuTowBean> getMapList() {
+        int i = 0;
+        listTow = new ArrayList<>();
+
+        MenuTowBean menuBean = new MenuTowBean();
+        menuBean.setId(i++);
+        menuBean.setName(context.getResources().getString(R.string.map_location));
+        listTow.add(menuBean);
+
+        return listTow;
+    }
 
 }

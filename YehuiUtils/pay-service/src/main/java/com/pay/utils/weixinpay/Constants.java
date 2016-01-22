@@ -1,4 +1,4 @@
-package com.umeng.utils.weixinpay;
+package com.pay.utils.weixinpay;
 
 public class Constants {
     /** appid

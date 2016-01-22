@@ -10,7 +10,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/baidu-map" />
             <option value="$PROJECT_DIR$/cropper" />
             <option value="$PROJECT_DIR$/pay-service" />
             <option value="$PROJECT_DIR$/umeng-sdk" />
@@ -20,7 +19,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/baidu-map" />
             <option value="$PROJECT_DIR$/cropper" />
             <option value="$PROJECT_DIR$/pay-service" />
             <option value="$PROJECT_DIR$/umeng-sdk" />

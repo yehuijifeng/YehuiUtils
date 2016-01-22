@@ -1,5 +1,0 @@
-1,basehelper
-2,baseactivity
-3,toolbar
-4,basefragment
-5,baselistactivity(listview,raidview,resayview)

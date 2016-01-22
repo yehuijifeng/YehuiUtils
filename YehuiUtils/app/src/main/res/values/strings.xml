@@ -87,5 +87,7 @@
     <string name="error_exit_app">很抱歉,程序出现异常,即将退出... ...</string>
     <string name="welcome_to_use">欢迎使用夜辉宝典！</string>
 
+    <string name="baidu_map">百度地图</string>
+    <string name="map_location">当前位置</string>
 
 </resources>

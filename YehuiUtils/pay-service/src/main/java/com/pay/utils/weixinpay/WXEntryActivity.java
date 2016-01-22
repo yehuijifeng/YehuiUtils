@@ -1,4 +1,4 @@
-package com.umeng.utils.weixinpay;//package com.pay.utils.weixinpay;
+package com.pay.utils.weixinpay;//package com.pay.utils.weixinpay;
 //
 //import android.app.Activity;
 //import android.os.Bundle;

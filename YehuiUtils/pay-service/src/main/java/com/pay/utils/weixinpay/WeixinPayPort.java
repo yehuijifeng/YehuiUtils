@@ -1,4 +1,4 @@
-package com.umeng.utils.weixinpay;
+package com.pay.utils.weixinpay;
 
 import android.content.Context;
 import android.widget.Toast;

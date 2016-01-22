@@ -369,6 +369,12 @@
         <activity
             android:name=".activity.SettingsActivity"
             android:launchMode="singleTop"></activity>
+
+        <!--设置页面-->
+        <activity
+            android:name=".activity.map.LocationActivity"
+            android:launchMode="singleTop"></activity>
+
     </application>
 
 </manifest>

@@ -1,1 +1,1 @@
-include ':app', ':pay-service', 'umeng-sdk', 'cropper'
+include ':app', ':pay-service',  'umeng-sdk', 'cropper', 'baidu-map'

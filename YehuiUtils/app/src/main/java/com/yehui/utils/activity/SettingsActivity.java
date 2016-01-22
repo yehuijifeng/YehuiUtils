@@ -71,12 +71,16 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
             case R.id.zh_cn_text:
                 language_str = AppUtil.setUserLanguage(this, Locale.CHINA);
                 sharedPreferences.saveString(SettingContact.APP_LANGUAGE, EmptyUtil.isStringEmpty(language_str) ? SettingContact.DEFAULT_LANGUAGE : language_str);
-                root.invalidate();
+                popupWindowAll.dismissWindow();
+                AppUtil.reStartApp(SettingsActivity.this);
+                showShortToast("设置成功，即将重启app");
                 break;
             case R.id.en_gb_text:
                 language_str = AppUtil.setUserLanguage(this, Locale.UK);
                 sharedPreferences.saveString(SettingContact.APP_LANGUAGE, EmptyUtil.isStringEmpty(language_str) ? SettingContact.DEFAULT_LANGUAGE : language_str);
-                root.invalidate();
+                popupWindowAll.dismissWindow();
+                AppUtil.reStartApp(this);
+                showShortToast("设置成功，即将重启app");
                 break;
         }
     }

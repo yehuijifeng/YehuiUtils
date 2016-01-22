@@ -56,6 +56,13 @@ public class PopupWindowAll extends View {
     }
 
     /**
+     * 关闭popupwindow
+     */
+    public void dismissWindow(){
+        if(popupWindow!=null)
+            popupWindow.dismiss();
+    }
+    /**
      * 全屏幕显示
      */
     public void showFullWindow(View root) {
@@ -84,9 +91,6 @@ public class PopupWindowAll extends View {
         root.getLocationOnScreen(location);
         popupWindow.setAnimationStyle(R.anim.activity_start_anim);
         popupWindow.showAtLocation(root,Gravity.NO_GRAVITY, (location[0] + rootWidth / 2) - parentWidth / 2, location[1] + rootHeight);
-//        if (parentWidth == 0 || parentHeight == 0) {
-//            popupWindow.dismiss();
-//        }
     }
 
 

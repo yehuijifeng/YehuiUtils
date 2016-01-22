@@ -27,5 +27,7 @@ public class ActivityCollector {
                 activity.finish();
             }
         }
+        //杀死该应用进程
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 }

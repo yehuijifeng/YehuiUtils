@@ -36,6 +36,7 @@ import com.yehui.utils.bean.MenuTowBean;
 import com.yehui.utils.contacts.MenuContact;
 import com.yehui.utils.contacts.SettingContact;
 import com.yehui.utils.utils.AppUtil;
+import com.yehui.utils.utils.LanguageUtil;
 import com.yehui.utils.utils.ResourcesUtil;
 import com.yehui.utils.utils.UmengUtil;
 import com.yehui.utils.view.dialog.PromptDialog;
@@ -143,9 +144,9 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
         String explain;
         try {
             InputStream in;
-            if (sharedPreferences.getString(SettingContact.APP_LANGUAGE).equalsIgnoreCase("cn")) {
+            if (sharedPreferences.getString(SettingContact.APP_LANGUAGE).equalsIgnoreCase(LanguageUtil.CHINA)) {
                 in = getResources().getAssets().open("yehui-explain-zh.txt");
-            } else if (sharedPreferences.getString(SettingContact.APP_LANGUAGE).equalsIgnoreCase("gb")) {
+            } else if (sharedPreferences.getString(SettingContact.APP_LANGUAGE).equalsIgnoreCase(LanguageUtil.ENGLISH)) {
                 in = getResources().getAssets().open("yehui-explain-en.txt");
             } else {
                 in = getResources().getAssets().open("yehui-explain-zh.txt");

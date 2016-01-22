@@ -3,6 +3,31 @@
     android:versionCode="100"
     android:versionName="1.0.0">
 
+
+    <!--写设置-->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!--读sd卡-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--写sd卡-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--联网-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--联网状态-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--wifi状态-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--锁屏-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!--二维码扫描权限-->
+    <!--调用相机权限-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--硬件相机-->
+    <uses-feature android:name="android.hardware.camera" />
+    <!--硬件相机自动对焦-->
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <!--震动-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <!-- 极光推送  系统要求的权限，必须-->
     <!--注册极光推送消息，前置包名-->
     <!-- Required -->
@@ -42,35 +67,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-
-
-    <!--写设置-->
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <!--读sd卡-->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!--写sd卡-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--联网-->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!--联网状态-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--wifi状态-->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!--锁屏-->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!--二维码扫描权限-->
-    <!--调用相机权限-->
-    <uses-permission android:name="android.permission.CAMERA" />
-    <!--硬件相机-->
-    <uses-feature android:name="android.hardware.camera" />
-    <!--硬件相机自动对焦-->
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <!--震动-->
-    <uses-permission android:name="android.permission.VIBRATE" />
-
-    <!-- GPS定位权限 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <!--百度定位所需权限-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
@@ -189,7 +185,7 @@
             </intent-filter>
         </receiver>
 
-        <!--**********************************极光推送***************************************-->
+        <!--**********************************极光推送完***************************************-->
 
         <!--***********************************百度地图********************************************-->
         <meta-data
@@ -204,6 +200,7 @@
                 <action android:name="com.baidu.location.service_v2.2"></action>
             </intent-filter>
         </service>
+        <!--***********************************百度地图完********************************************-->
 
         <!--主页面-->
         <activity

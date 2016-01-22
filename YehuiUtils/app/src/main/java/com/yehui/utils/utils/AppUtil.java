@@ -2,12 +2,17 @@ package com.yehui.utils.utils;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 
+import com.yehui.utils.activity.YehuiHomeActivity;
 import com.yehui.utils.application.ActivityCollector;
 import com.yehui.utils.contacts.SettingContact;
 
@@ -63,6 +68,11 @@ public class AppUtil {
     }
 
 
+    /**
+     * 判断是否第一次进入应用
+     * @param context
+     * @return
+     */
     public static boolean isOneStart(Context context) {
         SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(context, SettingContact.YEHUI_SHARE);
         Boolean isOneStart = sharedPreferencesUtil.getBoolean(SettingContact.IS_ONE_START, true);//获取这个值，如果没有这个值则去第二个参数，即取默认值
@@ -80,7 +90,7 @@ public class AppUtil {
      * @param activty
      * @return
      */
-    public boolean isTopActivity(Activity activty) {
+    public static boolean isTopActivity(Activity activty) {
         ActivityManager activityManager = (ActivityManager) activty.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> runningTaskInfoList = activityManager.getRunningTasks(1);
         if (runningTaskInfoList != null) {
@@ -100,19 +110,6 @@ public class AppUtil {
     /**
      * 修改当前语言
      */
-    public static void setUserLanguage(Locale locale) {
-        for (Activity activity : ActivityCollector.activities) {
-            //选择语言
-            Configuration config = activity.getResources().getConfiguration();
-            DisplayMetrics dm = activity.getResources().getDisplayMetrics();
-            config.locale = locale;
-            activity.getResources().updateConfiguration(config, dm);
-        }
-    }
-
-    /**
-     * 修改当前语言
-     */
     public static String setUserLanguage(Context context, Locale locale) {
         //选择语言
         Configuration config = context.getResources().getConfiguration();
@@ -120,5 +117,28 @@ public class AppUtil {
         config.locale = locale;
         context.getResources().updateConfiguration(config, dm);
         return context.getResources().getConfiguration().locale.getCountry();
+    }
+
+    private static Handler handler = new Handler();
+
+    /**
+     * 重启app
+     */
+    public static void reStartApp(final Context context) {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                Intent intent = new Intent(context, YehuiHomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                PendingIntent restartIntent = PendingIntent.getActivity(
+                        context, 0, intent, 0);
+                //退出程序
+                AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 1000,
+                        restartIntent); // 1秒钟后重启应用
+                ActivityCollector.finishAll();
+            }
+        }, 1000);
     }
 }

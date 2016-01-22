@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -27,8 +26,7 @@ import com.yehui.utils.http.request.ResponseComplete;
 import com.yehui.utils.http.request.ResponseFailure;
 import com.yehui.utils.http.request.ResponseResult;
 import com.yehui.utils.http.request.ResponseSuccess;
-import com.yehui.utils.utils.AppUtil;
-import com.yehui.utils.utils.EmptyUtil;
+import com.yehui.utils.utils.LanguageUtil;
 import com.yehui.utils.utils.SharedPreferencesUtil;
 import com.yehui.utils.view.loadingview.MyLoadingView;
 import com.yehui.utils.view.titleview.MyTitleView;
@@ -37,7 +35,6 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import de.greenrobot.event.EventBus;
 
@@ -198,7 +195,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         initData();
     }
 
-    private FrameLayout frameLayout;
+    /**
+     * 语言包工具类
+     */
+    protected LanguageUtil languageUtil;
 
     /**
      * baseactivity的初始化
@@ -206,16 +206,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void initProperties() {
         helper = new BaseHelper(this);
         getSharedPreferences();
+        LanguageUtil.adapterLanguage(this, sharedPreferences);
 
-        if (EmptyUtil.isStringEmpty(sharedPreferences.getString(SettingContact.APP_LANGUAGE)))
-            AppUtil.setUserLanguage(this, AppUtil.getUserLanguage(this));
-        else {
-            if (sharedPreferences.getString(SettingContact.APP_LANGUAGE).equalsIgnoreCase("cn")) {
-                AppUtil.setUserLanguage(this, Locale.CHINESE);
-            } else if (sharedPreferences.getString(SettingContact.APP_LANGUAGE).equalsIgnoreCase("gb")) {
-                AppUtil.setUserLanguage(this, Locale.ENGLISH);
-            }
-        }
         root = (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
         /**
          * 注意：

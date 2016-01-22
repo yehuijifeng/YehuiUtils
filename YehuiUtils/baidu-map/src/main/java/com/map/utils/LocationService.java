@@ -1,4 +1,4 @@
-package com.yehui.utils.baidumap;
+package com.map.utils;
 
 import android.content.Context;
 
@@ -8,31 +8,29 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.map.utils.locations.LocationBean;
 
-import de.greenrobot.event.EventBus;
 
 /**
- * Created by yehuijifeng
+ * Created by luhao
  * on 2016/1/19.
  * 百度定位，获得坐标
  */
-public class LocationUtil {
+public class LocationService {
     private LocationClient mLocationClient;
     private MyLocationListener mMyLocationListener;
     private String locationStr;
     private LocationBean locationBean;
-    private EventBus eventBus;
+    private BaiduMapInterface baiduMapInterface;
 
-    public void initLoaction(Context context) {
-        eventBus = EventBus.getDefault();
+    public LocationService(Context context) {
         locationBean = new LocationBean();
         mLocationClient = new LocationClient(context);
         mMyLocationListener = new MyLocationListener();
         mLocationClient.registerLocationListener(mMyLocationListener);
-        initLocation();
-
+        getLocation();
     }
 
-    public void getLoaction() {
+    public void startLoaction(BaiduMapInterface baiduMapInterface) {
+        this.baiduMapInterface = baiduMapInterface;
         mLocationClient.start();//定位SDK start之后会默认发起一次定位请求，开发者无须判断isstart并主动调用request
         mLocationClient.requestLocation();
     }
@@ -42,15 +40,15 @@ public class LocationUtil {
             mLocationClient.stop();
     }
 
-    private void initLocation() {
+    private void getLocation() {
         LocationClientOption option = new LocationClientOption();
-        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备；LocationMode.Hight_Accuracy;LocationMode.Battery_Saving;LocationMode.Device_Sensors;
-        option.setCoorType("gcj02");//可选，默认gcj02，设置返回的定位结果坐标系，"gcj02";//国家测绘局标准；"bd09ll";//百度经纬度标准；"bd09";//百度墨卡托标准
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
+        option.setCoorType("gcj02");//可选，默认gcj02，设置返回的定位结果坐标系，
         int span = 0;
         option.setScanSpan(span);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
         option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
-        option.setOpenGps(false);//可选，默认false,设置是否使用gps
-        option.setLocationNotify(false);//可选，默认false，设置是否当gps有效时按照1S1次频率输出GPS结果
+        option.setOpenGps(true);//可选，默认false,设置是否使用gps
+        option.setLocationNotify(true);//可选，默认false，设置是否当gps有效时按照1S1次频率输出GPS结果
         option.setIgnoreKillProcess(false);//可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
         mLocationClient.setLocOption(option);
     }
@@ -98,7 +96,11 @@ public class LocationUtil {
                 locationBean.setLocationStr("无法获取有效定位依据导致定位失败，一般是由于手机的原因，处于飞行模式下一般会造成这种结果，可以试着重启手机");
             }
             locationStr = sb.toString();
-            eventBus.post(locationBean);
+            baiduMapInterface.showLocationMessage(locationBean);
         }
+    }
+
+    public interface BaiduMapInterface {
+        void showLocationMessage(LocationBean locationBean);
     }
 }

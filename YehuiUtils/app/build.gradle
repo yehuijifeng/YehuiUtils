@@ -37,8 +37,8 @@ dependencies {
     compile project(':umeng-sdk')
     compile project(':cropper')
     compile project(':pay-service')
+    compile project(':baidu-map')
     compile files('libs/ormlite-android-4.48.jar')
     compile files('libs/ormlite-core-4.48.jar')
     compile files('libs/zxing.jar')
-    compile files('libs/locSDK_6.13.jar')
 }

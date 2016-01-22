@@ -4,10 +4,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.map.utils.locations.LocationBean;
 import com.yehui.utils.R;
 import com.yehui.utils.activity.base.BaseActivity;
 import com.yehui.utils.baidumap.LocationUtil;
-import com.yehui.utils.baidumap.locations.LocationBean;
 
 /**
  * Created by yehuijifeng

@@ -1,4 +1,5 @@
-include ':app', ':baidu-map',
+include ':app', ':easeui', ':easemob',
+        ':baidu-map',
         ':pay-service',
         ':umeng-sdk',
         ':cropper'

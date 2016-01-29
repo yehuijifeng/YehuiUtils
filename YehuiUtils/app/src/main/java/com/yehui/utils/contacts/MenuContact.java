@@ -3,8 +3,8 @@ package com.yehui.utils.contacts;
 import android.content.Context;
 
 import com.yehui.utils.R;
-import com.yehui.utils.bean.MenuBean;
-import com.yehui.utils.bean.MenuTowBean;
+import com.yehui.utils.bean.menu.MenuBean;
+import com.yehui.utils.bean.menu.MenuTowBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,9 +56,13 @@ public class MenuContact {
     /*动画区*/
     public static final String layoutAnim = "LayoutAnimation";
 
-    /*动画区*/
+    /*百度地图*/
     public static final String baiduMap = "BaiduMap";
     public static final String location = "location";
+
+    /*环信*/
+    public static final String easemob = "Easemob";
+    public static final String easeKefu = "kefu";
 
     private List<MenuBean> listOne;
     private List<MenuTowBean> listTow;
@@ -108,6 +112,12 @@ public class MenuContact {
         menuBean7.setName(context.getResources().getString(R.string.baidu_map));
         menuBean7.setListTow(getMapList());
         listOne.add(menuBean7);
+
+        MenuBean menuBean8 = new MenuBean();
+        menuBean8.setId(i++);
+        menuBean8.setName(context.getResources().getString(R.string.ease_mob));
+        menuBean8.setListTow(getEaseList());
+        listOne.add(menuBean8);
 
         return listOne;
     }
@@ -294,5 +304,17 @@ public class MenuContact {
 
         return listTow;
     }
+
+    private List<MenuTowBean>   getEaseList() {
+        int i = 0;
+        listTow = new ArrayList<>();
+        MenuTowBean menuBean = new MenuTowBean();
+        menuBean.setId(i++);
+        menuBean.setName(context.getResources().getString(R.string.ease_kefu));
+        listTow.add(menuBean);
+
+        return listTow;
+    }
+
 
 }

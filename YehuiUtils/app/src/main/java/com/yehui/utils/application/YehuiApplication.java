@@ -11,6 +11,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.yehui.utils.easemob.InitEasemob;
 import com.yehui.utils.jpush.JPushInterfaces;
 import com.yehui.utils.utils.LogUtil;
 import com.yehui.utils.utils.files.FileContact;
@@ -43,7 +44,16 @@ public class YehuiApplication extends Application {
     public static DisplayImageOptions defaultOptions = ImageOptions.defaultOptions();
     //取得圆形image的配置类
     public static DisplayImageOptions roundOptions = ImageOptions.roundOptions();
-    public boolean normal_app = false;
+
+    /**
+     * login user name
+     */
+    public final String PREF_USERNAME = "username";
+
+    /**
+     * 当前用户nickname,为了苹果推送不是userid而是昵称
+     */
+    public static String currentUserNick = "";
 
     @Override
     public void onCreate() {
@@ -55,15 +65,15 @@ public class YehuiApplication extends Application {
         FileContact.createCacheImage();
         FileContact.createSettigns();
 
+        /**初始化环信*/
+        InitEasemob.getInstance(this);
         JPushInterfaces.setJPushDebugMode(true);// 设置开启日志,发布时请关闭日志
         JPushInterfaces.initJPush(this);// 初始化 JPush
         /**
          * 全局捕获异常的代理类
          */
-        if (normal_app) {
-            CrashHandler crashHandler = CrashHandler.getInstance();
-            crashHandler.init(getApplicationContext());
-        }
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(getApplicationContext());
         /**
          * 初始化imageloader
          */

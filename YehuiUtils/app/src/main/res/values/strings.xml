@@ -90,4 +90,7 @@
     <string name="baidu_map">百度地图</string>
     <string name="map_location">当前位置</string>
 
+    <string name="ease_mob">环信</string>
+    <string name="ease_kefu">环信客服</string>
+
 </resources>

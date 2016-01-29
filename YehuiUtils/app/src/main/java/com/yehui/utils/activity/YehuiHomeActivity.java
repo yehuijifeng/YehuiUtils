@@ -32,10 +32,11 @@ import com.yehui.utils.activity.view.PhotoViewActivity;
 import com.yehui.utils.activity.view.PopupwindowActivity;
 import com.yehui.utils.activity.view.ViewFlipperActivity;
 import com.yehui.utils.activity.view.WebViewActivity;
-import com.yehui.utils.bean.MenuBean;
-import com.yehui.utils.bean.MenuTowBean;
+import com.yehui.utils.bean.menu.MenuBean;
+import com.yehui.utils.bean.menu.MenuTowBean;
 import com.yehui.utils.contacts.MenuContact;
 import com.yehui.utils.contacts.SettingContact;
+import com.yehui.utils.easemob.activity.LoginEaseActivity;
 import com.yehui.utils.utils.AppUtil;
 import com.yehui.utils.utils.LanguageUtil;
 import com.yehui.utils.utils.ResourcesUtil;
@@ -319,6 +320,8 @@ public class YehuiHomeActivity extends BaseActivity implements OnClickListener {
             startActivity(CustomAnimActivity.class);
         }else if (menuStr == getResources().getString(R.string.map_location)) {
             startActivity(LocationActivity.class);
+        }else if (menuStr == getResources().getString(R.string.ease_kefu)) {
+            startActivity(LoginEaseActivity.class);
         }
     }
 }

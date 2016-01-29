@@ -8,16 +8,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.os.Handler;
-import android.util.DisplayMetrics;
 
 import com.yehui.utils.activity.YehuiHomeActivity;
 import com.yehui.utils.application.ActivityCollector;
 import com.yehui.utils.contacts.SettingContact;
 
+import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by yehuijifeng
@@ -30,6 +28,36 @@ public class AppUtil {
     private AppUtil() {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
+    }
+
+
+    /**
+     * 获得app的包名
+     * @param pID
+     * @return
+     */
+    public static String getAppName(Context context,int pID) {
+        String processName = null;
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List l = am.getRunningAppProcesses();
+        Iterator i = l.iterator();
+        PackageManager pm = context.getPackageManager();
+        while (i.hasNext()) {
+            ActivityManager.RunningAppProcessInfo info = (ActivityManager.RunningAppProcessInfo) (i.next());
+            try {
+                if (info.pid == pID) {
+                    CharSequence c = pm.getApplicationLabel(pm.getApplicationInfo(info.processName, PackageManager.GET_META_DATA));
+                    // Log.d("Process", "Id: "+ info.pid +" ProcessName: "+
+                    // info.processName +"  Label: "+c.toString());
+                    // processName = c.toString();
+                    processName = info.processName;
+                    return processName;
+                }
+            } catch (Exception e) {
+                // Log.d("Process", "Error>> :"+ e.toString());
+            }
+        }
+        return processName;
     }
 
     /**

@@ -55,7 +55,7 @@ public class LocationActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.map_zuobiao_btn:
-                locationUtil.getLoaction();
+                locationUtil.startLoaction();
                 break;
             case R.id.map_zuobiao_name_btn:
                 break;

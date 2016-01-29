@@ -23,20 +23,20 @@ public class Instance {
      * 但是编译器却会对上述四条语句进行优化，认为只有XBYTE[2]=0x58（即忽略前三条语句，只产生一条机器代码）。
      * 如果键入volatile，则编译器会逐一的进行编译并产生相应的机器代码（产生四条代码）.
      */
-    private static volatile Instance oneModel = null;
+    private static volatile Instance instance = null;
 
     private Instance() {
     }
 
-    public synchronized static Instance getOneModel() {
-        if (oneModel == null) {
+    public synchronized static Instance getInstance() {
+        if (instance == null) {
             synchronized (Instance.class) {
-                if (oneModel == null) {
-                    oneModel = new Instance();
+                if (instance == null) {
+                    instance = new Instance();
                 }
             }
         }
-        return oneModel;
+        return instance;
     }
 
 }
